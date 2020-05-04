@@ -4,9 +4,13 @@ public interface EventsInterface {
 	
 	int playerGetRewords(int addGold, int addExp);
 
-	int playerGetPenalty(int lossGold);
+	void playerGetPenalty();
 	
-	void createQuest();
+	// 퀘스트 생성 인터페이스(임시)
+//	void createQuest();
+	
+	// 돌발상황 생성 인터페이스(임시)
+//	void createCaution();
 
 	
 }

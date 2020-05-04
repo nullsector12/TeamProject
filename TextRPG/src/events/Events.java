@@ -7,24 +7,24 @@ public abstract class Events implements EventsInterface{
 	int lossGold;
 	
 	@Override
-	// 전투 결과에 따른 
+	// 전투 결과에 따른 Gold와 Exp의 획득
 	public int playerGetRewords(int addGold, int addExp) {
 
 		if(battleResult == true) {
-			currentGold += monster.goldWorth;
-			currentExp = monster.expWorth; 
-			return addGold = currentGold;
-			return addExp = currentExp; 
+			Player.currentGold += Monster.setgoldWorth;
+			Player.currentExp += Monster.setexpWorth;
+			return currentGold = addGold;
+			return currentExp = addExp; 
 		}else {
 			// 패널티를 정해야함
-			
+			playerGetPenalty();
 		}	
 	}// end of playerGetGold
 	
+	// 패배로 인한 골드의 감소
 	@Override
-	public int playerGetPenalty(int lossGold) {
-		lossGold = (player.currentGold) - 100*player.currentLevel;
-		return lossGold;
+	public void playerGetPenalty() {
+		currentGold = (Player.currentGold) - (100*Player.currentLevel);
 		
 	}
 	
