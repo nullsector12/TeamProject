@@ -1,10 +1,34 @@
 package events;
 
-public class Events {
+public abstract class Events implements EventsInterface{
 
-	public static void main(String[] args) {
-		System.out.println("G-Ral 맞은 GITHUB");
+	int currentGold;
+	int currentExp;
+	int lossGold;
+	
+	@Override
+	// 전투 결과에 따른 
+	public int playerGetRewords(int addGold, int addExp) {
 
+		if(battleResult == true) {
+			currentGold += monster.goldWorth;
+			currentExp = monster.expWorth; 
+			return addGold = currentGold;
+			return addExp = currentExp; 
+		}else {
+			// 패널티를 정해야함
+			
+		}	
+	}// end of playerGetGold
+	
+	@Override
+	public int playerGetPenalty(int lossGold) {
+		lossGold = (player.currentGold) - 100*player.currentLevel;
+		return lossGold;
+		
 	}
-
+	
 }
+
+	
+
