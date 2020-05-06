@@ -9,6 +9,4 @@ public interface PlayerBasicStats {
 			, BASIC_MAXEXP = 20
 			, BASIC_EVASION = 0;
 	
-	
-
 }
