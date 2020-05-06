@@ -13,8 +13,8 @@ public class Player extends Entity{
 	//private int currentStrength;;
 	//private int currentHealth;
 	//private int maxHealth;
+	//private float evasion;
 	private int gold;
-	private float evasion;
 	private int currentLevel;
 	private int currentExp;
 	private int levelUpExp;
@@ -27,7 +27,7 @@ public class Player extends Entity{
 		super.setCurrentHealth(BasicInfo.BASIC_HEALTH);
 		super.setMaxHealth(BasicInfo.BASIC_HEALTH);
 		super.setCurrentStrength(BasicInfo.BASIC_POWER);
-		evasion = 0.00f;
+		super.setEvasion(0);
 		gold = BasicInfo.BASIC_GOLD;
 		currentExp = 0;
 		levelUpExp = BasicInfo.BASIC_EXP;
@@ -124,14 +124,14 @@ public class Player extends Entity{
 			super.setMaxHealth((int) (super.getMaxHealth() * 1.3f) / 1);
 			super.setCurrentHealth((int) super.getMaxHealth());
 				super.setCurrentStrength((int) (super.getCurrentStrength() * 1.3f));
-				evasion = evasion + 0.01f;
+				super.setEvasion(super.getEvasion() + 1);
 
 				System.out.println("레벨업 하였습니다!\n");
 
 				System.out.println("레벨 : " + currentLevel + " UP↑");
 				System.out.println("HP : " + super.getCurrentHealth() + "/" + super.getMaxHealth());
 				System.out.println("공격력 : " + super.getCurrentStrength());
-				System.out.println("회피율 : " + evasion + "%");
+				System.out.println("회피율 : " + super.getEvasion() + "%");
 				System.out.println("EXP : " + currentExp + "/" + levelUpExp);
 				System.out.println("+++++++++++++++++++++++++++++++++");
 				if (currentExp < levelUpExp) {
@@ -157,7 +157,7 @@ public class Player extends Entity{
 		System.out.println("레벨 : " + currentLevel);
 		System.out.println("HP : " + super.getCurrentHealth() + "/" + super.getMaxHealth());
 		System.out.println("공격력 : " + super.getCurrentStrength());
-		System.out.println("회피율 : " + evasion + "%");
+		System.out.println("회피율 : " + super.getEvasion() + "%");
 		System.out.println("EXP : " + currentExp + "/" + levelUpExp);
 
 	
