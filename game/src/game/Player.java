@@ -127,7 +127,7 @@ public class Player extends Entity{
 			super.setMaxHealth((int) (super.getMaxHealth() * 1.3f) / 1);
 			super.setCurrentHealth((int) super.getMaxHealth());
 				super.setCurrentStrength((int) (super.getCurrentStrength() * 1.3f));
-				super.setEvasion(super.getEvasion() + 1);
+				super.setEvasion(super.getEvasion() + 100);
 
 				System.out.println("레벨업 하였습니다!\n");
 

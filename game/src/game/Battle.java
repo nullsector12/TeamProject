@@ -17,6 +17,9 @@ public class Battle {
 	int dmg;
 	Random rand = new Random();
 	
+//	Battle(Monster m){//몬스터 종류가 여러가지라서 회피율 계산할 때 메서드 인자로 받아와서 사용해야 함
+//		this.m=m;
+//	}
 	
 //던전을 불러온다.
 	
@@ -25,7 +28,7 @@ public class Battle {
 	void playerAttack(Monster m, int dmg) {
 		dmg =(((int)(Math.random()*10)+5));
 		
-		if(monsterEvasion()) {
+		if(monsterEvasion(m)) {
 			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
 			dmg = 0;
 		}
@@ -54,8 +57,8 @@ public class Battle {
             }
 	 }
 	 
-	 boolean monsterEvasion() {
-		 
+	 boolean monsterEvasion(Monster m) {
+		 System.out.println("몬스터 회피율:"+m.getEvasion());
          if ((rand.nextInt(100) + 1) <= m.getEvasion()) {
          	return pass = true;       
          }else {

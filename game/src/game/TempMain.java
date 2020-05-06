@@ -5,7 +5,7 @@ public class TempMain {
 	public static void main(String[] args) {
 		Monster m = new Monster();
 //		m.setCurrentHealth(100);
-		m=m.makeMonster(2);//3라운드 몬스터
+		m=m.makeMonster(12);//3라운드 몬스터
 		m.showData();
 		System.out.println("----------------------------------");
 //		Monster m=Monster.getInstance();

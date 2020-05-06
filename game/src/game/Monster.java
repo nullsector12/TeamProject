@@ -137,10 +137,9 @@ public class Monster extends Entity {
 		goldWorth = exp;
 		// 스테이지 별 몬스터 경험치의 10퍼센트를 골드로 반환(최대 10퍼센트까지 골드 받을 수 있음) or 랜덤 반환
 		Random rand = new Random();
-		int gold_max = (int) (exp * 0.1);
-		int gold_min = (int) (exp * 0.01);// 최소 골드
+		int gold_max = (int) (exp * 0.5);
+		int gold_min = (int) (exp * 0.1);// 최소 골드
 		goldWorth = rand.nextInt(gold_max - gold_min + 1) + gold_min;// 수식 변경
-
 //        int gMin = (int)(g*.7);
 //        int gMax = (int)(g*1.2);
 //        goldWorth = rand.nextInt(gMax - gMin +1) + gMin; //generates a number from g*.7 - g*1.2 (70% - 120% of g)

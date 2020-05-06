@@ -17,11 +17,10 @@ public class Dragon extends Monster {//should be resistant to physical attacks!
 //        super.setBaseDefense(6);
 //        super.setBaseMagicDefense(2);
         
-        super.setGoldWorth(30);
-        super.setExpWorth(25);
+        super.setExpWorth(250);
+        super.setGoldWorth(getExpWorth());
         super.setWeakness(2); //See Monster class for list of types
-        super.setEscapable(true);
-        
+        super.setEvasion(10);
 //        Item slimeE = new SlimeExtract();
 //        super.getLoot().add(slimeE);
         
