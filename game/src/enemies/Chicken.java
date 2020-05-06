@@ -1,4 +1,5 @@
 package enemies;
+import game.BasicInfo;
 //1-2
 import game.Monster;
 
@@ -8,7 +9,7 @@ public class Chicken extends Monster {//should be resistant to physical attacks!
 
     public Chicken() {
 //    	super.setEvasion(evasion);
-    	
+
         super.setName("닭");
         super.setBaseHealth(200);
 //        super.setBaseMana(10);

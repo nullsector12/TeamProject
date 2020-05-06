@@ -4,6 +4,9 @@ public class TempMain {
 
 	public static void main(String[] args) {
 		Monster m = new Monster();
+//		m.setCurrentHealth(100);
+		m=m.makeMonster(3);
+		m.showData();
 //		Monster m=Monster.getInstance();
 //		m = m.makeMonster(1);
 ////		System.out.println(m);
@@ -22,6 +25,7 @@ public class TempMain {
 //		m.encounterMonster();
 //
 		Player p = new Player();
+//		p.setCurrentHealth(100);
 //		System.out.println(p);
 //
 //		m = m.makeMonster(3);

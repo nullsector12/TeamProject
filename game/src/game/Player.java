@@ -22,18 +22,16 @@ public class Player extends Entity{
 	private int itemAttackPower;
 
 	Player() {
-		name = "";
-		currentLevel =11 ;
-		currentHealth =11 ;
-		maxHealth =1111 ;
-		attackPower = 111;
-		evasion = 10;
-		inventory = new ArrayList<String>();
+		super.setName("");
+		currentLevel = BasicInfo.BASIC_LEVEL;
+		super.setCurrentHealth(BasicInfo.BASIC_HEALTH);
+		super.setMaxHealth(BasicInfo.BASIC_HEALTH);
+		super.setCurrentStrength(BasicInfo.BASIC_POWER);
+		evasion = 0.00f;
+		gold = BasicInfo.BASIC_GOLD;
 		currentExp = 0;
-		levelUpExp = 111;
+		levelUpExp = BasicInfo.BASIC_EXP;
 		sc = new Scanner(System.in);
-		gold = 10;
-		itemAttackPower = 0;
 	}
 
 	// 캐릭터의 이름을 받는 메서드
@@ -109,8 +107,8 @@ public class Player extends Entity{
 	}
 
 	// 골드 변화 메서드
-	void getGold(int gold) {
-		this.gold = this.gold + gold;
+	void getGold(Monster m) {
+		this.gold = this.gold +m.getGoldWorth();
 
 		System.out.println();
 		// return gold;
@@ -126,45 +124,6 @@ public class Player extends Entity{
 
 	}
 
-	void checkItem() {
-		int check1 = 0;
-		int check2 = 0;
-		int check3 = 0;
-		int check4 = 0;
-		int check5 = 0;
-		int check6 = 0;
-		int check7 = 0;
-		int check8 = 0;
-		int check9 = 0;
-		int check10 = 0;
-		int check11 = 0;
-		int check12 = 0;
 
-		if (check1 == 1) {
-		}
-		if (check2 == 1) {
-		}
-		if (check3 == 1) {
-		}
-		if (check4 == 1) {
-		}
-		if (check5 == 1) {
-		}
-		if (check6 == 1) {
-		}
-		if (check7 == 1) {
-		}
-		if (check8 == 1) {
-		}
-		if (check9 == 1) {
-		}
-		if (check10 == 1) {
-		}
-		if (check11 == 1) {
-		}
-		if (check12 == 1) {
-		}
-
-	}
 
 }

@@ -3,18 +3,21 @@
 //하위 클래스들이 공통적으로 갖는 기본값들 초기화
 package game;
 
-public class Entity {
-	private String name;
-	private int baseHealth, currentHealth, maxHealth;// 기본, 현재, 최대 체력
-	private int baseMana, currentMana, maxMana;// 기본, 현재, 최대 마나
-	private int baseStrength, currentStrength;// 기본, 현재 힘
-	private int baseMagic, currentMagic;// 기본, 현재 마력
-	private int baseAgility, currentAgility;// 기본, 현재 민첩성
-	private int baseDefense, currentDefense;// 기본, 현재 방어력
-	private int baseMagicDefense, currentMagicDefense;// 기본, 현재 마법 방어력
+public class Entity {//상속할 때 상위클래스에 private 처리하지 말 것
+	 String name;
+	 int baseHealth, currentHealth, maxHealth;// 기본, 현재, 최대 체력
+	 int baseMana, currentMana, maxMana;// 기본, 현재, 최대 마나
+	 int baseStrength, currentStrength;// 기본, 현재 힘
+	 int baseMagic, currentMagic;// 기본, 현재 마력
+	 int baseAgility, currentAgility;// 기본, 현재 민첩성
+	 int baseDefense, currentDefense;// 기본, 현재 방어력
+	 int baseMagicDefense, currentMagicDefense;// 기본, 현재 마법 방어력
 
+//	 Entity(int currentHealth){
+//		 this.currentHealth=currentHealth;
+//	 }
 	public String getName() {
-		return name;
+		return name;	
 	}// 이름 반환
 
 	public void setName(String input) {

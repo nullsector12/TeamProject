@@ -1,5 +1,5 @@
 package game;
-/*
+/* 
 멤버변수
 name/
 currentHealth/maxHealth/
@@ -29,6 +29,8 @@ monkey sheep  pig  snake
 3-1    3-2   3-3    3-4
 horse cow tiger dragon*/
 
+import java.util.Random;
+
 /*
  Monster 추상클래스로 만들어서
  하위클래스에서 오버라이딩
@@ -41,11 +43,25 @@ MonsterImpl 인터페이스 상속받기
  Map<K,V>로 구현
  
 evasion 계산식 정의해야 함
+
+스레드로 처리해볼 것
+
+--------------------------------------
+각 단계별 몬스터에 스테이지 값 저장
  
  */
-
-import enemies.*;
-import jdk.nashorn.internal.ir.CallNode.EvalArgs;
+import enemies.Chicken;
+import enemies.Cow;
+import enemies.Dog;
+import enemies.Dragon;
+import enemies.Horse;
+import enemies.Monkey;
+import enemies.Pig;
+import enemies.Rabbit;
+import enemies.Rat;
+import enemies.Sheep;
+import enemies.Snake;
+import enemies.Tiger;
 
 
 
@@ -61,6 +77,11 @@ public class Monster extends Entity {
 	// 1 = physical, 2 = fire, 3 = water, 4 = lightning, 5 = ice, more?!
 	private boolean escapable;// 탈출(도망) 가능 여부->도망 가능 true/ 도망 불가 false
 	
+	private int stage;
+
+//	Monster(){//얘는 몬스터별로 값이 다 다르기 때문에 필요없음
+//		setCurrentHealth(BasicInfo.BASIC_HEALTH);
+//	}
 	// singleton
 //	private Monster(int evasion, int goldWorth, int expWorth, int weakness) {
 //		this.evasion = evasion;
@@ -74,6 +95,14 @@ public class Monster extends Entity {
 //	public static Monster getInstance() {
 //		return monster;
 //	}
+
+	public int getStage() {
+		return stage;
+	}
+
+	public void setStage(int stage) {
+		this.stage = stage;
+	}
 
 	// evasion 계산식 정의해야 함
 	public int getEvasion() {
@@ -89,8 +118,15 @@ public class Monster extends Entity {
 	}// 랜덤 십진수로 곱해지는 statement에서 일반적으로 호출됨 //usually called in a statement multiplied
 		// by a random decimal
 
-	public void setGoldWorth(int g) {
-//        Random rand = new Random();
+	public void setGoldWorth(int exp) {
+		goldWorth=exp;
+		//스테이지 별 몬스터 경험치의 10퍼센트를 골드로 반환(최대 10퍼센트까지 골드 받을 수 있음) or 랜덤 반환
+		Random rand=new Random();
+		int gold_max=(int)(exp*0.1);
+		int gold_min=(int)(exp*0.01);//최소 골드
+		 goldWorth=rand.nextInt(gold_max-gold_min+1)+gold_min;//수식 변경
+		
+		
 //        int gMin = (int)(g*.7);
 //        int gMax = (int)(g*1.2);
 //        goldWorth = rand.nextInt(gMax - gMin +1) + gMin; //generates a number from g*.7 - g*1.2 (70% - 120% of g)
@@ -191,11 +227,13 @@ public class Monster extends Entity {
 	 
 	
 	public void showData() {
-		System.out.println("현재 보유 골드: "+this.goldWorth);
-		System.out.println("현재 보유 경험치: "+this.expWorth);
-		System.out.println("현재 보유 약점: "+this.weakness);
+		System.out.println("몬스터 이름: "+this.getName());
+		System.out.println("현재 체력: "+this.getCurrentHealth());
+		System.out.println("현재 보유 골드: "+this.getGoldWorth());
+		System.out.println("현재 보유 경험치: "+this.getExpWorth());
+		System.out.println("현재 보유 약점: "+this.getWeakness());
 		System.out.println("도망 가능 여부: "+this.escapable);
-		System.out.println("회피 가능성: "+this.evasion);
+		System.out.println("회피율: "+this.getEvasion());
 		
 	}
 	@Override
