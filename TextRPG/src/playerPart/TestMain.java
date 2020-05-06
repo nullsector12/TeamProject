@@ -19,7 +19,7 @@ public class TestMain {
 		player.showStatus();
 		
 		
-		BrokenSword bs = new BrokenSword("", 0, 0, 0, 0, 0);
+		A_Hat bs = new A_Hat("", 0, 0, 0, 0, 0);
 		
 		
 		
