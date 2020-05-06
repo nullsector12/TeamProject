@@ -20,7 +20,7 @@ public class Player {
 		attackPower = PlayerBasicStats.BASIC_ATTACKPOWER;
 		gold = PlayerBasicStats.BASIC_GOLD;
 		nextLevelExp = PlayerBasicStats.BASIC_MAXEXP;
-		currentExp = 0;
+		currentExp = 500;
 		evasion = PlayerBasicStats.BASIC_EVASION;
 		
 	}
@@ -38,15 +38,23 @@ public class Player {
 	}
 	
 	
+	void canLevelUp(){
+		while(true)
+		if(this.currentExp > this.nextLevelExp) {
+			this.level += 1;
+			maxHealth = (int)(maxHealth*1.1);
+			attackPower = (int)(attackPower*1.2);
+			nextLevelExp = (int)(nextLevelExp*1.2)+(level*10);
+			System.out.println("레벨이 올랐습니다!");
+			System.out.println("레벨 : " + level);
+			System.out.println("최대 체력 : " + maxHealth);
+			System.out.println("공격력 : " + attackPower);
+//			System.out.println("필요 경험치 : " + nextLevelExp);
+		}else {
+			break;
+		}
+	}
 	
-	
-	
-	
-	
-//	void canLevelUp(){
-//		
-//	}
-//	
 //	void LevelUp() {
 //		level += 1;
 //		maxHealth = (int)(maxHealth*1.2);

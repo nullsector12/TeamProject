@@ -10,6 +10,7 @@ public class TestMain {
 		game.createPlayer();
 		game.createMonster();
 		game.printCave();
+		game.levelUp();
 	}
 
 

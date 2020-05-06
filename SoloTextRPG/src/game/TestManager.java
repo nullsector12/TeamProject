@@ -25,8 +25,12 @@ public class TestManager {
 	
 	void printCave() {
 		System.out.println(cave.cave1(null));
-		
-	
 	}
+	
+	void levelUp() {
+		hero.canLevelUp();
+
+	}
+	
 	
 }
