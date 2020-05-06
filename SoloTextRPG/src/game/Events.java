@@ -18,12 +18,12 @@ public class Events {
 		choice = input.nextLine();
 		switch(choice) {
 			case "ㅇ" :
-				System.out.println(d.stage +" 에서" + m.monsterName +" 이(가) 대량으로 발생했습니다. 처리해주세요. ㅠㅠ");
+				System.out.println(d.stage +" 에서" + m.getMonsterName() +" 이(가) 대량으로 발생했습니다. 처리해주세요. ㅠㅠ");
 				System.out.println("수락 하시겠습니까?");
 				choice = input.nextLine();
 				switch(choice) {
 					case "ㅇ":
-						p.acceptQuest(m.monsterName, d.stage, this.numOfRequest);
+						p.acceptQuest(m.getMonsterName(), d.stage, this.numOfRequest);
 						System.out.println("퀘스트를 수락하였습니다. 퀘스트 내용 : " + d.stage +" 에서" + m.monsterName +" 을(를) " + numOfRequest +" 마리 잡아주세요.");
 						break;
 					case "ㅗ":

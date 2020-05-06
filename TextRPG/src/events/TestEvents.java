@@ -1,6 +1,6 @@
 package events;
 
-public abstract class Events implements EventsInterface{
+public abstract class TestEvents implements TestEventsInterface{
 
 	
 //	boolean battleResult = true;

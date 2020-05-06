@@ -1,6 +1,6 @@
 package events;
 
-public interface EventsInterface {
+public interface TestEventsInterface {
 	
 	int playerGetRewords(int addGold, int addExp);
 

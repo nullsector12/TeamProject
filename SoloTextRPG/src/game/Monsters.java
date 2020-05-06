@@ -27,13 +27,21 @@ public class Monsters {
 	}
 	
 	public void showMonsterInfo() {
-		System.out.println("몬스터 이름 : " + rat(monsterName));
+		System.out.println("몬스터 이름 : " + getMonsterName());
 		System.out.println("레벨 : " + level);
 		System.out.println("체력 :" + currentHealth +"/" + maxHealth);
 		System.out.println("공격력 : " + attackPower);
 		System.out.println("회피율 : " + evasion);
 		System.out.println("============================");
 
+	}
+
+	public String getMonsterName() {
+		return monsterName;
+	}
+
+	public void setMonsterName(String monsterName) {
+		this.monsterName = monsterName;
 	}
 
 }

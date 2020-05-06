@@ -34,11 +34,12 @@ public class TestManager {
 	
 	// 전투 기능
 	void battle() {
+		enemy.rat(null);
 		fight.battle(hero, enemy);
 		
 		if(enemy.currentHealth <= 0) {
 			System.out.println("전투 승리");
-			System.out.println(enemy.rat(null) +" 이(가) 쓰러졌습니다.");
+			System.out.println(enemy.getMonsterName() +" 이(가) 쓰러졌습니다.");
 			
 			// 일정 레벨이상 차이나면 획득하는 전리품 줄어듦
 			if(hero.getLevel() > (enemy.level+3)) {
@@ -70,6 +71,7 @@ public class TestManager {
 			// 현재 게임 종료 후에도 무한루프 돌아감, 후에 retry 여부 확인문 넣으면 될듯
 			// 어떻게 끝내지...
 			System.out.println("=== GAME OVER ===");
+			System.exit(0);
 		}
 	
 	}

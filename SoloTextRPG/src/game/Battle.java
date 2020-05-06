@@ -11,7 +11,7 @@ public class Battle {
 	
 	void battle (Player p, Monsters m) {
 		
-		System.out.println("야생의 " + m.rat(null) + "이(가) 나타났다!");
+		System.out.println("야생의 " + m.getMonsterName() + "이(가) 나타났다!");
 		m.showMonsterInfo();
 		System.out.println("플레이어 =" + p.playerName + "= 의 턴");
 		
@@ -25,9 +25,9 @@ public class Battle {
 				case "공격":
 					System.out.println( p.playerName +" 의 공격!");
 					m.currentHealth = m.currentHealth - p.attackPower;
-					System.out.println(m.monsterName +" 의 체력이 " + m.currentHealth + "남았습니다.");
+					System.out.println(m.getMonsterName() +" 의 체력이 " + m.currentHealth + "남았습니다.");
 					if(m.currentHealth > 0) {
-						System.out.println(m.monsterName +" 의 반격!");
+						System.out.println(m.getMonsterName() +" 의 반격!");
 						p.currentHealth = p.currentHealth - m.attackPower;
 						System.out.println(p.playerName + " 의 체력이 현재 " + p.currentHealth + " 남았습니다.");
 					}
