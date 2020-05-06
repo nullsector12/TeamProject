@@ -77,14 +77,19 @@ public class Monster extends Entity {
 	private int stage;
 	protected Monster(){
 		stage=1;
-		baseHealth=BasicInfo.BASIC_HEALTH;
-		baseStrength=BasicInfo.BASIC_POWER;
-		
-		goldWorth=BasicInfo.BASIC_GOLD;
-		expWorth=BasicInfo.BASIC_EXP;
+//		baseHealth=BasicInfo.BASIC_HEALTH;
+//		baseStrength=BasicInfo.BASIC_POWER;
+//		
+//		goldWorth=BasicInfo.BASIC_GOLD;
+//		expWorth=BasicInfo.BASIC_EXP;
+//		weakness=0;
+//		evasion=0;
+		setBaseHealth(stage);
+		setBaseStrength(BasicInfo.BASIC_POWER+stage*10);
+		setExpWorth(BasicInfo.BASIC_EXP+stage*10);
+		setGoldWorth(getExpWorth());
 		weakness=0;
 		evasion=0;
-		
 	}
 //	Monster(){//얘는 몬스터별로 값이 다 다르기 때문에 필요없음
 //		setCurrentHealth(BasicInfo.BASIC_HEALTH);
@@ -105,7 +110,7 @@ public class Monster extends Entity {
 	public void setBaseHealth(int stage) {// 메서드 오버라이딩
 		//체력 증가 비율 설정해야 함
 		super.setBaseHealth(BasicInfo.BASIC_HEALTH + stage * 10);//스테이지별 몬스터마다 기본 체력 다름
-		System.out.println("기본 체력: "+super.getBaseHealth());
+//		System.out.println("기본 체력: "+super.getBaseHealth());
 //		super.setBaseHealth(500);
 	}
 

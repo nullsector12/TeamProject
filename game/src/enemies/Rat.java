@@ -14,32 +14,17 @@ package enemies;
 	int BASIC_LEVEL = 1;*/
 import game.Monster;
 import game.BasicInfo;
-//import items.*;
 
 public class Rat extends Monster {//should be resistant to physical attacks!
 
     public Rat() {
-//    	super();
     	super.setStage(1);//stage 1
-    	
         super.setName("쥐");
-//        super.setBaseHealth(BasicInfo.BASIC_HEALTH);
        super.setBaseHealth(getStage());
-        
         super.setBaseStrength(5);
-        
         super.setGoldWorth(300);
         super.setExpWorth(25);
         super.setWeakness(2); //See Monster class for list of types
-        super.setEscapable(true);
-        
-//        Item slimeE = new SlimeExtract();
-//        super.getLoot().add(slimeE);
-        
-//        int[] chance = {80};//needs to map to same index
-//        super.setLootChance(chance);
-        
-//        super.setRandomLoot();
         
         super.initCurrentStats();
         
@@ -49,7 +34,4 @@ public class Rat extends Monster {//should be resistant to physical attacks!
     	super.showData();
     	System.out.println("쥐 선택");
     }
-    /*public int slash() {
-        return (int)(super.getBaseStrength() * 0.5) + 10;
-    }*/
 }
