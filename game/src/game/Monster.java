@@ -46,8 +46,8 @@ evasion 계산식 정의해야 함
 
 스레드로 처리해볼 것
 
---------------------------------------
-각 단계별 몬스터에 스테이지 값 저장
+--------------------------------------추가사항
+각 단계별 몬스터에 스테이지 값 저장(o)
  
  */
 import enemies.Chicken;
@@ -63,22 +63,29 @@ import enemies.Sheep;
 import enemies.Snake;
 import enemies.Tiger;
 
-
-
-
 public class Monster extends Entity {
 
 	// 회피 확률->공격 무효화 기능
-	private  int evasion;
-
-	private  int goldWorth;// 골드
-	private  int expWorth;// 경험치
-	private  int weakness;// 몬스터가 가진 기본 약점
+//	private int evasion;
+//	private int goldWorth;// 골드
+//	private int expWorth;// 경험치
+	//==================================================
+	private int weakness;// 몬스터가 가진 기본 약점
 	// 1 = physical, 2 = fire, 3 = water, 4 = lightning, 5 = ice, more?!
 	private boolean escapable;// 탈출(도망) 가능 여부->도망 가능 true/ 도망 불가 false
-	
-	private int stage;
 
+	private int stage;
+	protected Monster(){
+		stage=1;
+		baseHealth=BasicInfo.BASIC_HEALTH;
+		baseStrength=BasicInfo.BASIC_POWER;
+		
+		goldWorth=BasicInfo.BASIC_GOLD;
+		expWorth=BasicInfo.BASIC_EXP;
+		weakness=0;
+		evasion=0;
+		
+	}
 //	Monster(){//얘는 몬스터별로 값이 다 다르기 때문에 필요없음
 //		setCurrentHealth(BasicInfo.BASIC_HEALTH);
 //	}
@@ -95,6 +102,12 @@ public class Monster extends Entity {
 //	public static Monster getInstance() {
 //		return monster;
 //	}
+	public void setBaseHealth(int stage) {// 메서드 오버라이딩
+		//체력 증가 비율 설정해야 함
+		super.setBaseHealth(BasicInfo.BASIC_HEALTH + stage * 10);//스테이지별 몬스터마다 기본 체력 다름
+		System.out.println("기본 체력: "+super.getBaseHealth());
+//		super.setBaseHealth(500);
+	}
 
 	public int getStage() {
 		return stage;
@@ -110,6 +123,8 @@ public class Monster extends Entity {
 	}
 
 	public void setEvasion(int evasion) {
+//		Random rand=new Random();
+//		rand.nextInt()
 		this.evasion = evasion;
 	}
 
@@ -119,14 +134,13 @@ public class Monster extends Entity {
 		// by a random decimal
 
 	public void setGoldWorth(int exp) {
-		goldWorth=exp;
-		//스테이지 별 몬스터 경험치의 10퍼센트를 골드로 반환(최대 10퍼센트까지 골드 받을 수 있음) or 랜덤 반환
-		Random rand=new Random();
-		int gold_max=(int)(exp*0.1);
-		int gold_min=(int)(exp*0.01);//최소 골드
-		 goldWorth=rand.nextInt(gold_max-gold_min+1)+gold_min;//수식 변경
-		
-		
+		goldWorth = exp;
+		// 스테이지 별 몬스터 경험치의 10퍼센트를 골드로 반환(최대 10퍼센트까지 골드 받을 수 있음) or 랜덤 반환
+		Random rand = new Random();
+		int gold_max = (int) (exp * 0.1);
+		int gold_min = (int) (exp * 0.01);// 최소 골드
+		goldWorth = rand.nextInt(gold_max - gold_min + 1) + gold_min;// 수식 변경
+
 //        int gMin = (int)(g*.7);
 //        int gMax = (int)(g*1.2);
 //        goldWorth = rand.nextInt(gMax - gMin +1) + gMin; //generates a number from g*.7 - g*1.2 (70% - 120% of g)
@@ -216,47 +230,47 @@ public class Monster extends Entity {
 		printName();
 	}
 
-	/*	private  int evasion;
+	/*
+	 * private int evasion;
+	 * 
+	 * private int goldWorth;// 골드 private int expWorth;// 경험치 private int
+	 * weakness;// 몬스터가 가진 기본 약점 // 1 = physical, 2 = fire, 3 = water, 4 =
+	 * lightning, 5 = ice, more?! private boolean escapable;// 탈출(도망) 가능 여부->도망 가능
+	 * true/ 도망 불가 false
+	 */
 
-	private  int goldWorth;// 골드
-	private  int expWorth;// 경험치
-	private  int weakness;// 몬스터가 가진 기본 약점
-	// 1 = physical, 2 = fire, 3 = water, 4 = lightning, 5 = ice, more?!
-	private boolean escapable;// 탈출(도망) 가능 여부->도망 가능 true/ 도망 불가 false*/
-	
-	 
-	
 	public void showData() {
-		System.out.println("몬스터 이름: "+this.getName());
-		System.out.println("현재 체력: "+this.getCurrentHealth());
-		System.out.println("현재 보유 골드: "+this.getGoldWorth());
-		System.out.println("현재 보유 경험치: "+this.getExpWorth());
-		System.out.println("현재 보유 약점: "+this.getWeakness());
-		System.out.println("도망 가능 여부: "+this.escapable);
-		System.out.println("회피율: "+this.getEvasion());
-		
+		System.out.println("몬스터 이름: " + this.getName());
+		System.out.println("현재 체력: " + this.getCurrentHealth());
+		System.out.println("현재 보유 골드: " + this.getGoldWorth());
+		System.out.println("현재 보유 경험치: " + this.getExpWorth());
+		System.out.println("현재 보유 약점: " + this.getWeakness());
+		System.out.println("도망 가능 여부: " + this.escapable);
+		System.out.println("회피율: " + this.getEvasion());
+
 	}
+
 	@Override
 	public String toString() {
 		return "Monster [evasion=" + evasion + ", goldWorth=" + goldWorth + ", expWorth=" + expWorth + ", weakness="
 				+ weakness + ", escapable=" + escapable + "]";
 	}
-	
+
 	void printName() {
-		System.out.println(getName()+"을(를) 만났습니다");
+		System.out.println(getName() + "을(를) 만났습니다");
 	}
-	
-	public void  attack(Player player, int hit) {//Player에 가하는 공격의 양
-		System.out.println(getName()+"이(가) 공격합니다");
-		player.setCurrentHealth(player.getCurrentHealth()-hit);//공격받은 만큼 Player의 hp차감
-		if(player.getCurrentHealth()<0) {
-			System.out.println("끝");
-		}else {
-			
-		}
-	}
+
+//	public void  attack(Player player, int hit) {//Player에 가하는 공격의 양
+//		System.out.println(getName()+"이(가) 공격합니다");
+//		player.setCurrentHealth(player.getCurrentHealth()-hit);//공격받은 만큼 Player의 hp차감
+//		if(player.getCurrentHealth()<0) {
+//			System.out.println("끝");
+//		}else {
+//			
+//		}
+//	}
 	/*
-	abstract void printName() ;
-*/
+	 * abstract void printName() ;
+	 */
 	// public Skill[] getSkills(){return blahhh;}
 }

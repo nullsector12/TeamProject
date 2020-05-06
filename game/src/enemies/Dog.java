@@ -7,12 +7,13 @@ import game.Monster;
 public class Dog extends Monster {//should be resistant to physical attacks!
 
     public Dog() {
+    	super.setStage(4);
         super.setName("개");
-        super.setBaseHealth(200);
+//        super.setBaseHealth(200);
+        super.setBaseHealth(getStage());
 //        super.setBaseMana(10);
         super.setBaseStrength(5);
 //        super.setBaseMagic(2);
-        super.setBaseAgility(3);
 //        super.setBaseDefense(6);
 //        super.setBaseMagicDefense(2);
         

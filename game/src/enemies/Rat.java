@@ -19,16 +19,14 @@ import game.BasicInfo;
 public class Rat extends Monster {//should be resistant to physical attacks!
 
     public Rat() {
+//    	super();
     	super.setStage(1);//stage 1
     	
         super.setName("쥐");
-        super.setBaseHealth(BasicInfo.BASIC_HEALTH);
-//        super.setBaseMana(10);
+//        super.setBaseHealth(BasicInfo.BASIC_HEALTH);
+       super.setBaseHealth(getStage());
+        
         super.setBaseStrength(5);
-//        super.setBaseMagic(2);
-        super.setBaseAgility(3);
-//        super.setBaseDefense(6);
-//        super.setBaseMagicDefense(2);
         
         super.setGoldWorth(300);
         super.setExpWorth(25);
@@ -51,21 +49,6 @@ public class Rat extends Monster {//should be resistant to physical attacks!
     	super.showData();
     	System.out.println("쥐 선택");
     }
-	@Override
-	public String toString() {
-		return "Rat [getEvasion()=" + getEvasion() + ", getGoldWorth()=" + getGoldWorth() + ", getExpWorth()="
-				+ getExpWorth() + ", getWeakness()=" + getWeakness() + ", isEscapable()=" + isEscapable()
-				+ ", toString()=" + super.toString() + ", getName()=" + getName() + ", getCurrentHealth()="
-				+ getCurrentHealth() + ", getBaseHealth()=" + getBaseHealth() + ", getMaxHealth()=" + getMaxHealth()
-				+ ", getCurrentMana()=" + getCurrentMana() + ", getBaseMana()=" + getBaseMana() + ", getMaxMana()="
-				+ getMaxMana() + ", getCurrentStrength()=" + getCurrentStrength() + ", getBaseStrength()="
-				+ getBaseStrength() + ", getCurrentMagic()=" + getCurrentMagic() + ", getBaseMagic()=" + getBaseMagic()
-				+ ", getCurrentAgility()=" + getCurrentAgility() + ", getBaseAgility()=" + getBaseAgility()
-				+ ", getCurrentDefense()=" + getCurrentDefense() + ", getBaseDefense()=" + getBaseDefense()
-				+ ", getCurrentMagicDefense()=" + getCurrentMagicDefense() + ", getBaseMagicDefense()="
-				+ getBaseMagicDefense() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
-	}
-    
     /*public int slash() {
         return (int)(super.getBaseStrength() * 0.5) + 10;
     }*/

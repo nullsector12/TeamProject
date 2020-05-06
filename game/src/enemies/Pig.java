@@ -7,12 +7,13 @@ import game.Monster;
 public class Pig extends Monster {//should be resistant to physical attacks!
 
     public Pig() {
+    	super.setStage(7);
         super.setName("돼지");
-        super.setBaseHealth(200);
+//        super.setBaseHealth(200);
+        super.setBaseHealth(getStage());
 //        super.setBaseMana(10);
         super.setBaseStrength(5);
 //        super.setBaseMagic(2);
-        super.setBaseAgility(3);
 //        super.setBaseDefense(6);
 //        super.setBaseMagicDefense(2);
         

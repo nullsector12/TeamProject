@@ -7,12 +7,14 @@ import game.Monster;
 public class Sheep extends Monster {//should be resistant to physical attacks!
 
     public Sheep() {
+    	super.setStage(6);
+    	
         super.setName("양");
-        super.setBaseHealth(200);
+//        super.setBaseHealth(200);
+        super.setBaseHealth(getStage());
 //        super.setBaseMana(10);
         super.setBaseStrength(5);
 //        super.setBaseMagic(2);
-        super.setBaseAgility(3);
 //        super.setBaseDefense(6);
 //        super.setBaseMagicDefense(2);
         
@@ -21,13 +23,6 @@ public class Sheep extends Monster {//should be resistant to physical attacks!
         super.setWeakness(2); //See Monster class for list of types
         super.setEscapable(true);
         
-//        Item slimeE = new SlimeExtract();
-//        super.getLoot().add(slimeE);
-        
-        int[] chance = {80};//needs to map to same index
-//        super.setLootChance(chance);
-        
-//        super.setRandomLoot();
         
         super.initCurrentStats();
     }

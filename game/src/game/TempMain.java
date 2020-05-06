@@ -5,8 +5,9 @@ public class TempMain {
 	public static void main(String[] args) {
 		Monster m = new Monster();
 //		m.setCurrentHealth(100);
-		m=m.makeMonster(3);
+		m=m.makeMonster(2);//3라운드 몬스터
 		m.showData();
+		System.out.println("----------------------------------");
 //		Monster m=Monster.getInstance();
 //		m = m.makeMonster(1);
 ////		System.out.println(m);
@@ -35,10 +36,14 @@ public class TempMain {
 //		System.out.println("----------------------------------");
 //		System.out.println(p);
 
-		Battle b = new Battle();
 		p.addName();
-		System.out.println(p.getName());
+		Battle b = new Battle();
+//		System.out.println(p.getName());
 		b.choicePlayerMovement(m,p);
+		
+//		System.out.println("=============================");
+//		m=m.makeMonster(1);//1라운드 몬스터
+//		b.choicePlayerMovement(m, p);
 	}
 
 }

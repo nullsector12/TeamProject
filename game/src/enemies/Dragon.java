@@ -7,12 +7,13 @@ import game.Monster;
 public class Dragon extends Monster {//should be resistant to physical attacks!
 
     public Dragon() {
+    	super.setStage(12);
         super.setName("용");
-        super.setBaseHealth(200);
+//        super.setBaseHealth(200);
+        super.setBaseHealth(getStage());
 //        super.setBaseMana(10);
         super.setBaseStrength(5);
 //        super.setBaseMagic(2);
-        super.setBaseAgility(3);
 //        super.setBaseDefense(6);
 //        super.setBaseMagicDefense(2);
         

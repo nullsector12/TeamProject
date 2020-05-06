@@ -13,13 +13,12 @@ public class Rabbit extends Monster {//should be resistant to physical attacks!
         super.setName("토끼");
         super.setBaseHealth(20);
         
-        super.setBaseHealth(BasicInfo.BASIC_HEALTH+getStage()*10);//int형 변수 전달
-        
+//        super.setBaseHealth(BasicInfo.BASIC_HEALTH+getStage()*10);//int형 변수 전달
+        super.setBaseHealth(getStage());
         
 //        super.setBaseMana(10);
         super.setBaseStrength(5);
 //        super.setBaseMagic(2);
-        super.setBaseAgility(3);
 //        super.setBaseDefense(6);
 //        super.setBaseMagicDefense(2);
         
