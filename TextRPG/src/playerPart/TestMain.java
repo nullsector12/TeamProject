@@ -1,5 +1,8 @@
 package playerPart;
 
+import items.*;
+
+
 public class TestMain {
 
 	public static void main(String[] args) {
@@ -14,6 +17,23 @@ public class TestMain {
 		player.checkLevelUp();
 		
 		player.showStatus();
+		
+		
+		BrokenSword bs = new BrokenSword("", 0, 0, 0, 0, 0);
+		
+		
+		
+		
+		
+		Inventory iv = new Inventory();
+		
+		
+		
+		iv.addEquipment(bs);
+			
+		iv.showInventory();
+		
+		
 		
 		
 	}
