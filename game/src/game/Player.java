@@ -26,7 +26,7 @@ public class Player extends Entity{
 	public Player() {
 		super.setName("");
 		currentLevel = BasicInfo.BASIC_LEVEL;
-		super.setCurrentHealth(BasicInfo.BASIC_HEALTH);
+		super.setCurrentHealth(BasicInfo.BASIC_HEALTH+999);
 		super.setMaxHealth(BasicInfo.BASIC_HEALTH);
 		super.setCurrentStrength(BasicInfo.BASIC_POWER);
 		super.setEvasion(0);

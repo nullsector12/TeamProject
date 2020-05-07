@@ -26,6 +26,8 @@ public class Battle {
 	//적중 확률 = ((정확도-회피 확률)/정확도) * 100 (%)
 //공격을 정의한다.
 	void playerAttack(Monster m, int dmg) {
+//		if(!m.isAlive()) return;
+		
 		dmg =(((int)(Math.random()*10)+5));
 		
 		if(monsterEvasion(m)) {
@@ -33,6 +35,10 @@ public class Battle {
 			dmg = 0;
 		}
 		m.setCurrentHealth(m.getCurrentHealth() - dmg);
+		System.out.println("방어 전 데미지:"+dmg);
+		m.setDefense(p);
+//		m.setDefense(dmg);
+		System.out.println("방어력===============>"+m.getDefense());
         System.out.println(dmg + " 만큼 가격! 몬스터의 체력은:" + (m.getCurrentHealth()));
     }
 	
@@ -103,7 +109,7 @@ public class Battle {
 	        	break;
 	        }
 		  
-//		 m. setEvasion();//턴마다 회피율 값 바뀌어야 하기 떄문에 회피율 재설정
+		 m. setEvasion();//턴마다 회피율 값 바뀌어야 하기 떄문에 회피율 재설정
 }
 	}
 }

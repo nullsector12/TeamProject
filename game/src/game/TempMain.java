@@ -52,6 +52,7 @@ public class TempMain {
 //		System.out.println(p);
 
 		p.addName();
+		
 		Battle b = new Battle();
 //		System.out.println(p.getName());
 		b.choicePlayerMovement(m,p);
