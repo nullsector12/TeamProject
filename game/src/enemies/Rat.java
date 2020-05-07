@@ -14,24 +14,28 @@ package enemies;
 	int BASIC_LEVEL = 1;*/
 import game.Monster;
 import game.BasicInfo;
+//	int STAGE = 1, BASE_HEALTH = 100, BASE_STRENGTH = 10, BESE_EVASION = 20;
 
 public class Rat extends Monster {//should be resistant to physical attacks!
 
     public Rat() {
-    	super.setStage(1);//stage 1
-        super.setName("쥐");
-       super.setBaseHealth(getStage());
-        super.setBaseStrength(5);
-        super.setGoldWorth(300);
-        super.setExpWorth(25);
-        super.setWeakness(2); //See Monster class for list of types
+    	setStage(EnemyBasics.STAGE);//stage 1
+        setName("쥐");
+       setBaseHealth(getStage());
+        setBaseStrength(EnemyBasics.BASE_STRENGTH);
+//        setExpWorth(EnemyBasics.BASE_EXP_WORTH);
+        setExpWorth(getStage());//메서드 인자 stage로 바꿈
+
+        setGoldWorth(getExpWorth());
+        setWeakness(2); //See Monster class for list of types
         
-        super.initCurrentStats();
+        setEvasion();//이건 그냥 랜덤 확률
+        
+        initCurrentStats();
         
     }
 
     public void showData() {
     	super.showData();
-    	System.out.println("쥐 선택");
     }
 }

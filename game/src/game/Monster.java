@@ -72,7 +72,6 @@ public class Monster extends Entity {
 	//==================================================
 	private int weakness;// 몬스터가 가진 기본 약점
 	// 1 = physical, 2 = fire, 3 = water, 4 = lightning, 5 = ice, more?!
-	private boolean escapable;// 탈출(도망) 가능 여부->도망 가능 true/ 도망 불가 false
 
 	private int stage;
 	protected Monster(){
@@ -84,12 +83,8 @@ public class Monster extends Entity {
 //		expWorth=BasicInfo.BASIC_EXP;
 //		weakness=0;
 //		evasion=0;
-		setBaseHealth(stage);
-		setBaseStrength(BasicInfo.BASIC_POWER+stage*10);
-		setExpWorth(BasicInfo.BASIC_EXP+stage*10);
-		setGoldWorth(getExpWorth());
+
 		weakness=0;
-		evasion=0;
 	}
 //	Monster(){//얘는 몬스터별로 값이 다 다르기 때문에 필요없음
 //		setCurrentHealth(BasicInfo.BASIC_HEALTH);
@@ -114,6 +109,14 @@ public class Monster extends Entity {
 //		super.setBaseHealth(500);
 	}
 
+//	setBaseStrength(BasicInfo.BASIC_POWER+stage*10);
+//	setExpWorth(BasicInfo.BASIC_EXP+stage*10);
+//	setGoldWorth(getExpWorth());
+	
+	
+public void 	setBaseStrength(int stage) {
+	baseStrength=BasicInfo.BASIC_POWER+stage*10;
+}
 	public int getStage() {
 		return stage;
 	}
@@ -127,10 +130,10 @@ public class Monster extends Entity {
 		return evasion;
 	}
 
-	public void setEvasion(int evasion) {
-//		Random rand=new Random();
-//		rand.nextInt()
-		this.evasion = evasion;
+	public void setEvasion() {//이건 함수 인자나 고려할 다른 값 필요 없이 그냥 랜덤
+		Random rand=new Random();//회피율 게임 턴마다 바뀌어야 함(고정값 x)
+		
+		evasion=(rand.nextInt(100)+1);
 	}
 
 	public int getGoldWorth() {
@@ -155,8 +158,14 @@ public class Monster extends Entity {
 		return expWorth;
 	}
 
-	public void setExpWorth(int i) {
-		expWorth = i;
+	public void setExpWorth(int stage) {
+		Random rand=new Random();
+		
+//		exp*=(stage*(rand.nextInt(2)+1));
+		
+		int exp_max=(int)(stage*10);
+		int exp_min=(int)(stage*2);
+		expWorth =stage*10+rand.nextInt(exp_max-exp_min+1)+exp_min;
 	}
 
 	public int getWeakness() {
@@ -167,13 +176,6 @@ public class Monster extends Entity {
 		weakness = i;
 	}
 
-	public boolean isEscapable() {
-		return escapable;
-	}
-
-	public void setEscapable(boolean i) {
-		escapable = i;
-	}
 
 	// manage클래스에서 상위 클래스 타입의 인스턴스를 생성해놓고
 	// 스테이지별로 몬스터 생성
@@ -226,7 +228,6 @@ public class Monster extends Entity {
 			monster = new Dragon();
 			break;
 		}
-		System.out.println("---------------------------함수 실행 종료");
 		return monster;
 	}
 
@@ -244,20 +245,20 @@ public class Monster extends Entity {
 	 */
 
 	public void showData() {
+		System.out.println("현재 스테이지: "+this.getStage());
 		System.out.println("몬스터 이름: " + this.getName());
 		System.out.println("현재 체력: " + this.getCurrentHealth());
-		System.out.println("현재 보유 골드: " + this.getGoldWorth());
 		System.out.println("현재 보유 경험치: " + this.getExpWorth());
+		System.out.println("현재 보유 골드: " + this.getGoldWorth());
 		System.out.println("현재 보유 약점: " + this.getWeakness());
-		System.out.println("도망 가능 여부: " + this.escapable);
-		System.out.println("회피율: " + this.getEvasion());
+		System.out.println("회피율: " + this.getEvasion()+"%");
 
 	}
 
 	@Override
 	public String toString() {
 		return "Monster [evasion=" + evasion + ", goldWorth=" + goldWorth + ", expWorth=" + expWorth + ", weakness="
-				+ weakness + ", escapable=" + escapable + "]";
+				+ weakness + ", escapable=" + "]";
 	}
 
 	void printName() {

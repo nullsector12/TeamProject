@@ -75,8 +75,6 @@ public class Battle {
 
 //사용자의 입력에 따른 공격
 	void choicePlayerMovement(Monster m, Player p) {
-		
-		
 		System.out.println("Battle Start!!!");
 		while(true) {
 		System.out.println("1.공격 2.회피");
@@ -104,6 +102,8 @@ public class Battle {
 	        	//리워드호출
 	        	break;
 	        }
+		  
+//		 m. setEvasion();//턴마다 회피율 값 바뀌어야 하기 떄문에 회피율 재설정
 }
 	}
 }

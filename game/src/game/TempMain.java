@@ -5,9 +5,24 @@ public class TempMain {
 	public static void main(String[] args) {
 		Monster m = new Monster();
 //		m.setCurrentHealth(100);
-		m=m.makeMonster(12);//3라운드 몬스터
-		m.showData();
-		System.out.println("----------------------------------");
+//		m=m.makeMonster(1);//3라운드 몬스터
+//		m.showData();
+//		System.out.println("----------------------------------");
+//		m=m.makeMonster(2);//3라운드 몬스터
+//		m.showData();
+//		System.out.println("----------------------------------");
+//		m=m.makeMonster(12);//3라운드 몬스터
+//		m.showData();
+//		System.out.println("----------------------------------");
+//		
+//		
+		for (int i = 1; i <=12; i++) {
+			m=m.makeMonster(i);//3라운드 몬스터
+			m.showData();
+			System.out.println("----------------------------------");
+		}
+		
+		
 //		Monster m=Monster.getInstance();
 //		m = m.makeMonster(1);
 ////		System.out.println(m);
