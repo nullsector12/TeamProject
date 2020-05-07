@@ -48,7 +48,9 @@ evasion 계산식 정의해야 함
 
 --------------------------------------추가사항
 각 단계별 몬스터에 스테이지 값 저장(o)
- 
+ 약점
+ 회피율
+ 체력값 계산하는 수식 재정의
  */
 import enemies.Chicken;
 import enemies.Cow;
@@ -72,10 +74,12 @@ public class Monster extends Entity {
 	//==================================================
 	private int weakness;// 몬스터가 가진 기본 약점
 	// 1 = physical, 2 = fire, 3 = water, 4 = lightning, 5 = ice, more?!
-
 	private int stage;
+	Random rand;
 	protected Monster(){
-		stage=1;
+		rand=new Random();
+		
+//		stage=1;
 //		baseHealth=BasicInfo.BASIC_HEALTH;
 //		baseStrength=BasicInfo.BASIC_POWER;
 //		
@@ -131,8 +135,7 @@ public void 	setBaseStrength(int stage) {
 	}
 
 	public void setEvasion() {//이건 함수 인자나 고려할 다른 값 필요 없이 그냥 랜덤
-		Random rand=new Random();//회피율 게임 턴마다 바뀌어야 함(고정값 x)
-		
+		//회피율 게임 턴마다 바뀌어야 함(고정값 x)
 		evasion=(rand.nextInt(100)+1);
 	}
 
@@ -144,7 +147,6 @@ public void 	setBaseStrength(int stage) {
 	public void setGoldWorth(int exp) {
 		goldWorth = exp;
 		// 스테이지 별 몬스터 경험치의 10퍼센트를 골드로 반환(최대 10퍼센트까지 골드 받을 수 있음) or 랜덤 반환
-		Random rand = new Random();
 		int gold_max = (int) (exp * 0.5);
 		int gold_min = (int) (exp * 0.1);// 최소 골드
 		goldWorth = rand.nextInt(gold_max - gold_min + 1) + gold_min;// 수식 변경
@@ -159,7 +161,7 @@ public void 	setBaseStrength(int stage) {
 	}
 
 	public void setExpWorth(int stage) {
-		Random rand=new Random();
+		
 		
 //		exp*=(stage*(rand.nextInt(2)+1));
 		
@@ -245,7 +247,7 @@ public void 	setBaseStrength(int stage) {
 	 */
 
 	public void showData() {
-		System.out.println("현재 스테이지: "+this.getStage());
+		System.out.println("현재 스테이지: "+this.getStage());//1-1 형식으로 바꿔야됨
 		System.out.println("몬스터 이름: " + this.getName());
 		System.out.println("현재 체력: " + this.getCurrentHealth());
 		System.out.println("현재 보유 경험치: " + this.getExpWorth());

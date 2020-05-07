@@ -92,8 +92,11 @@ public class Entity {//상속할 때 상위클래스에 private 처리하지 말
 		baseStrength = input;
 	}
 
+	/*	 int evasion;
+	 int goldWorth;
+	 int expWorth;*/
 
-	public void initCurrentStats() {// 현재 스탯 초기화
+	public void initCurrentStats() {
 		currentHealth = baseHealth;
 		currentStrength = baseStrength;
 	}

@@ -5,6 +5,7 @@ import game.Monster;
 public class Monkey extends Monster {//should be resistant to physical attacks!
 
     public Monkey() {
+
     	setStage(5);
         setName("원숭이");
         setBaseHealth(getStage());
@@ -16,8 +17,8 @@ public class Monkey extends Monster {//should be resistant to physical attacks!
         setWeakness(2); //See Monster class for list of types
         
         setEvasion();//이건 그냥 랜덤 확률
-
         initCurrentStats();
+
     }
     
 }

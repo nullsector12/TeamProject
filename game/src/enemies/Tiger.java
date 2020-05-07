@@ -16,8 +16,8 @@ public class Tiger extends Monster {//should be resistant to physical attacks!
         setWeakness(2); //See Monster class for list of types
 
         setEvasion();//이건 그냥 랜덤 확률
-
         initCurrentStats();
+
     }
     
 }

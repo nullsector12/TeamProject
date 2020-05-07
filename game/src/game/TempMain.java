@@ -22,7 +22,7 @@ public class TempMain {
 			System.out.println("----------------------------------");
 		}
 		
-		
+
 //		Monster m=Monster.getInstance();
 //		m = m.makeMonster(1);
 ////		System.out.println(m);
