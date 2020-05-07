@@ -9,9 +9,9 @@ public class Battle {
 	
 	Scanner bt = new Scanner(System.in);
 //플레이어 몬스터 모두 불러온다.
-	Player p = new Player();
-	Monster m = new Monster();
-	Dungeon d = new Dungeon();
+	
+	Events e =new Events();
+	
 	int turns;
 	boolean pass;
 	int pdmg;
@@ -40,7 +40,7 @@ public class Battle {
 	void monsterAttack(Player p, int mdmg) {
 		mdmg =((int)(Math.random()*10)+5);
 		
-		if(playerEvasion()) {
+		if(pass) {
 			System.out.println("플레이어가 몬스터의 공격을 회피했습니다! 데미지가 0이 됩니다.");
 			mdmg = 0;
 		}
@@ -49,7 +49,7 @@ public class Battle {
 	}
 	
 //회피를 정의 한다.	
-	 boolean playerEvasion() {
+	 boolean playerEvasion(Player p) {
 		 
             if ((rand.nextInt(100) + 1) <= p.getEvasion()) {
             	return pass = true;       
@@ -87,11 +87,13 @@ public class Battle {
 			  if(p.getCurrentHealth() <= 0) {
 				  // 전투 패배 시 int 0 반환
 		        	result = 0;
+		        	e.rewordsOrPenalty(p, m, result);
 		        	break;
 		        	
 		        }else if(m.getCurrentHealth()<=0) {
 		        	// 전투 승리 시 int 1 반환
 		        	result = 1;
+		        	e.rewordsOrPenalty(p, m, result);
 		        	break;
 		        	
 		        }else {
@@ -104,52 +106,9 @@ public class Battle {
 //			
 //			playerAttack(m, pdmg);
 //			break;
-		}return result;
-		
-
-//		  if(p.getCurrentHealth()<=0) {
-//	        	System.out.println("죽었습니다.");
-//	        	p.showStatus();
-//	        	break;
-//	        }else if(m.getCurrentHealth()<=0) {
-//	        	System.out.println("승리하셨습니다.");
-//	        	p.showStatus();
-//	        	//리워드호출
-//	        	break;
-//	        }
-		
-		  }
-	}
+			}
+		return result;
+		}
+	}	
 }
 
-////회피를 정의 한다.
-//void playerWeakness(Monster m, int wns) {
-//	wns = (int) (mdmg-(Math.random()*m.getCurrentHealth()));
-//	//p.getCurrentHealth() = (p.getCurrentHealth() - wns);  
-//    System.out.println(wns + " 만큼 회피!:" + (p.getCurrentHealth()-wns));
-// 
-//}
-//
-//void monsterWeakness(Player p, int wns) {
-//	wns = (int) (mdmg-(Math.random()*p.getCurrentHealth()));
-//	//p.getCurrentHealth() = (p.getCurrentHealth() - wns);  
-//    System.out.println(wns + " 만큼 회피!:" + (m.getCurrentHealth()-wns));
-// 
-//}
-
-////서로 턴을 주고 받는다.
-//void PlayerTurn(Player p, Monster m) { 
-//
-//	//플레이어턴
-////	System.out.println(p.getName() + " - " + "HP: " + p.getCurrentHealth() + "/" + p.getMaxHealth());
-////    System.out.println(m.getName() + " - " + "HP: " + m.getCurrentHealth());
-//}
-//
-//void MonsterTurn() {
-//	
-////    //몬스터턴
-////    System.out.println(m.getName() + "의 공격!!!");
-////    //monster.getSkills(); blah stuff
-////    System.out.println("화가난" + m.getName() + "!!!!");
-//    
-//}

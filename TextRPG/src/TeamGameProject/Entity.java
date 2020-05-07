@@ -102,8 +102,8 @@ public class Entity {//상속할 때 상위클래스에 private 처리하지 말
 		return maxHealth;
 	}
 
-	public int setMaxHealth(int input) {
-		return maxHealth = input;
+	public void setMaxHealth(int input) {
+		 maxHealth = input;
 	}
 
 	public int getCurrentStrength() {
@@ -113,8 +113,8 @@ public class Entity {//상속할 때 상위클래스에 private 처리하지 말
 		return currentStrength;
 	}
 
-	public int setCurrentStrength(int input) {
-		return currentStrength = input;
+	public void setCurrentStrength(int input) {
+		 currentStrength = input;
 	}
 
 	public int getBaseStrength() {

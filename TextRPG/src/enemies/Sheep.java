@@ -7,28 +7,20 @@ import TeamGameProject.Monster;
 public class Sheep extends Monster {//should be resistant to physical attacks!
 
     public Sheep() {
-    	super.setStage(6);
-    	
-        super.setName("양");
-//        super.setBaseHealth(200);
-        super.setBaseHealth(getStage());
-//        super.setBaseMana(10);
-        super.setBaseStrength(5);
-//        super.setBaseMagic(2);
-//        super.setBaseDefense(6);
-//        super.setBaseMagicDefense(2);
+
+    	setStage(6);
+        setName("양");
+        setBaseHealth(getStage());
+        setBaseStrength(EnemyBasics.BASE_STRENGTH);
+//        setExpWorth(EnemyBasics.BASE_EXP_WORTH);
+        setExpWorth(getStage());//메서드 인자 stage로 바꿈
+
+        setGoldWorth(getExpWorth());
+        setWeakness(2); //See Monster class for list of types
         
-        super.setGoldWorth(30);
-        super.setExpWorth(25);
-        super.setWeakness(2); //See Monster class for list of types
-        super.setEscapable(true);
-        super.setEvasion(5);
-        
-        
-        super.initCurrentStats();
+        setEvasion();//이건 그냥 랜덤 확률
+        initCurrentStats();
+
     }
     
-    /*public int slash() {
-        return (int)(super.getBaseStrength() * 0.5) + 10;
-    }*/
 }

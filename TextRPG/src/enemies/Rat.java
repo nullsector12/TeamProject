@@ -19,38 +19,24 @@ import TeamGameProject.BasicInfo;
 public class Rat extends Monster {//should be resistant to physical attacks!
 
     public Rat() {
-//    	super();
-    	super.setStage(1);//stage 1
-    	
-        super.setName("쥐");
-//        super.setBaseHealth(BasicInfo.BASIC_HEALTH);
-       super.setBaseHealth(getStage());
-       super.setEvasion(5);
+
+    	setStage(EnemyBasics.STAGE);//stage 1
+        setName("쥐");
+       setBaseHealth(getStage());
+        setBaseStrength(EnemyBasics.BASE_STRENGTH);
+//        setExpWorth(EnemyBasics.BASE_EXP_WORTH);
+        setExpWorth(getStage());//메서드 인자 stage로 바꿈
+
+        setGoldWorth(getExpWorth());
+        setWeakness(2); //See Monster class for list of types
         
-        super.setBaseStrength(5);
-        
-        super.setGoldWorth(300);
-        super.setExpWorth(25);
-        super.setWeakness(2); //See Monster class for list of types
-        super.setEscapable(true);
-        
-//        Item slimeE = new SlimeExtract();
-//        super.getLoot().add(slimeE);
-        
-//        int[] chance = {80};//needs to map to same index
-//        super.setLootChance(chance);
-        
-//        super.setRandomLoot();
-        
-        super.initCurrentStats();
+        setEvasion();//이건 그냥 랜덤 확률
+        initCurrentStats();
+
         
     }
 
     public void showData() {
     	super.showData();
-    	System.out.println("쥐 선택");
     }
-    /*public int slash() {
-        return (int)(super.getBaseStrength() * 0.5) + 10;
-    }*/
 }
