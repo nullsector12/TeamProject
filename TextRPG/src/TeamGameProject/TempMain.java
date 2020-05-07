@@ -4,10 +4,12 @@ import java.util.Random;
 
 public class TempMain {
 	Random rand = new Random();
+	static int result;
 	public static void main(String[] args) {
+		
 		Monster m = new Monster();
 //		m.setCurrentHealth(100);
-		m=m.makeMonster((int)(Math.random()*13)+1);//3라운드 몬스터
+		m=m.makeMonster((int)(Math.random()*13)+1);//랜덤 라운드 몬스터
 		m.showData();
 		System.out.println("----------------------------------");
 //		Monster m=Monster.getInstance();
@@ -28,6 +30,8 @@ public class TempMain {
 //		m.encounterMonster();
 //
 		Player p = new Player();
+		Battle b = new Battle();
+		Events e = new Events();
 //		p.setCurrentHealth(100);
 //		System.out.println(p);
 //
@@ -39,9 +43,16 @@ public class TempMain {
 //		System.out.println(p);
 
 		p.addName();
-		Battle b = new Battle();
+		while(true) {
 //		System.out.println(p.getName());
-		b.choicePlayerMovement(m,p);
+			m=m.makeMonster((int)(Math.random()*13)+1);
+			result = b.choicePlayerMovement(m, p);
+			p.showStatus();
+			e.rewordsOrPenalty(result);
+			p.showStatus();
+			
+		}
+		
 		
 //		System.out.println("=============================");
 //		m=m.makeMonster(1);//1라운드 몬스터

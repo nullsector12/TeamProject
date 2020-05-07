@@ -19,6 +19,7 @@ public class Battle {
 	int wns;
 	int dmg;
 	Random rand = new Random();
+	int battleResult;
 	
 	
 //던전을 불러온다.
@@ -26,7 +27,7 @@ public class Battle {
 	//적중 확률 = ((정확도-회피 확률)/정확도) * 100 (%)
 //공격을 정의한다.
 	void playerAttack(Monster m, int dmg) {
-		dmg =(((int)(Math.random()*10)+5));
+		dmg = 1000;
 		
 		if(monsterEvasion(m)) {
 			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
@@ -68,12 +69,14 @@ public class Battle {
   
 
 //사용자의 입력에 따른 공격
-	void choicePlayerMovement(Monster m, Player p) {
+	int choicePlayerMovement(Monster m, Player p) {
+		int result = 0;
+		this.battleResult = result;
 		
+		System.out.println("====== 전투 시작 ======");
 		
-		System.out.println("Battle Start!!!");
 		while(true) {
-		System.out.println("1.공격 2.회피");
+		System.out.println("1.공격");
 		int choice = Integer.parseInt(bt.nextLine());
 		
 		switch(choice) {
@@ -81,24 +84,41 @@ public class Battle {
 			
 			playerAttack(m, dmg);
 			monsterAttack(p, dmg);
+			  if(p.getCurrentHealth() <= 0) {
+				  // 전투 패배 시 int 0 반환
+		        	result = 0;
+		        	break;
+		        	
+		        }else if(m.getCurrentHealth()<=0) {
+		        	// 전투 승리 시 int 1 반환
+		        	result = 1;
+		        	break;
+		        	
+		        }else {
+		        	continue;
+		        	// 추가 메뉴 반환값 구상해보기
+		        }
 			
-			break;
-		case 2:
-			
-			playerAttack(m, pdmg);
-			break;
-		}
-		  if(p.getCurrentHealth()<=0) {
-	        	System.out.println("죽었습니다.");
-	        	p.showStatus();
-	        	break;
-	        }else if(m.getCurrentHealth()<=0) {
-	        	System.out.println("승리하셨습니다.");
-	        	p.showStatus();
-	        	//리워드호출
-	        	break;
-	        }
-}
+			// 전투 메뉴 추가 생각해보기
+//		case 2:
+//			
+//			playerAttack(m, pdmg);
+//			break;
+		}return result;
+		
+
+//		  if(p.getCurrentHealth()<=0) {
+//	        	System.out.println("죽었습니다.");
+//	        	p.showStatus();
+//	        	break;
+//	        }else if(m.getCurrentHealth()<=0) {
+//	        	System.out.println("승리하셨습니다.");
+//	        	p.showStatus();
+//	        	//리워드호출
+//	        	break;
+//	        }
+		
+		  }
 	}
 }
 

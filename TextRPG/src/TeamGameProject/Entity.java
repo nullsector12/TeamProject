@@ -22,6 +22,9 @@ public class Entity {//상속할 때 상위클래스에 private 처리하지 말
 //	 int baseAgility, currentAgility;// 기본, 현재 민첩성
 	 int baseDefense, currentDefense;// 기본, 현재 방어력
 //	 int baseMagicDefense, currentMagicDefense;// 기본, 현재 마법 방어력
+	int currentExp;
+	int currentLevel;
+	int gold;
 
 //	 Entity(int currentHealth){
 //		 this.currentHealth=currentHealth;
@@ -36,8 +39,8 @@ public class Entity {//상속할 때 상위클래스에 private 처리하지 말
 		return evasion;
 	}
 
-	public void setEvasion(int evasion) {
-		this.evasion = evasion;
+	public int setEvasion(int evasion) {
+		return this.evasion = evasion;
 	}
 
 	public int getGoldWorth() {
@@ -83,8 +86,8 @@ public class Entity {//상속할 때 상위클래스에 private 처리하지 말
 		return currentHealth;
 	}
 
-	public void setCurrentHealth(int input) {
-		currentHealth = input;
+	public int setCurrentHealth(int input) {
+		return currentHealth = input;
 	}
 
 	public int getBaseHealth() {
@@ -99,8 +102,8 @@ public class Entity {//상속할 때 상위클래스에 private 처리하지 말
 		return maxHealth;
 	}
 
-	public void setMaxHealth(int input) {
-		maxHealth = input;
+	public int setMaxHealth(int input) {
+		return maxHealth = input;
 	}
 
 	public int getCurrentStrength() {
@@ -110,8 +113,8 @@ public class Entity {//상속할 때 상위클래스에 private 처리하지 말
 		return currentStrength;
 	}
 
-	public void setCurrentStrength(int input) {
-		currentStrength = input;
+	public int setCurrentStrength(int input) {
+		return currentStrength = input;
 	}
 
 	public int getBaseStrength() {

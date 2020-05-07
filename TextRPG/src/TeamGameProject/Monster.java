@@ -111,10 +111,8 @@ public class Monster extends Entity {
 		return evasion;
 	}
 
-	public void setEvasion(int evasion) {
-//		Random rand=new Random();
-//		rand.nextInt()
-		this.evasion = evasion;
+	public int setEvasion(int evasion) {
+		return this.evasion = evasion;
 	}
 
 	public int getGoldWorth() {
@@ -238,12 +236,12 @@ public class Monster extends Entity {
 		System.out.println("회피율: " + this.getEvasion());
 
 	}
-
-	@Override
-	public String toString() {
-		return "Monster [evasion=" + getEvasion() + ", goldWorth=" + getGoldWorth() + ", expWorth=" + getExpWorth() + ", weakness="
-				+ weakness + ", escapable=" + escapable + "]";
-	}
+//
+//	@Override
+//	public String toString() {
+//		return "Monster [evasion=" + getEvasion() + ", goldWorth=" + getGoldWorth() + ", expWorth=" + getExpWorth() + ", weakness="
+//				+ weakness + ", escapable=" + escapable + "]";
+//	}
 
 	void printName() {
 		System.out.println(getName() + "을(를) 만났습니다");

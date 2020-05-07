@@ -22,7 +22,6 @@ public class Player {
 		nextLevelExp = PlayerBasicStats.BASIC_MAXEXP;
 		currentExp = 0;
 		evasion = PlayerBasicStats.BASIC_EVASION;
-		
 	}
 
 	
