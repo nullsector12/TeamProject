@@ -26,9 +26,7 @@ public class Entity {//상속할 때 상위클래스에 private 처리하지 말
 	int currentLevel;
 	int gold;
 
-//	 Entity(int currentHealth){
-//		 this.currentHealth=currentHealth;
-//	 }
+
 	 
 	 
 	public String getName() {

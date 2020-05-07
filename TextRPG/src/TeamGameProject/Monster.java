@@ -131,9 +131,6 @@ public class Monster extends Entity {
 //		super.setBaseHealth(500);
 	}
 
-//	setBaseStrength(BasicInfo.BASIC_POWER+stage*10);
-//	setExpWorth(BasicInfo.BASIC_EXP+stage*10);
-//	setGoldWorth(getExpWorth());
 
 	public void setBaseStrength(int stage) {
 		baseStrength = BasicInfo.BASIC_POWER + stage * 10;
@@ -152,9 +149,9 @@ public class Monster extends Entity {
 		return evasion;
 	}
 
-	public void setEvasion() {// 이건 함수 인자나 고려할 다른 값 필요 없이 그냥 랜덤
+	public int setEvasion(int evasion) {// 이건 함수 인자나 고려할 다른 값 필요 없이 그냥 랜덤
 		// 회피율 게임 턴마다 바뀌어야 함(고정값 x)
-		evasion = (rand.nextInt(100) + 1);
+		 return this.evasion = evasion;
 	}
 
 	public int getGoldWorth() {
@@ -168,9 +165,7 @@ public class Monster extends Entity {
 		int gold_max = (int) (exp * 0.5);
 		int gold_min = (int) (exp * 0.1);// 최소 골드
 		goldWorth = rand.nextInt(gold_max - gold_min + 1) + gold_min;// 수식 변경
-//        int gMin = (int)(g*.7);
-//        int gMax = (int)(g*1.2);
-//        goldWorth = rand.nextInt(gMax - gMin +1) + gMin; //generates a number from g*.7 - g*1.2 (70% - 120% of g)
+
 	}
 
 //battle/ event에서 gold/exp 관련 정보 처리
@@ -254,14 +249,6 @@ public class Monster extends Entity {
 		printName();
 	}
 
-	/*
-	 * private int evasion;
-	 * 
-	 * private int goldWorth;// 골드 private int expWorth;// 경험치 private int
-	 * weakness;// 몬스터가 가진 기본 약점 // 1 = physical, 2 = fire, 3 = water, 4 =
-	 * lightning, 5 = ice, more?! private boolean escapable;// 탈출(도망) 가능 여부->도망 가능
-	 * true/ 도망 불가 false
-	 */
 
 	public void showData() {
 		System.out.println("현재 스테이지: " + this.getStage());// 1-1 형식으로 바꿔야됨
@@ -272,7 +259,6 @@ public class Monster extends Entity {
 		System.out.println("현재 보유 약점: " + this.getWeakness());
 		System.out.println("회피율: " + this.getEvasion() + "%");
 		System.out.println("방어력: " + this.getDefense());
-
 	}
 
 	@Override
@@ -285,6 +271,7 @@ public class Monster extends Entity {
 		System.out.println(getName() + "을(를) 만났습니다");
 	}
 
+	
 	// ==========================================================05/07 추가 메서드
 	boolean isAlive() {// 몬스터 살아있는지 여부 알려주는 메서드
 		if (getCurrentHealth() <= 0)
@@ -307,17 +294,4 @@ public class Monster extends Entity {
 		// 기본적으로 방어력은 체력에 더해지는 값(체력 증가 효과) 거기에 데미지 빼서 체력값 재정의
 	}
 
-//	public void  attack(Player player, int hit) {//Player에 가하는 공격의 양
-//		System.out.println(getName()+"이(가) 공격합니다");
-//		player.setCurrentHealth(player.getCurrentHealth()-hit);//공격받은 만큼 Player의 hp차감
-//		if(player.getCurrentHealth()<0) {
-//			System.out.println("끝");
-//		}else {
-//			
-//		}
-//	}
-	/*
-	 * abstract void printName() ;
-	 */
-	// public Skill[] getSkills(){return blahhh;}
 }
