@@ -69,7 +69,7 @@ public class Battle {
   
 
 //사용자의 입력에 따른 공격
-	void choicePlayerMovement(Monster m, Player p) {
+	int choicePlayerMovement(Monster m, Player p) {
 		int result = 0;
 		this.battleResult = result;
 		
@@ -94,6 +94,7 @@ public class Battle {
 		        	// 전투 승리 시 int 1 반환
 		        	result = 1;
 		        	e.rewordsOrPenalty(p, m, result);
+		        	
 		        	break;
 		        	
 		        }else {
@@ -101,14 +102,18 @@ public class Battle {
 		        	// 추가 메뉴 반환값 구상해보기
 		        }
 			
+			  
+			  
+			  
+			  
 			// 전투 메뉴 추가 생각해보기
 //		case 2:
 //			
 //			playerAttack(m, pdmg);
 //			break;
 			}
-		//return result;
-		
+		return result;
+	
 		
 		}
 		

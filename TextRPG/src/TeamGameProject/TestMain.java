@@ -4,7 +4,6 @@ import java.util.Random;
 
 public class TestMain {
 	Random rand = new Random();
-	static int result;
 
 	public static void main(String[] args) {
 

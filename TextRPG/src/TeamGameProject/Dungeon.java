@@ -26,7 +26,6 @@ public class Dungeon {
 		this.boss2Count = 0;
 		this.stage = 0;
 		sc = new Scanner(System.in);
-		
 
 	}
 
@@ -53,7 +52,6 @@ public class Dungeon {
 		for (int i = 1; i < 4; i++) {
 			System.out.println(i + "단계");
 			stage1(p, i);
-			System.out.println("gggggg");
 		}
 		System.out.println("스테이지를 모두 클리어 하셨습니다.");
 	}
@@ -87,6 +85,7 @@ public class Dungeon {
 		switch (num) {
 		case 1:
 			m = new Rat();
+
 			break;
 		case 2:
 			m = new Chicken();
@@ -97,8 +96,7 @@ public class Dungeon {
 		}
 		System.out.println(m.getName());
 		b.choicePlayerMovement(m, p);
-		//System.out.println(result);
-		
+		// System.out.println(result);
 
 	}
 
@@ -138,8 +136,8 @@ public class Dungeon {
 	}
 
 	void bossRoom(Player p, int num) {
-		System.out.println(num+"단계 보스");
-		switch(num) {
+		System.out.println(num + "단계 보스");
+		switch (num) {
 		case 1:
 			m = new Dog();
 			break;
