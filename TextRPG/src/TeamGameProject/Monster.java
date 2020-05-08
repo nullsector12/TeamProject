@@ -30,7 +30,7 @@ horse cow tiger dragon*/
  * 
  * 
  * 구현해야 할 사항
- * 약점
+ * 약점=> 약점1~5 속성에 해당하는 공격 받으면 플레이어 공격력*(?) 해서 공격력(받은 데미지) 증폭시켜서 체력 깎음
  * 방어=>     현재 체력= 현재 체력+(받은 데미지-방어력) 
  * => 방어력이 받은 데미지보다 큰 경우에는 그냥 현재 체력 유지(받은 총 데미지 값 0)
  * 
@@ -60,6 +60,9 @@ evasion 계산식 정의해야 함
  체력값 계산하는 수식 재정의
  */
 
+
+//스탯 다르게
+//여러마리 만들기
 import java.util.Random;
 
 import enemies.Chicken;
@@ -75,9 +78,8 @@ import enemies.Rat;
 import enemies.Sheep;
 import enemies.Snake;
 import enemies.Tiger;
-
-public class Monster extends Entity {
-
+public class Monster extends Entity {//이름 랜덤하게 나오도록
+	
 	// 회피 확률->공격 무효화 기능
 //	private int evasion;
 //	private int goldWorth;// 골드
@@ -87,7 +89,6 @@ public class Monster extends Entity {
 
 	// ==================================================
 	private int weakness;// 몬스터가 가진 기본 약점
-	// 1 = physical, 2 = fire, 3 = water, 4 = lightning, 5 = ice, more?!
 	private int stage;
 	Random rand;
 
@@ -154,7 +155,7 @@ public class Monster extends Entity {
 
 	public void setEvasion() {// 이건 함수 인자나 고려할 다른 값 필요 없이 그냥 랜덤
 		// 회피율 게임 턴마다 바뀌어야 함(고정값 x)
-		evasion = (rand.nextInt(10) + 1);
+		evasion = (rand.nextInt(100) + 1);
 	}
 
 	public int getGoldWorth() {
@@ -191,7 +192,8 @@ public class Monster extends Entity {
 		return weakness;
 	}
 
-	public void setWeakness(int i) {
+	public void setWeakness(int i) {//몬스터 회피
+		i*=rand.nextInt(10)+1;
 		weakness = i;
 	}
 
@@ -208,7 +210,10 @@ public class Monster extends Entity {
 
 	public Monster makeMonster(int stage) {// 스테이지 별 몬스터 생성
 		Monster monster = null;
-		switch (stage) {
+		
+		int numOfMonsters=rand.nextInt(5)+1;//스테이지마다 랜덤하게 나오는 몬스터 마리 수
+		
+		switch (stage) {//스테이지 별 같은 종류/다른 능력치  몬스터 여러마리 생성
 		case Rounds.first:
 			monster = new Rat();// 자동 형변환
 			System.out.println(monster);
@@ -271,7 +276,8 @@ public class Monster extends Entity {
 		System.out.println("현재 보유 골드: " + this.getGoldWorth());
 		System.out.println("현재 보유 약점: " + this.getWeakness());
 		System.out.println("회피율: " + this.getEvasion() + "%");
-		System.out.println("방어력: " + this.getDefense());
+//		System.out.println("방어력: " + this.getDefense());
+		System.out.println("약점 : " + this.getWeakness());
 
 	}
 
@@ -292,20 +298,49 @@ public class Monster extends Entity {
 		else
 			return true;
 	}
+	// ==========================================================05/08 추가 메서드
+	
+	public void setName(String name) {//이름 랜덤하게 나오도록
+		String[] kinds= {"빨간 ","파란 ","노란 ","검은 ","흰 "};
+		Random rand=new Random();
+		int numOfkinds=rand.nextInt(5);
+		
+		this.name=kinds[numOfkinds]+name;
 
-	public int getDefense() {
-		return defense;
+		
 	}
 
-	public void setDefense(Player p) {// 플레이어(로부터 받는 공격양=받은 데미지) 메서드 인자로 받아야 함
-//		if (defense >= p.getCurrentStrength())// 플레이어로부터 받은 데미지보다 방어력이 큰 경우
-//			setCurrentHealth(getCurrentHealth());// 현재 체력 유지
-//		else///플레이어로부터 받은 데미지가 방어력보다 큰 경우
-		if (defense < p.getCurrentStrength())
-			setCurrentHealth(getCurrentHealth() + (defense - p.getCurrentStrength()));// 현재 체력+=(방어력-받은 데미지)
-
-		// 기본적으로 방어력은 체력에 더해지는 값(체력 증가 효과) 거기에 데미지 빼서 체력값 재정의
-	}
+//	public int getDefense() {
+//		return this.defense;
+//	}
+//
+//	public void setDefense(int dmg) {// 플레이어(로부터 받는 공격양=받은 데미지) 메서드 인자로 받아야 함
+////		if (defense >= p.getCurrentStrength())// 플레이어로부터 받은 데미지보다 방어력이 큰 경우
+////			setCurrentHealth(getCurrentHealth());// 현재 체력 유지
+////		else///플레이어로부터 받은 데미지가 방어력보다 큰 경우
+////		if (defense < dmg)
+////			if(getCurrentHealth()+defense<getCurrentHealth())
+////				setCurrentHealth(getCurrentHealth() + defense -dmg);// 현재 체력+=(방어력-받은 데미지)
+//		this.defense = rand.nextInt(20) + 1;
+////		if (defense > dmg) {
+////			defense -= dmg;
+////			setCurrentHealth(getCurrentHealth() + defense);
+////		} else {
+////			defense = 0;
+////			return;
+////		}
+//		// 기본적으로 방어력은 체력에 더해지는 값(체력 증가 효과) 거기에 데미지 빼서 체력값 재정의
+//	}
+//	public void setDefense(Player p) {// 플레이어(로부터 받는 공격양=받은 데미지) 메서드 인자로 받아야 함
+////		if (defense >= p.getCurrentStrength())// 플레이어로부터 받은 데미지보다 방어력이 큰 경우
+////			setCurrentHealth(getCurrentHealth());// 현재 체력 유지
+////		else///플레이어로부터 받은 데미지가 방어력보다 큰 경우
+//		if (defense < p.getCurrentStrength())
+//			if(getCurrentHealth()+defense<getCurrentHealth())
+//				setCurrentHealth(getCurrentHealth() + defense -p.getCurrentStrength());// 현재 체력+=(방어력-받은 데미지)
+//		
+//		// 기본적으로 방어력은 체력에 더해지는 값(체력 증가 효과) 거기에 데미지 빼서 체력값 재정의
+//	}
 
 //	public void  attack(Player player, int hit) {//Player에 가하는 공격의 양
 //		System.out.println(getName()+"이(가) 공격합니다");
