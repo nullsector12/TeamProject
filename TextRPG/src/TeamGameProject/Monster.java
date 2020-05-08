@@ -64,6 +64,7 @@ public class Monster extends Entity {
 	private boolean escapable;// 탈출(도망) 가능 여부->도망 가능 true/ 도망 불가 false
 
 	private int stage;
+	Random rand;
 	protected Monster(){
 		stage=1;
 		baseHealth = BasicInfo.BASIC_HEALTH;
@@ -73,6 +74,7 @@ public class Monster extends Entity {
 		expWorth = BasicInfo.BASIC_EXP;
 		weakness = 0;
 		evasion = 0;
+		rand=new Random();
 		
 	}
 //	Monster(){//얘는 몬스터별로 값이 다 다르기 때문에 필요없음
@@ -123,9 +125,8 @@ public class Monster extends Entity {
 	public void setGoldWorth(int exp) {
 		goldWorth = exp;
 		// 스테이지 별 몬스터 경험치의 10퍼센트를 골드로 반환(최대 10퍼센트까지 골드 받을 수 있음) or 랜덤 반환
-		Random rand = new Random();
-		int gold_max = (int) (exp * 0.1);
-		int gold_min = (int) (exp * 0.01);// 최소 골드
+		int gold_max = (int) (exp * 0.5);
+		int gold_min = (int) (exp * 0.1);// 최소 골드
 		goldWorth = rand.nextInt(gold_max - gold_min + 1) + gold_min;// 수식 변경
 
 //        int gMin = (int)(g*.7);
@@ -139,7 +140,9 @@ public class Monster extends Entity {
 	}
 
 	public void setExpWorth(int i) {
-		expWorth = i;
+		int exp_max = (int) (stage * 10);
+		int exp_min = (int) (stage * 2);
+		expWorth = stage * 10 + rand.nextInt(exp_max - exp_min + 1) + exp_min;
 	}
 
 	public int getWeakness() {

@@ -31,7 +31,9 @@ public class TempMain {
 //
 		Player p = new Player();
 		Battle b = new Battle();
-		Events e = new Events();
+		
+		
+		Events e = new Events(b,m,p);
 //		p.setCurrentHealth(100);
 //		System.out.println(p);
 //

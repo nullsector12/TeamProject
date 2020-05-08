@@ -27,7 +27,7 @@ public class Battle {
 	//적중 확률 = ((정확도-회피 확률)/정확도) * 100 (%)
 //공격을 정의한다.
 	void playerAttack(Monster m, int dmg) {
-		dmg = 1000;
+		dmg = 100;
 		
 		if(monsterEvasion(m)) {
 			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
