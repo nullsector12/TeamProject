@@ -216,13 +216,13 @@ public class Dungeon {
 		System.out.println(num + "단계 보스");
 		switch (num) {
 		case 1:
-			m = new Dog();
+			m=makeMonsters(num+3);//4,8,12
 			break;
 		case 2:
-			m = new Snake();
+			m=makeMonsters(num+6);
 			break;
 		case 3:
-			m = new Dragon();
+			m=makeMonsters(num+9);
 			break;
 		}
 	}
