@@ -10,7 +10,7 @@ public class Tiger extends Monster {//should be resistant to physical attacks!
     	setStage(11);
         setName("호랑이");
         setBaseHealth(getStage());
-        setBaseStrength(EnemyBasics.BASE_STRENGTH);
+        setBaseStrength();
 //        setExpWorth(EnemyBasics.BASE_EXP_WORTH);
         setExpWorth(getStage());//메서드 인자 stage로 바꿈
 

@@ -2,7 +2,7 @@
 
 package TeamGameProject;
 
-import java.util.ArrayList;
+
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -111,11 +111,13 @@ public class Player extends Entity{
 
 	void showStatus() {
 		System.out.println("================================");
+		System.out.println("플레이어 이름 : " + getName());
 		System.out.println("레벨 : " + currentLevel);
-		System.out.println("HP : " + super.getCurrentHealth() + "/" + super.getMaxHealth());
-		System.out.println("공격력 : " + super.getCurrentStrength());
-		System.out.println("회피율 : " + super.getEvasion() + "%");
+		System.out.println("HP : " + getCurrentHealth() + "/" + getMaxHealth());
+		System.out.println("공격력 : " + getCurrentStrength());
+		System.out.println("회피율 : " + getEvasion() + "%");
 		System.out.println("EXP : " + currentExp + "/" + levelUpExp);
+		System.out.println("소지금 : " + gold + " Gold");
 	
 	}
 
@@ -124,8 +126,8 @@ public class Player extends Entity{
 	public int getGold() {
 		return gold;
 	}
-	public int setGold(int gold) {
-		return this.gold = gold;
+	public void setGold(int gold) {
+		this.gold = gold;
 	}
 	public int getCurrentExp() {
 		return currentExp;

@@ -1,5 +1,5 @@
 package enemies;
-import TeamGameProject.BasicInfo;
+
 //1-3
 import TeamGameProject.Monster;
 
@@ -12,7 +12,7 @@ public class Rabbit extends Monster {//should be resistant to physical attacks!
     	setStage(3);//stage 3
         setName("토끼");
         setBaseHealth(getStage());
-        setBaseStrength(EnemyBasics.BASE_STRENGTH);
+        setBaseStrength();
 //        setExpWorth(EnemyBasics.BASE_EXP_WORTH);
         setExpWorth(getStage());//메서드 인자 stage로 바꿈
 

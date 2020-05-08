@@ -11,7 +11,7 @@ public class Dragon extends Monster {//should be resistant to physical attacks!
     	setStage(12);
         setName("용");
         setBaseHealth(getStage());
-        setBaseStrength(EnemyBasics.BASE_STRENGTH);
+        setBaseStrength();
         setExpWorth(getStage());//메서드 인자 stage로 바꿈
         setGoldWorth(getExpWorth());
         setWeakness(2); //See Monster class for list of types

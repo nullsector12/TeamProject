@@ -11,7 +11,7 @@ public class Snake extends Monster {//should be resistant to physical attacks!
     	setStage(8);
         setName("뱀");
         setBaseHealth(getStage());
-        setBaseStrength(EnemyBasics.BASE_STRENGTH);
+        setBaseStrength();
 //        setExpWorth(EnemyBasics.BASE_EXP_WORTH);
         setExpWorth(getStage());//메서드 인자 stage로 바꿈
 
