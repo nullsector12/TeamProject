@@ -7,6 +7,8 @@ public class TempMain {
 	static int result;
 	public static void main(String[] args) {
 		
+		Player player= Player.getInstance();
+		
 		Monster m = new Monster();
 //		m.setCurrentHealth(100);
 		m=m.makeMonster((int)(Math.random()*13)+1);//랜덤 라운드 몬스터
@@ -29,7 +31,7 @@ public class TempMain {
 //		m.showData();
 //		m.encounterMonster();
 //
-		Player p = new Player();
+		//Player p = new Player();
 		Battle b = new Battle();
 		Events e = new Events();
 //		p.setCurrentHealth(100);
@@ -42,15 +44,16 @@ public class TempMain {
 //		System.out.println("----------------------------------");
 //		System.out.println(p);
 
-		p.addName();
+		e.p.addName();
 		while(true) {
 //		System.out.println(p.getName());
 			m=m.makeMonster((int)(Math.random()*13)+1);
-			result = b.choicePlayerMovement(m, p);
-			p.showStatus();
+			result = b.choicePlayerMovement(m, e.p);
+			e.p.showStatus();
 			e.rewordsOrPenalty(result);
-			p.showStatus();
-			
+			e.p.showStatus();
+			player.addlevel(e.p);
+			System.out.println("================"+e.p.levelSave);
 		}
 		
 		

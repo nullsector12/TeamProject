@@ -1,6 +1,5 @@
-//Need to make quests and have objects associated in here n such ya know
+package T0508;
 
-package TeamGameProject;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,45 +14,11 @@ public class Player extends Entity{
 	//private int currentHealth;
 	//private int maxHealth;
 	//private float evasion;
-
-	private int levelUpExp;
-	private int currentLevel;
-	private int maxHealth;
-	private int currentHealth;
-	private int attackPower;
-	private int evasion;
 	private int gold;
+	private int currentLevel;
 	private int currentExp;
+	private int levelUpExp;
 	private Scanner sc;
-	
-	ArrayList<Player> levelSave;
-	private static Player player= 	new Player();
-	public static Player getInstance() {
-		return player;
-	}
-
-	public Player() {
-		setName("");
-		currentLevel = BasicInfo.BASIC_LEVEL; //BasicInfo.BASIC_LEVEL;
-		maxHealth = BasicInfo.BASIC_HEALTH;
-		currentHealth = maxHealth; //BasicInfo.BASIC_HEALTH
-		attackPower = BasicInfo.BASIC_POWER; // BasicInfo.BASIC_POWER
-		evasion = setEvasion(0);
-		gold = BasicInfo.BASIC_GOLD; //BasicInfo.BASIC_GOLD;
-		currentExp = 0;
-		levelUpExp = BasicInfo.BASIC_EXP; //BasicInfo.BASIC_EXP;
-		sc = new Scanner(System.in);
-		
-		
-		levelSave = new ArrayList<Player>();
-	
-	}
-	
-	//배열에 플레이어 레벨정보저장
-	void addlevel(Player p1) {
-		
-		levelSave.add(p1);
-	}
 
 	// 캐릭터의 이름을 받는 메서드
 	void addName() {
@@ -62,6 +27,7 @@ public class Player extends Entity{
 //		name = sc.nextLine();
 
 		super.setName(JOptionPane.showInputDialog("캐릭터의 이름을 입력해주세요.")); 
+		
 		
 		while (true) {
 			System.out.println("입력하신 이름이 " + super.getName() + "님이 맞습니까? 맞으면 y 틀리면n");
@@ -78,65 +44,89 @@ public class Player extends Entity{
 				System.out.println("잘못 누르셨습니다.");
 				continue;
 			}
-
 		}
-		// return name;
-
+	}
+	public Player() {
+		setName("");
+		currentLevel = BasicInfo.BASIC_LEVEL;
+		super.setCurrentHealth(BasicInfo.BASIC_HEALTH);
+		super.setMaxHealth(BasicInfo.BASIC_HEALTH);
+		super.setCurrentStrength(BasicInfo.BASIC_POWER);
+		super.setEvasion(0);
+		gold = BasicInfo.BASIC_GOLD;
+		currentExp = 0;
+		levelUpExp = BasicInfo.BASIC_EXP;
+		sc = new Scanner(System.in);
 	}
 
+
+	// 체력의 변화를 반환하는 메서드
+	void getCurrnetHeatlh(int health) {
+		
+		super.setCurrentHealth(super.getCurrentHealth()+ health); 
+		if (super.getCurrentHealth()>super.getMaxHealth()) {
+		super.setCurrentHealth(super.getMaxHealth());
+		}
+		
+		
+		if (super.getCurrentHealth()<=0) {
+			super.setCurrentHealth(0);
+			System.out.println(super.getName()+"님이 사망하셨습니다.");
+		}
+	}
+		
 	
 	// 경험치 값을 확인해 레벨업 및 스테이터스 업데이트를 하는 메서드
-	void checkLevelUp(Player p) {
-		
-		//양
-		Player p1 = null;
-		
+	void checkLevelUp() {
 		while (true) {
 			if (getCurrentExp() >= levelUpExp) {
 
-				setCurrentExp(getCurrentExp() - levelUpExp);
+				currentExp = currentExp - levelUpExp;
+
+				currentLevel += 1;
+ 
 				levelUpExp = (int) (levelUpExp * 1.3f);
-				
-				setCurrentLevel(getCurrentLevel()+1);
-				setMaxHealth((int) (getMaxHealth() * 1.3f) / 1);
-//				setCurrentHealth((int)getMaxHealth());
+			super.setMaxHealth((int) (super.getMaxHealth() * 1.3f) / 1);
+			super.setCurrentHealth((int) super.getMaxHealth());
 				super.setCurrentStrength((int) (super.getCurrentStrength() * 1.3f));
-				super.setEvasion(getEvasion() + 1);
-				initCurrentStats();
+				super.setEvasion(super.getEvasion() + 1);
 
 				System.out.println("레벨업 하였습니다!\n");
-				System.out.println("레벨 : " + getCurrentLevel() + " UP↑");
-				System.out.println("HP : " + getCurrentHealth() + "/" + getMaxHealth());
-				System.out.println("공격력 : " + getCurrentStrength());
-				System.out.println("회피율 : " + getEvasion() + "%");
-				System.out.println("EXP : " + getCurrentExp() + "/" + levelUpExp);
+				System.out.println("이름 : " + this.name);
+				System.out.println("레벨 : " + this.currentLevel + " UP↑");
+				System.out.println("최대 HP : " + getCurrentHealth() +"/"+ this.getMaxHealth());
+				System.out.println("공격력 : " + this.getCurrentStrength());
+				System.out.println("회피율 : " + this.getEvasion() + "%");
+				System.out.println("EXP : " + this.currentExp + "/" + this.levelUpExp);
 				System.out.println("+++++++++++++++++++++++++++++++++");
+				
 				if (getCurrentExp() < levelUpExp) {
 					break;
 				}
+			}else {
+				break;
 			}
-		}addlevel(p1);
+		}
 	}
-
 
 	void showStatus() {
 		System.out.println("================================");
-		System.out.println("레벨 : " + getCurrentLevel());
+		System.out.println("레벨 : " + currentLevel);
 		System.out.println("HP : " + super.getCurrentHealth() + "/" + super.getMaxHealth());
 		System.out.println("공격력 : " + super.getCurrentStrength());
 		System.out.println("회피율 : " + super.getEvasion() + "%");
-		System.out.println("EXP : " + getCurrentExp() + "/" + levelUpExp);
+		System.out.println("EXP : " + currentExp + "/" + levelUpExp);
 	
 	}
 
+	
+	
 	public int getGold() {
 		return gold;
 	}
-
 	public int setGold(int gold) {
 		return this.gold = gold;
 	}
-
 	public int getCurrentExp() {
 		return currentExp;
 	}
@@ -152,7 +142,5 @@ public class Player extends Entity{
 	public int setCurrentLevel(int currentLevel) {
 		return this.currentLevel = currentLevel;
 	}
-	
-	
 	
 }
