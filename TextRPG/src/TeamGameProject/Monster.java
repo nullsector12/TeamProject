@@ -154,7 +154,7 @@ public class Monster extends Entity {
 
 	public void setEvasion() {// 이건 함수 인자나 고려할 다른 값 필요 없이 그냥 랜덤
 		// 회피율 게임 턴마다 바뀌어야 함(고정값 x)
-		evasion = (rand.nextInt(100) + 1);
+		evasion = (rand.nextInt(10) + 1);
 	}
 
 	public int getGoldWorth() {
