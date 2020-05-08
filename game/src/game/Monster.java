@@ -227,7 +227,6 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 		switch (stage) {//스테이지 별 같은 종류/다른 능력치  몬스터 여러마리 생성
 		case Rounds.first:
 			monster = new Rat();// 자동 형변환
-			System.out.println(monster);
 			break;
 		case Rounds.second:
 			monster = new Chicken();
@@ -285,7 +284,6 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 		System.out.println("현재 체력: " + this.getCurrentHealth());
 		System.out.println("현재 보유 경험치: " + this.getExpWorth());
 		System.out.println("현재 보유 골드: " + this.getGoldWorth());
-		System.out.println("현재 보유 약점: " + this.getWeakness());
 		System.out.println("회피율: " + this.getEvasion() + "%");
 //		System.out.println("방어력: " + this.getDefense());
 		System.out.println("약점 : " + this.getWeakness());
