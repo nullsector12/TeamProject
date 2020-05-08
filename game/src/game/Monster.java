@@ -204,8 +204,11 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 	}
 
 	public void setWeakness(int i) {//몬스터 회피
-		i*=rand.nextInt(10)+1;
-		weakness = i;
+//		i*=rand.nextInt(2)+1;
+//		weakness = i;
+		weakness =rand.nextInt(2)+1;
+		//코드 확인 용이하게 하기 위해서
+		//weakness값 일단 작게 잡음
 	}
 
 	// manage클래스에서 상위 클래스 타입의 인스턴스를 생성해놓고
@@ -265,9 +268,9 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 		return monster;
 	}
 
-	public void encounterMonster() {
-		printName();
-	}
+//	public void encounterMonster() {
+//		printName();
+//	}
 
 	/*
 	 * private int evasion;

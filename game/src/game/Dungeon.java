@@ -60,7 +60,7 @@ public class Dungeon {
 				if ((bossStage(m, p, 1))) {//bossStage메서드 승패 여부를 나타내기 위해서 boolean값 반환하도록 변경함
 					System.out.println("============이김");
 					stageNomal(p);
-					if(bossStage(m, p, 2)) {
+					if(bossStage(m, p, 2)) {//다음 스테이지로 넘어갈건지 말건지 선택 조건식 추가
 						stageHard(p);
 					}
 				}
