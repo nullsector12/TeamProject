@@ -2,8 +2,19 @@ package TeamGameProject;
 
 import java.util.Scanner;
 
+/**
+ * 앞으로 추가 할 사항 : 
+ * 
+ *  보스 사냥 성공 후 다음 스테이지 도전 or 마을 복귀 선택지
+ *  장비 탈착 기능
+ *  
+ *
+ */
 public class Town {
 
+	
+	
+	
 
 	Dungeon d = new Dungeon();
 	Scanner input = new Scanner(System.in);
