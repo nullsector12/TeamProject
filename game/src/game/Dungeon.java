@@ -176,15 +176,15 @@ public class Dungeon {
 		switch (num) {
 		case 1:
 //			m = new Monkey();
-			m=makeMonsters(num);
+			m=makeMonsters(num+4);//1 5 9
 			break;
 		case 2:
 //			m = new Sheep();
-			m=makeMonsters(num);
+			m=makeMonsters(num+4);
 			break;
 		case 3:
 //			m = new Pig();
-			m=makeMonsters(num);
+			m=makeMonsters(num+4);
 			break;
 		}
 		System.out.println(m.getName());
@@ -196,15 +196,15 @@ public class Dungeon {
 		switch (num) {
 		case 1:
 //			m = new Horse();
-			m=makeMonsters(num);
+			m=makeMonsters(num+8);
 			break;
 		case 2:
 //			m = new Cow();
-			m=makeMonsters(num);
+			m=makeMonsters(num+8);
 			break;
 		case 3:
 //			m = new Tiger();
-			m=makeMonsters(num);
+			m=makeMonsters(num+8);
 			break;
 		}
 		System.out.println(m.getName());
