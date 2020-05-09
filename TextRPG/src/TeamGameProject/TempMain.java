@@ -4,21 +4,19 @@ import java.util.Random;
 
 public class TempMain {
 	Random rand = new Random();
-	static int result;
 
 	public static void main(String[] args) {
-		Battle b = new Battle();
-		Player p = new Player();
-		Monster m = new Monster();
-
-		m.makeMonster((int)(Math.random()*13)+1);//랜덤 라운드 몬스터
-		m.showData();
-		System.out.println("----------------------------------");
-
-		p.addName();
-		m.makeMonster((int)(Math.random()*13)+1);
-		b.choicePlayerMovement(m, p);
 		
+		Town t = new Town();
+		System.out.println("----------------------------------");
+		System.out.println("게임을 시작합니다.");
+		t.d.p.addName();
+		System.out.println("어서오세요." + t.d.p.getName() + "님, JAVA 마을에 오신 것을 환영합니다.");
+		
+		
+		while(true) {
+		t.town();
+		}
 	}
 
 }
