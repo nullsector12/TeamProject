@@ -12,18 +12,16 @@ import java.util.Scanner;
  */
 public class Town {
 
-	
-	
-	
-
-	Dungeon d = new Dungeon();
 	Scanner input = new Scanner(System.in);
+	Dungeon d = new Dungeon();
+	
 
 	void town() {
 
-		System.out.println("무엇을 하시겠습니까  >>> 1. 던전 가기  2. 캐릭터 정보창  3. 상점 이용  4. 여관 이용(체력회복)   5. 게임 종료");
+		
 
 		while (true) {
+			System.out.println("무엇을 하시겠습니까  >>> 1. 던전 가기  2. 캐릭터 정보창  3. 상점 이용  4. 여관 이용(체력회복)   5. 게임 종료");
 			
 			int choiceMenu = input.nextInt();
 			input.nextLine();
@@ -31,7 +29,9 @@ public class Town {
 			switch (choiceMenu) {
 		
 			case 1: // 던전 들어가기
-				d.stage(d.p);
+				if(d.stage(d.p)) {	
+					continue;
+				}
 				break;
 				
 			case 2: // 현재 정보 확인

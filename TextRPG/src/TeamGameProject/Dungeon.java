@@ -16,12 +16,15 @@ public class Dungeon {
 	int boss1Count; // 보스입장가능 카운트
 	int boss2Count;
 	int boss3Count;
-	int stage1Count; // 스테이지 입장가능 카운트
-	int stage2Count;
+	int stage2Count; // 스테이지 입장가능 카운트
+	int stage3Count;
 	Scanner sc;
 	Monster m = new Monster();
 	Player p = new Player();
 	Battle b = new Battle();
+	Events e = new Events();
+
+	boolean result;
 
 	boolean win;
 
@@ -29,11 +32,9 @@ public class Dungeon {
 		this.boss1Count = 0;
 		this.boss2Count = 0;
 		this.boss3Count = 0;
-		this.stage1Count = 0;
 		this.stage2Count = 0;
+		this.stage3Count = 0;
 		sc = new Scanner(System.in);
-
-		win = false;
 
 	}
 
@@ -42,20 +43,39 @@ public class Dungeon {
 		int num = stageChoice();
 		switch (num) {
 		case DungeonIf.EASY:
-			stageFailed=stage1(p);
+			result = stageEasy(p);
+//				break;
+//				if ((bossStage(m, p, 1))) {//bossStage메서드 승패 여부를 나타내기 위해서 boolean값 반환하도록 변경함
+//					stageNomal(p);
+//					if(bossStage(m, p, 2)) {
+//						stageHard(p);
+//					}
+//				}
+//				else {
+//					
+//				}
 			break;
 		case DungeonIf.NOMAL:
-
+			stageNomal(p);
+			if (bossStage(m, p, 2)) {
+				stageHard(p);
+				if (bossStage(m, p, 3)) {
+					System.out.println("플레이어 최종 승리");
+				} else {
+					break;// 일단 break
+				}
+			}
 			break;
-
 		case DungeonIf.HARD:
+			stageHard(p);
+			bossStage(m, p, 3);
 			break;
+
 		}
 		return result;
 	}
 
 	boolean bossStage(Monster m, Player p, int num) {
-		win = false;
 		System.out.println("보스에 도전하시겠습니까? y or n");
 		String select = sc.nextLine();
 		if (select.equals("y")) {
@@ -79,13 +99,13 @@ public class Dungeon {
 				case 1:
 					System.out.println(num + "단계 보스를 처치 하셨습니다.");
 					System.out.println("다음스테이지 입장이 가능합니다.");
-					stage1Count++;
+					stage2Count++;
 					win = true;
 					break;
 				case 2:
 					System.out.println(num + "단계 보스를 처치 하셨습니다.");
 					System.out.println("다음스테이지 입장이 가능합니다.");
-					stage2Count++;
+					stage3Count++;
 					win = true;
 					break;
 				case 3:
@@ -102,16 +122,12 @@ public class Dungeon {
 
 	// 초급스테이지
 	boolean stageEasy(Player p) {
-		boolean result = false;
 		System.out.println("난이도 : 쉬움");
 		for (int i = 1; i < 4; i++) {
-			System.out.println(i + "단계");
-			if (!stage1(p, i)) {
-				result = playCheck();
-			}else {		
+			result = stage1(p, i);
+			if (result) {
 				break;
 			}
-
 		}
 		return result;
 	}
@@ -139,7 +155,6 @@ public class Dungeon {
 	}
 
 	boolean stage1(Player p, int num) {
-		boolean result = false;
 		switch (num) {
 		case 1:
 //			m = new Monkey();
@@ -154,17 +169,16 @@ public class Dungeon {
 			m = makeMonsters(num);
 			break;
 		}
-		System.out.println(m.getName());
 		int win = b.choicePlayerMovement(m, p);
 		if (num == 3 && win == 0) {
 			boss1Count++;
 			System.out.println("스테이지를 모두 클리어 하셨습니다.");
 			result = true;
 		} else if (win == 1) {
-			System.out.println("마을로 돌아갑니다.");
-			result = false;
+			result = e.takeDie(p);
 
 		}
+		return result;
 	}
 
 	void stage2(Player p, int num) {
@@ -212,6 +226,7 @@ public class Dungeon {
 		if (num == 3 && result == 0) {
 			boss3Count++;
 			System.out.println("스테이지를 모두 클리어 하셨습니다.");
+	
 		}
 
 	}
@@ -236,9 +251,8 @@ public class Dungeon {
 	boolean stage2Check() {
 
 		boolean result = false;
-		if (stage1Count == 0) {
+		if (stage2Count == 0) {
 			System.out.println("입장하실수 없습니다.");
-			return result;
 		} else {
 			result = true;
 		}
@@ -248,9 +262,8 @@ public class Dungeon {
 	boolean stage3Check() {
 
 		boolean result = false;
-		if (stage2Count == 0) {
+		if (stage3Count == 0) {
 			System.out.println("입장하실수 없습니다.");
-			return result;
 		} else {
 			result = true;
 		}
@@ -261,9 +274,7 @@ public class Dungeon {
 	boolean boss1Check() {
 		boolean result = false;
 		if (boss1Count == 0) {
-			System.out.println("입장불가");
-			return result;
-		} else {
+			System.out.println("입장하실수 없습니다.");
 			result = true;
 		}
 		return result;
@@ -272,9 +283,7 @@ public class Dungeon {
 	boolean boss2Check() {
 		boolean result = false;
 		if (boss2Count == 0) {
-			System.out.println("입장불가");
-			return result;
-		} else {
+			System.out.println("입장하실수 없습니다.");
 			result = true;
 		}
 		return result;
@@ -283,9 +292,7 @@ public class Dungeon {
 	boolean boss3Check() {
 		boolean result = false;
 		if (boss3Count == 0) {
-			System.out.println("입장불가");
-			return result;
-		} else {
+			System.out.println("입장하실수 없습니다.");
 			result = true;
 		}
 		return result;
@@ -299,23 +306,20 @@ public class Dungeon {
 		sc.nextLine();
 		switch (num) {
 		case 1:
-			if (!boss1Check()) {
-				System.out.println("입장하실수 없습니다.");
+			if (boss1Check()) {
 				num = 4;
-				break;
 			}
+			break;
 		case 2:
-			if (!boss2Check()) {
-				System.out.println("입장하실수 없습니다.");
+			if (boss2Check()) {
 				num = 4;
-				break;
 			}
+			break;
 		case 3:
-			if (!boss3Check()) {
-				System.out.println("입장하실수 없습니다.");
+			if (boss3Check()) {
 				num = 4;
-				break;
 			}
+			break;
 		}
 
 		return num;
@@ -325,16 +329,29 @@ public class Dungeon {
 	boolean playCheck() {
 
 		boolean result = false;
-		System.out.println("더 진행하시겠습니까?");
+		System.out.println("더 진행하시겠습니까? 1. yes 2.no");
 		int num = sc.nextInt();
 		sc.nextLine();
 		switch (num) {
 		case 1:
+			System.out.println("다음 스테이지로 진행합니다.");
 			result = true;
 			break;
 		case 2:
 			System.out.println("마을로 돌아갑니다.");
 			break;
+		}
+		return result;
+	}
+
+	boolean playBoss() {
+		boolean result = false;
+		System.out.println("보스에 도전하시겠습니까? 1. yes 2.no");
+		int num = sc.nextInt();
+		sc.nextLine();
+		if (num == 1) {
+			System.out.println("보스도전");
+			result = true;
 		}
 		return result;
 	}
