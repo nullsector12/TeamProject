@@ -3,7 +3,6 @@ package TeamGameProject;
 import java.util.Scanner;
 import java.util.Random;
 
-
 public class Battle {
 
 	Scanner bt = new Scanner(System.in);
@@ -25,7 +24,7 @@ public class Battle {
 	// 적중 확률 = ((정확도-회피 확률)/정확도) * 100 (%)
 //공격을 정의한다.
 	void playerAttack(Player p, Monster m) {
-		dmg = p.getCurrentStrength() * 200;
+		dmg = p.getCurrentStrength() * 10;
 
 		if (monsterEvasion(m)) {
 			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
@@ -69,7 +68,7 @@ public class Battle {
 	int choicePlayerMovement(Monster m, Player p) {
 		int result = 0;
 		this.battleResult = result;
-
+		
 		System.out.println("====== 전투 시작 ======");
 
 		while (true) {
@@ -78,12 +77,12 @@ public class Battle {
 
 			switch (choice) {
 			case 1:
-				
+
 				playerAttack(p, m);
 				monsterAttack(p, m);
 				if (p.getCurrentHealth() <= 0) {
 					result = 1;
-					e.penaltyOfDeath(p, m);
+					e.takeDie(p, true);
 					break;
 
 				} else if (m.getCurrentHealth() <= 0) {
@@ -103,6 +102,8 @@ public class Battle {
 //			break;
 			}
 			return result;
+
 		}
+
 	}
 }

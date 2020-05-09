@@ -44,19 +44,16 @@ public class Dungeon {
 		this.p = p;
 		int num = stageChoice();
 
-		while (true) {
 			switch (num) {
 			case DungeonIf.EASY:
 				stageEasy(p);
 				if ((bossStage(m, p, 1))) {//bossStage메서드 승패 여부를 나타내기 위해서 boolean값 반환하도록 변경함
-					System.out.println("============이김");
 					stageNomal(p);
 					if(bossStage(m, p, 2)) {
 						stageHard(p);
 					}
 				}
 				else {
-					System.out.println("=======짐");
 					
 				}
 				break;
@@ -77,17 +74,16 @@ public class Dungeon {
 				break;
 			}
 		}
-	}
 
 	// 초급스테이지
 	void stageEasy(Player p) {
 		System.out.println("난이도 : 쉬움");
 		for (int i = 1; i < 4; i++) {
-			System.out.println(i + "단계");
-			stage1(p, i);
+				System.out.println(i + "단계");
+				stage1(p, i);
+			
 		}
 		System.out.println("스테이지를 모두 클리어 하셨습니다.");
-
 	}
 
 	// 중급스테이지
@@ -115,9 +111,6 @@ public class Dungeon {
 	}
 
 	void stage1(Player p, int num) {// 스테이지 별 같은 종류/다른 능력치 몬스터 여러마리 생성
-		Random rand = new Random();
-		int numOfMonsters = 0;// 스테이지마다 랜덤하게 나오는 몬스터 마리 수
-		ArrayList<Monster> monsters;
 
 		switch (num) {
 		case 1:
@@ -145,7 +138,7 @@ public class Dungeon {
 			m = makeMonsters(num);
 			break;
 		case 3:
-			m = new Rabbit();
+//			m = new Rabbit();
 //			makeMonsters(m);
 			m = makeMonsters(num);
 			break;

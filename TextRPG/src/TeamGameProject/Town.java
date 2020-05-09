@@ -12,12 +12,8 @@ import java.util.Scanner;
  */
 public class Town {
 
-	
-	
-	
-
-	Dungeon d = new Dungeon();
 	Scanner input = new Scanner(System.in);
+	Dungeon d = new Dungeon();
 
 	void town() {
 

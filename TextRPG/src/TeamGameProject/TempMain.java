@@ -6,9 +6,10 @@ public class TempMain {
 	Random rand = new Random();
 
 	public static void main(String[] args) {
-
+		
 		Town t = new Town();
-
+		
+		
 		System.out.println("----------------------------------");
 		System.out.println("게임을 시작합니다.");
 		t.d.p.addName();
