@@ -13,77 +13,52 @@ import enemies.*;
  */
 public class Dungeon {
 
-	int boss1Count;
+	int boss1Count; // 보스입장가능 카운트
 	int boss2Count;
 	int boss3Count;
-	int stage1;
-	int stage2;
+	int stage1Count; // 스테이지 입장가능 카운트
+	int stage2Count;
 	Scanner sc;
 	Monster m = new Monster();
 	Player p = new Player();
 	Battle b = new Battle();
-	
+
 	boolean win;
 
 	public Dungeon() {
 		this.boss1Count = 0;
 		this.boss2Count = 0;
 		this.boss3Count = 0;
-		this.stage1 = 0;
-		this.stage2 = 0;
+		this.stage1Count = 0;
+		this.stage2Count = 0;
 		sc = new Scanner(System.in);
-		
+
 		win = false;
 
 	}
 
 	// 스테이지 선택
-	void stage(Player p) {
-		this.p = p;
+	boolean stage(Player p) {
 		int num = stageChoice();
+		switch (num) {
+		case DungeonIf.EASY:
+			stageFailed=stage1(p);
+			break;
+		case DungeonIf.NOMAL:
 
-		while (true) {
-			switch (num) {
-			case DungeonIf.EASY:
-				stageEasy(p);
-				if ((bossStage(m, p, 1))) {//bossStage메서드 승패 여부를 나타내기 위해서 boolean값 반환하도록 변경함
-					System.out.println("============이김");
-					stageNomal(p);
-					if(bossStage(m, p, 2)) {
-						stageHard(p);
-					}
-				}
-				else {
-					System.out.println("=======짐");
-					
-				}
-				break;
-			case DungeonIf.NOMAL:
-				stageNomal(p);
-				if(bossStage(m, p, 2)) {
-					stageHard(p);
-					if(bossStage(m,p,3)) {
-						System.out.println("플레이어 최종 승리");
-					}else {
-						break;//일단 break
-					}
-				}
-				break;
-			case DungeonIf.HARD:
-				stageHard(p);
-				bossStage(m, p, 3);
-				break;
-			}
+			break;
+
+		case DungeonIf.HARD:
+			break;
 		}
+		return result;
 	}
 
 	boolean bossStage(Monster m, Player p, int num) {
-		win=false;
-		System.out.println("보스에 도전하시겠습니까?");
-		System.out.println("1. Yes 2. No");
-		int select = sc.nextInt();
-		sc.nextLine();
-		if (select == 1) {
+		win = false;
+		System.out.println("보스에 도전하시겠습니까? y or n");
+		String select = sc.nextLine();
+		if (select.equals("y")) {
 			switch (num) {
 			case 1:
 				m = makeMonsters(num + 3);
@@ -94,21 +69,23 @@ public class Dungeon {
 			case 3:
 				m = makeMonsters(num + 9);
 				break;
+			case 4:
+				return win;
 			}
 			System.out.println(m.getName());
 			int result = b.choicePlayerMovement(m, p);
-			if (result == 1) {//result==1(몬스터 체력0이하일때=몬스터 죽었을 때)로 변경
+			if (result == 1) {// result==1(몬스터 체력0이하일때=몬스터 죽었을 때)로 변경
 				switch (num) {
 				case 1:
 					System.out.println(num + "단계 보스를 처치 하셨습니다.");
 					System.out.println("다음스테이지 입장이 가능합니다.");
-					stage1++;
+					stage1Count++;
 					win = true;
 					break;
 				case 2:
 					System.out.println(num + "단계 보스를 처치 하셨습니다.");
 					System.out.println("다음스테이지 입장이 가능합니다.");
-					stage2++;
+					stage2Count++;
 					win = true;
 					break;
 				case 3:
@@ -124,42 +101,45 @@ public class Dungeon {
 	}
 
 	// 초급스테이지
-	void stageEasy(Player p) {
+	boolean stageEasy(Player p) {
+		boolean result = false;
 		System.out.println("난이도 : 쉬움");
 		for (int i = 1; i < 4; i++) {
 			System.out.println(i + "단계");
-			stage1(p, i);
-		}
-		System.out.println("스테이지를 모두 클리어 하셨습니다.");
+			if (!stage1(p, i)) {
+				result = playCheck();
+			}else {		
+				break;
+			}
 
+		}
+		return result;
 	}
 
 	// 중급스테이지
-	void stageNomal(Player p) {
-
+	boolean stageNomal(Player p) {
+		boolean result = false;
 		System.out.println("난이도 : 보통");
 		for (int i = 1; i < 4; i++) {
 			System.out.println(i + "단계");
 			stage2(p, i);
 		}
-		System.out.println("스테이지를 모두 클리어 하셨습니다.");
 
 	}
 
 	// 상급스테이지
-	void stageHard(Player p) {
-
+	boolean stageHard(Player p) {
+		boolean result = false;
 		System.out.println("난이도 : 어려움");
 		for (int i = 1; i < 4; i++) {
 			System.out.println(i + "단계");
 			stage3(p, i);
 		}
-		System.out.println("스테이지를 모두 클리어 하셨습니다.");
 
 	}
 
-	void stage1(Player p, int num) {
-
+	boolean stage1(Player p, int num) {
+		boolean result = false;
 		switch (num) {
 		case 1:
 //			m = new Monkey();
@@ -175,11 +155,16 @@ public class Dungeon {
 			break;
 		}
 		System.out.println(m.getName());
-		int result = b.choicePlayerMovement(m, p);
-		if (num == 3 && result == 0) {
+		int win = b.choicePlayerMovement(m, p);
+		if (num == 3 && win == 0) {
 			boss1Count++;
-		}
+			System.out.println("스테이지를 모두 클리어 하셨습니다.");
+			result = true;
+		} else if (win == 1) {
+			System.out.println("마을로 돌아갑니다.");
+			result = false;
 
+		}
 	}
 
 	void stage2(Player p, int num) {
@@ -202,6 +187,7 @@ public class Dungeon {
 		int result = b.choicePlayerMovement(m, p);
 		if (num == 3 && result == 0) {
 			boss2Count++;
+			System.out.println("스테이지를 모두 클리어 하셨습니다.");
 		}
 	}
 
@@ -225,22 +211,131 @@ public class Dungeon {
 		int result = b.choicePlayerMovement(m, p);
 		if (num == 3 && result == 0) {
 			boss3Count++;
+			System.out.println("스테이지를 모두 클리어 하셨습니다.");
 		}
 
 	}
 
+	// 스테이지 선택
 	int stageChoice() {
 		System.out.println("=====================");
 		System.out.println("스테이지를 선택해주세요");
 		System.out.println("1. Easy 2. Nomal 3. Hard");
 		int num = sc.nextInt();
 		sc.nextLine();
+		if (num == 2 && stage2Check()) {
+			return num;
+		} else if (num == 3 && stage3Check()) {
+			return num;
+		}
+		return num;
+
+	}
+
+	// 스테이지 입장가능?
+	boolean stage2Check() {
+
+		boolean result = false;
+		if (stage1Count == 0) {
+			System.out.println("입장하실수 없습니다.");
+			return result;
+		} else {
+			result = true;
+		}
+		return result;
+	}
+
+	boolean stage3Check() {
+
+		boolean result = false;
+		if (stage2Count == 0) {
+			System.out.println("입장하실수 없습니다.");
+			return result;
+		} else {
+			result = true;
+		}
+		return result;
+	}
+
+	// 보스 입장가능 불가능할경우
+	boolean boss1Check() {
+		boolean result = false;
+		if (boss1Count == 0) {
+			System.out.println("입장불가");
+			return result;
+		} else {
+			result = true;
+		}
+		return result;
+	}
+
+	boolean boss2Check() {
+		boolean result = false;
+		if (boss2Count == 0) {
+			System.out.println("입장불가");
+			return result;
+		} else {
+			result = true;
+		}
+		return result;
+	}
+
+	boolean boss3Check() {
+		boolean result = false;
+		if (boss3Count == 0) {
+			System.out.println("입장불가");
+			return result;
+		} else {
+			result = true;
+		}
+		return result;
+	}
+
+	// 보스선택
+	int bossChoice() {
+		System.out.println("보스를 선택해주세요");
+		System.out.println("1. 1단계 2. 2단계 3. 3단계");
+		int num = sc.nextInt();
+		sc.nextLine();
+		switch (num) {
+		case 1:
+			if (!boss1Check()) {
+				System.out.println("입장하실수 없습니다.");
+				num = 4;
+				break;
+			}
+		case 2:
+			if (!boss2Check()) {
+				System.out.println("입장하실수 없습니다.");
+				num = 4;
+				break;
+			}
+		case 3:
+			if (!boss3Check()) {
+				System.out.println("입장하실수 없습니다.");
+				num = 4;
+				break;
+			}
+		}
+
 		return num;
 	}
-	boolean stageCheck() {
-		
+
+	// 진행여부 선택
+	boolean playCheck() {
+
 		boolean result = false;
-		
+		System.out.println("더 진행하시겠습니까?");
+		int num = sc.nextInt();
+		sc.nextLine();
+		switch (num) {
+		case 1:
+			result = true;
+			break;
+		case 2:
+			System.out.println("마을로 돌아갑니다.");
+			break;
+		}
 		return result;
 	}
 
@@ -290,17 +385,4 @@ public class Dungeon {
 //		} else {
 //
 //		}
-//	}
-
-//	int bossChoice() {
-//		if(bossCount < 1) {
-//			System.out.println("입장하실수 없습니다.");
-//		}
-//		System.out.println("====================");
-//		System.out.println("보스를 선택해주세요");
-//		System.out.println("1. 1단계 2. 2단계 3. 3단계");
-//		int num = sc.nextInt();
-//		sc.nextLine();
-//
-//		return num;
 //	}
