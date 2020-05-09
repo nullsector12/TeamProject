@@ -24,8 +24,11 @@ public class Dungeon {
 	Monster m = new Monster();
 	Player p = new Player();
 	Battle b = new Battle();
-
+	Events e = new Events();
+	
+	
 	boolean win;
+	boolean stageFailed;
 
 	public Dungeon() {
 		this.boss1Count = 0;
@@ -40,22 +43,21 @@ public class Dungeon {
 	}
 
 	// 스테이지 선택
-	void stage(Player p) {
-		this.p = p;
+	boolean stage(Player p) {
 		int num = stageChoice();
-
 			switch (num) {
 			case DungeonIf.EASY:
-				stageEasy(p);
-				if ((bossStage(m, p, 1))) {//bossStage메서드 승패 여부를 나타내기 위해서 boolean값 반환하도록 변경함
-					stageNomal(p);
-					if(bossStage(m, p, 2)) {
-						stageHard(p);
-					}
-				}
-				else {
-					
-				}
+				stageFailed = stageEasy(p);
+//				break;
+//				if ((bossStage(m, p, 1))) {//bossStage메서드 승패 여부를 나타내기 위해서 boolean값 반환하도록 변경함
+//					stageNomal(p);
+//					if(bossStage(m, p, 2)) {
+//						stageHard(p);
+//					}
+//				}
+//				else {
+//					
+//				}
 				break;
 			case DungeonIf.NOMAL:
 				stageNomal(p);
@@ -72,18 +74,24 @@ public class Dungeon {
 				stageHard(p);
 				bossStage(m, p, 3);
 				break;
+	
 			}
+			return stageFailed;
 		}
 
 	// 초급스테이지
-	void stageEasy(Player p) {
+	boolean stageEasy(Player p) {
 		System.out.println("난이도 : 쉬움");
 		for (int i = 1; i < 4; i++) {
+			if(!stage1(p, i)) {
 				System.out.println(i + "단계");
-				stage1(p, i);
-			
+		}else {
+			stageFailed = true;
+			break;
 		}
 		System.out.println("스테이지를 모두 클리어 하셨습니다.");
+		}
+		return stageFailed;
 	}
 
 	// 중급스테이지
@@ -110,7 +118,7 @@ public class Dungeon {
 
 	}
 
-	void stage1(Player p, int num) {// 스테이지 별 같은 종류/다른 능력치 몬스터 여러마리 생성
+	boolean stage1(Player p, int num) {// 스테이지 별 같은 종류/다른 능력치 몬스터 여러마리 생성
 
 		switch (num) {
 		case 1:
@@ -145,8 +153,13 @@ public class Dungeon {
 		}
 		
 		b.choicePlayerMovement(m, p);
+		if(e.takeDie(p)) { // 플레이어 사망 시 마을로 돌아간다고 선택했을 때
+			stageFailed = true;
+		}else {
+			e.rewordsOfVictory(p, m);
+		}
 		// System.out.println(result);
-
+		return stageFailed;
 	}
 
 	void stage2(Player p, int num) {

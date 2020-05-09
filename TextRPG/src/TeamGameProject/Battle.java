@@ -8,7 +8,7 @@ public class Battle {
 	Scanner bt = new Scanner(System.in);
 //플레이어 몬스터 모두 불러온다.
 
-	Events e = new Events();
+	
 
 	int turns;
 	boolean pass;
@@ -81,12 +81,15 @@ public class Battle {
 				playerAttack(p, m);
 				monsterAttack(p, m);
 				if (p.getCurrentHealth() <= 0) {
+					
+					// 패배 시 result = 1;
 					result = 1;
-					e.takeDie(p, true);
+					
 					break;
 
 				} else if (m.getCurrentHealth() <= 0) {
-					e.rewordsOfVictory(p, m);
+					
+					// 승리 시 reuslt = 0;
 					p.showStatus();
 					break;
 

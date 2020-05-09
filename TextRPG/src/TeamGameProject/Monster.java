@@ -64,7 +64,7 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 //	}
 	public void setBaseHealth(int stage) {// 메서드 오버라이딩
 		// 체력 증가 비율 설정해야 함
-		super.setBaseHealth(BasicInfo.BASIC_HEALTH + stage * 10);// 스테이지별 몬스터마다 기본 체력 다름
+		super.setBaseHealth(EnemyBasics.BASE_HEALTH + stage * 10);// 스테이지별 몬스터마다 기본 체력 다름
 //		System.out.println("기본 체력: "+super.getBaseHealth());
 //		super.setBaseHealth(500);
 	}
@@ -74,7 +74,7 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 //	setGoldWorth(getExpWorth());
 
 	public void setBaseStrength() {
-		baseStrength = BasicInfo.BASIC_POWER + stage * 10;
+		baseStrength = EnemyBasics.BASE_STRENGTH + stage * 10;
 	}
 
 	public int getStage() {
