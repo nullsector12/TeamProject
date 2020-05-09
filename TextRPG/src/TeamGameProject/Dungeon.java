@@ -56,19 +56,19 @@ public class Dungeon {
 //				}
 			break;
 		case DungeonIf.NOMAL:
-			stageNomal(p);
-			if (bossStage(m, p, 2)) {
-				stageHard(p);
-				if (bossStage(m, p, 3)) {
-					System.out.println("플레이어 최종 승리");
-				} else {
-					break;// 일단 break
-				}
-			}
+			result = stageNomal(p);
+//			if (bossStage(m, p, 2)) {
+//				stageHard(p);
+//				if (bossStage(m, p, 3)) {
+//					System.out.println("플레이어 최종 승리");
+//				} else {
+//					break;// 일단 break
+//				}
+//			}
 			break;
 		case DungeonIf.HARD:
-			stageHard(p);
-			bossStage(m, p, 3);
+			result = stageHard(p);
+//			bossStage(m, p, 3);
 			break;
 
 		}
@@ -134,24 +134,26 @@ public class Dungeon {
 
 	// 중급스테이지
 	boolean stageNomal(Player p) {
-		boolean result = false;
 		System.out.println("난이도 : 보통");
 		for (int i = 1; i < 4; i++) {
-			System.out.println(i + "단계");
-			stage2(p, i);
+			result = stage2(p, i);
+			if (result) {
+				break;
+			}
 		}
-
+		return result;
 	}
 
 	// 상급스테이지
 	boolean stageHard(Player p) {
-		boolean result = false;
 		System.out.println("난이도 : 어려움");
 		for (int i = 1; i < 4; i++) {
-			System.out.println(i + "단계");
-			stage3(p, i);
+			result = stage3(p, i);
+			if (result) {
+				break;
+			}
 		}
-
+		return result;
 	}
 
 	boolean stage1(Player p, int num) {
@@ -181,7 +183,7 @@ public class Dungeon {
 		return result;
 	}
 
-	void stage2(Player p, int num) {
+	boolean stage2(Player p, int num) {
 
 		switch (num) {
 		case 1:
@@ -197,15 +199,19 @@ public class Dungeon {
 			m = makeMonsters(num + 4);
 			break;
 		}
-		System.out.println(m.getName());
-		int result = b.choicePlayerMovement(m, p);
-		if (num == 3 && result == 0) {
+		int win = b.choicePlayerMovement(m, p);
+		if (num == 3 && win == 0) {
 			boss2Count++;
 			System.out.println("스테이지를 모두 클리어 하셨습니다.");
+			result = true;
+		} else if (win == 1) {
+			result = e.takeDie(p);
+
 		}
+		return result;
 	}
 
-	void stage3(Player p, int num) {
+	boolean stage3(Player p, int num) {
 
 		switch (num) {
 		case 1:
@@ -221,15 +227,19 @@ public class Dungeon {
 			m = makeMonsters(num + 8);
 			break;
 		}
-		System.out.println(m.getName());
-		int result = b.choicePlayerMovement(m, p);
-		if (num == 3 && result == 0) {
+		int win = b.choicePlayerMovement(m, p);
+		if (num == 3 && win == 0) {
 			boss3Count++;
 			System.out.println("스테이지를 모두 클리어 하셨습니다.");
-	
-		}
+			result = true;
+		} else if (win == 1) {
+			result = e.takeDie(p);
 
+		}
+		return result;
 	}
+
+	
 
 	// 스테이지 선택
 	int stageChoice() {
