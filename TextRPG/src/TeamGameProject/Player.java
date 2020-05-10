@@ -17,6 +17,11 @@ public class Player extends Entity {
 	private int currentLevel;
 	private int currentExp;
 	private int levelUpExp;
+//	private int stageCount2;
+//	private int stageCount3;
+//	private int boss1Count;
+//	private int boss2Count;
+//	private int boss3Count;
 	private Scanner sc;
 
 	// 캐릭터의 이름을 받는 메서드
@@ -55,6 +60,11 @@ public class Player extends Entity {
 		gold = BasicInfo.BASIC_GOLD;
 		currentExp = 0;
 		levelUpExp = BasicInfo.BASIC_EXP;
+//		stageCount2 = BasicInfo.BASIC_STAGE_2;
+//		stageCount3 = BasicInfo.BASIC_STAGE_3;
+//		boss1Count = BasicInfo.BASIC_BOSS1_COUNT;
+//		boss2Count = BasicInfo.BASIC_BOSS2_COUNT;
+//		boss3Count = BasicInfo.BASIC_BOSS3_COUNT;
 		sc = new Scanner(System.in);
 	}
 
@@ -140,5 +150,47 @@ public class Player extends Entity {
 	public int setCurrentLevel(int currentLevel) {
 		return this.currentLevel = currentLevel;
 	}
+
+//	public int getStageCount2() {
+//		return stageCount2;
+//	}
+//
+//	public void setStageCount2(int stageCount2) {
+//		this.stageCount2 = stageCount2;
+//	}
+//
+//	public int getStageCount3() {
+//		return stageCount3;
+//	}
+//
+//	public void setStageCount3(int stageCount3) {
+//		this.stageCount3 = stageCount3;
+//	}
+//
+//	public int getBoss1Count() {
+//		return boss1Count;
+//	}
+//
+//	public void setBoss1Count(int boss1Count) {
+//		this.boss1Count = boss1Count;
+//	}
+//
+//	public int getBoss2Count() {
+//		return boss2Count;
+//	}
+//
+//	public void setBoss2Count(int boss2Count) {
+//		this.boss2Count = boss2Count;
+//	}
+//
+//	public int getBoss3Count() {
+//		return boss3Count;
+//	}
+//
+//	public void setBoss3Count(int boss3Count) {
+//		this.boss3Count = boss3Count;
+//	}
+	
+	
 
 }

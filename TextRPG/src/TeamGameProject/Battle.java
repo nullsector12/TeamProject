@@ -67,7 +67,7 @@ public class Battle {
 //사용자의 입력에 따른 공격
 	int choicePlayerMovement(Monster m, Player p) {
 		int result = 0;
-		this.battleResult = result;
+		battleResult = result;
 		
 		System.out.println("====== 전투 시작 ======");
 
@@ -84,15 +84,14 @@ public class Battle {
 					
 					// 패배 시 result = 1;
 					result = 1;
-					
 					break;
 
 				} else if (m.getCurrentHealth() <= 0) {
 					
 					// 승리 시 reuslt = 0;
-					p.showStatus();
+					result = 0;
 					break;
-
+					
 				} else {
 					continue;
 					// 추가 메뉴 반환값 구상해보기
