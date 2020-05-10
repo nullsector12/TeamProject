@@ -75,7 +75,7 @@ public class Dungeon {
 		return result;
 	}
 
-	boolean bossStage(Monster m, Player p, int num) {
+	void bossStage(Player p, int num) {
 		System.out.println("보스에 도전하시겠습니까? y or n");
 		String select = sc.nextLine();
 		if (select.equals("y")) {
@@ -89,11 +89,9 @@ public class Dungeon {
 			case 3:
 				m = makeMonsters(num + 9);
 				break;
-			case 4:
-				return win;
 			}
-			System.out.println(m.getName());
 			int result = b.choicePlayerMovement(m, p);
+			e.rewordsOfVictory(p, m);
 			if (result == 1) {// result==1(몬스터 체력0이하일때=몬스터 죽었을 때)로 변경
 				switch (num) {
 				case 1:
@@ -117,7 +115,6 @@ public class Dungeon {
 		} else {
 
 		}
-		return win;
 	}
 
 	// 초급스테이지
@@ -157,7 +154,7 @@ public class Dungeon {
 	}
 
 	boolean stage1(Player p, int num) {
-		boolean result = false;
+		result = false;
 		switch (num) {
 		case 1:
 //			m = new Monkey();
@@ -177,6 +174,7 @@ public class Dungeon {
 		if (num == 3 && win == 0) {
 			boss1Count++;
 			System.out.println("스테이지를 모두 클리어 하셨습니다.");
+			bossStage(p,1);
 			result = true;
 		} else if (win == 1) {
 			result = e.takeDie(p);
@@ -186,7 +184,7 @@ public class Dungeon {
 	}
 
 	boolean stage2(Player p, int num) {
-
+		result = false;
 		switch (num) {
 		case 1:
 //			m = new Monkey();
@@ -205,6 +203,7 @@ public class Dungeon {
 		if (num == 3 && win == 0) {
 			boss2Count++;
 			System.out.println("스테이지를 모두 클리어 하셨습니다.");
+			bossStage(p,2);
 			result = true;
 		} else if (win == 1) {
 			result = e.takeDie(p);
@@ -233,6 +232,7 @@ public class Dungeon {
 		if (num == 3 && win == 0) {
 			boss3Count++;
 			System.out.println("스테이지를 모두 클리어 하셨습니다.");
+			bossStage(p,3);
 			result = true;
 		} else if (win == 1) {
 			result = e.takeDie(p);
@@ -240,8 +240,6 @@ public class Dungeon {
 		}
 		return result;
 	}
-
-	
 
 	// 스테이지 선택
 	int stageChoice() {
