@@ -1,79 +1,5 @@
 package game;
-/* 
-멤버변수
-name/
-currentHealth/maxHealth/
 
-
-attackPower: strength
-evasion: 정확히 어떤 것을 의미
-
-
-goldWorth/
-expWorth/
-weakness/
----------------------------------------------------------------------------
-메서드
-makeMonster()
-encounterMonster()
-
-attack()
-
-
-1-1   1-2     1-3  1-4
-rat  chiken rabbit dog
-
-2-1        2-2   2-3   2-4
-monkey sheep  pig  snake
-
-3-1    3-2   3-3    3-4
-horse cow tiger dragon*/
-
-/*============================================================05/07 수정 사항
- * 멤버변수
- * defense
- * 
- * 메서드
- * isAlive()
- * defense->getter/setter()
- * 
- * 
- * 구현해야 할 사항
- * 약점=> 약점1~5 속성에 해당하는 공격 받으면 플레이어 공격력*(?) 해서 공격력(받은 데미지) 증폭시켜서 체력 깎음
- * 방어=>     현재 체력= 현재 체력+(받은 데미지-방어력) 
- * => 방어력이 받은 데미지보다 큰 경우에는 그냥 현재 체력 유지(받은 총 데미지 값 0)
- * 
- * 
- * 
- * 추가 기능
- * 스킬?(공격력+=특화 능력*(?))=>수식 지정해서 계산처리 후 공격력에 더함
- * */
-/*
- * ===========================================================추후에 구현할 사항
- Monster 추상클래스로 만들어서
- 하위클래스에서 오버라이딩
- 
-MonsterImpl 인터페이스 상속받기
- 
- 싱글톤처리
- (예외처리->매니저)
- 
- Map<K,V>로 구현
- 
-evasion 계산식 정의해야 함
-
-스레드로 처리해볼 것
-
---------------------------------------05/06 추가사항
-각 단계별 몬스터에 스테이지 값 저장(o)
- 약점
- 회피율
- 체력값 계산하는 수식 재정의
- */
-
-
-//스탯 다르게
-//여러마리 만들기
 import java.util.Random;
 
 import enemies.Chicken;
@@ -138,7 +64,7 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 //	}
 	public void setBaseHealth(int stage) {// 메서드 오버라이딩
 		// 체력 증가 비율 설정해야 함
-		super.setBaseHealth(BasicInfo.BASIC_HEALTH + stage * 10);// 스테이지별 몬스터마다 기본 체력 다름
+		super.setBaseHealth(EnemyBasics.BASE_HEALTH + stage * 10);// 스테이지별 몬스터마다 기본 체력 다름
 //		System.out.println("기본 체력: "+super.getBaseHealth());
 //		super.setBaseHealth(500);
 	}
@@ -147,8 +73,8 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 //	setExpWorth(BasicInfo.BASIC_EXP+stage*10);
 //	setGoldWorth(getExpWorth());
 
-	public void setBaseStrength(int stage) {
-		baseStrength = BasicInfo.BASIC_POWER + stage * 10;
+	public void setBaseStrength() {
+		baseStrength = EnemyBasics.BASE_STRENGTH + stage * 10;
 	}
 
 	public int getStage() {
@@ -204,11 +130,8 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 	}
 
 	public void setWeakness(int i) {//몬스터 회피
-//		i*=rand.nextInt(2)+1;
-//		weakness = i;
-		weakness =rand.nextInt(2)+1;
-		//코드 확인 용이하게 하기 위해서
-		//weakness값 일단 작게 잡음
+		i*=rand.nextInt(10)+1;
+		weakness = i;
 	}
 
 	// manage클래스에서 상위 클래스 타입의 인스턴스를 생성해놓고
@@ -225,7 +148,8 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 	public Monster makeMonster(int stage) {// 스테이지 별 몬스터 생성
 		Monster monster = null;
 		
-		int numOfMonsters=rand.nextInt(5)+1;//스테이지마다 랜덤하게 나오는 몬스터 마리 수
+		@SuppressWarnings("unused")
+		int numOfMonsters =rand.nextInt(5)+1;//스테이지마다 랜덤하게 나오는 몬스터 마리 수
 		
 		switch (stage) {//스테이지 별 같은 종류/다른 능력치  몬스터 여러마리 생성
 		case Rounds.first:
@@ -268,9 +192,9 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 		return monster;
 	}
 
-//	public void encounterMonster() {
-//		printName();
-//	}
+	public void encounterMonster() {
+		printName();
+	}
 
 	/*
 	 * private int evasion;
@@ -284,9 +208,10 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 	public void showData() {
 		System.out.println("현재 스테이지: " + this.getStage());// 1-1 형식으로 바꿔야됨
 		System.out.println("몬스터 이름: " + this.getName());
-		System.out.println("현재 체력: " + this.getCurrentHealth());
-		System.out.println("현재 보유 경험치: " + this.getExpWorth());
-		System.out.println("현재 보유 골드: " + this.getGoldWorth());
+		System.out.println("공격력 : " + this.getCurrentStrength());
+		System.out.println("체력: " + this.getCurrentHealth());
+		System.out.println("획득 가능 경험치: " + this.getExpWorth());
+		System.out.println("획득 가능 골드: " + this.getGoldWorth());
 		System.out.println("회피율: " + this.getEvasion() + "%");
 //		System.out.println("방어력: " + this.getDefense());
 		System.out.println("약점 : " + this.getWeakness());
@@ -310,14 +235,16 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 		else
 			return true;
 	}
-	// ==========================================================05/08 추가 메서드
-	
+	// ==========================================================05/08 추가 메서드====05/10 메서드 수정
+	String title;
 	public void setName(String name) {//이름 랜덤하게 나오도록
-		String[] kinds= {"빨간 ","파란 ","노란 ","검은 ","흰 "};
+		String[] kinds= {"기본 ","날쏀 ","덩치가 큰 ","이빨이 날카로운 ","알 수 없는 "};//알 수 없는(랜덤)
 		Random rand=new Random();
-		int numOfkinds=rand.nextInt(5);
+		int randIndex=rand.nextInt(5);
 		
-		this.name=kinds[numOfkinds]+name;
+		this.name=kinds[randIndex]+name;
+		title=kinds[randIndex];
+		
 
 		
 	}
