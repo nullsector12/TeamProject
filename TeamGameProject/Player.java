@@ -52,7 +52,8 @@ public class Player extends Entity {
 	public D_DiamondWand D3 = new D_DiamondWand("", 0, 0, 0, 0, 0);
 
 	public Inven inven = new Inven();
-
+	
+	
 	private int gold;
 	private int currentLevel;
 	private int currentExp;
@@ -426,6 +427,9 @@ public class Player extends Entity {
 		System.out.println("판매 되었습니다.");
 
 	}
+	
+	
+	
  
 	public int getGold() {
 		return gold;

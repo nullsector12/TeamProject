@@ -132,9 +132,9 @@ public class Inven {
 
 		for (int i = 0; i < equip.size(); i++) {
 
-			equipPower = equipPower + equip.get(i).attackPower;
-			equipHealth = equipHealth + equip.get(i).health;
-			equipEvasion = equipEvasion + equip.get(i).evasion;
+			equipPower = equip.get(i).attackPower;
+			equipHealth = equip.get(i).health;
+			equipEvasion =  equip.get(i).evasion;
 
 		}
 		
