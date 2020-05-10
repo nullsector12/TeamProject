@@ -81,12 +81,8 @@ public class Dungeon {
 	boolean bossStage(Player p, int num) {
 
 		boolean win = false;
-		System.out.println(" ============================");
-		System.out.println("|  보스에 도전하시겠습니까? y or n   |  ");
-		System.out.println(" ============================");
-		String select = sc.nextLine();
-
-		if (select.equals("y")) {
+		
+		if (playBoss()) {
 			switch (num) {
 			case 1:
 				m = makeMonsters(num + 3);
@@ -129,7 +125,10 @@ public class Dungeon {
 					win = true;
 					break;
 				}
-			} else if (result == 2) {
+			}else if(result == 1) {
+				win = e.takeDie(p);
+			}else if (result == 2) {
+			
 				win = true;
 			} else {
 				System.out.println("------------------------");
@@ -137,9 +136,9 @@ public class Dungeon {
 				System.out.println("------------------------");
 				win = false;
 			}
-		} else {
-
 		}
+
+		
 		return win;
 	}
 
@@ -289,7 +288,7 @@ public class Dungeon {
 	}
 
 	boolean stage3(Player p, int num) {
-
+		result = false;
 		switch (num) {
 		case 1:
 //			m = new Monkey();
@@ -461,10 +460,9 @@ public class Dungeon {
 		System.out.println(" ============================");
 		System.out.println("| 보스에 도전하시겠습니까? y or n |");
 		System.out.println(" ============================");
-		int num = sc.nextInt();
-		sc.nextLine();
+		String num = sc.nextLine();
 
-		if (num == 1) {
+		if (num.equals("y")) {
 			System.out.println("보스도전");
 			result = true;
 		}
