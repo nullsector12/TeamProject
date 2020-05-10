@@ -14,7 +14,7 @@ public class Events {
 		// 0 = 패배 시, 1 = 승리 시
 		// 승리 시
 
-		System.out.println("축하합니다. 전투에서 승리하였습니다!");
+		
 
 		if (p.getCurrentLevel() > (m.getWeakness() + 3)) {
 			System.out.println("적정 레벨범위를 넘은 몬스터를 사냥하면 획득 가능한 경험치와 골드가 줄어듭니다.");

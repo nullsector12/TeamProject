@@ -76,7 +76,7 @@ public class Dungeon {
 		return result;
 	}
 
-	void bossStage(Player p, int num) {
+	boolean bossStage(Player p, int num) {
 		boolean win = false;
 		System.out.println("보스에 도전하시겠습니까? y or n");
 		String select = sc.nextLine();
@@ -94,31 +94,37 @@ public class Dungeon {
 			}
 			int result = b.choicePlayerMovement(m, p);
 			e.rewordsOfVictory(p, m);
-			if (result == 1) {// result==1(몬스터 체력0이하일때=몬스터 죽었을 때)로 변경
+			if (result == 0) {// result==1(몬스터 체력0이하일때=몬스터 죽었을 때)로 변경
 				switch (num) {
 				case 1:
+					System.out.println("------------------------");
 					System.out.println(num + "단계 보스를 처치 하셨습니다.");
 					System.out.println("다음스테이지 입장이 가능합니다.");
 					stage2Count++;
 					win = true;
 					break;
 				case 2:
+					System.out.println("------------------------");
 					System.out.println(num + "단계 보스를 처치 하셨습니다.");
 					System.out.println("다음스테이지 입장이 가능합니다.");
 					stage3Count++;
 					win = true;
 					break;
 				case 3:
+					System.out.println("------------------------");
 					System.out.println("마지막보스를 처치하셨습니다.");
 					win = true;
 					break;
 				}
 			} else if (result == 2) {
 				win = true;
+			}else {
+				System.out.println("패배하셨습니다.");
+				win = false;
 			}
 		} else {
 
-		}
+		}return win;
 	}
 
 	// 초급스테이지
@@ -177,9 +183,12 @@ public class Dungeon {
 		e.rewordsOfVictory(p, m);
 		if (num == 3 && win == 0) {
 			boss1Count++;
+			System.out.println("------------------------");
 			System.out.println("스테이지를 모두 클리어 하셨습니다.");
 			bossStage(p, 1);
 			result = true;
+		} else if (win == 0) {
+			System.out.println("축하합니다. 전투에서 승리하였습니다!");
 		} else if (win == 1) {
 			result = e.takeDie(p);
 
@@ -206,11 +215,14 @@ public class Dungeon {
 			break;
 		}
 		int win = b.choicePlayerMovement(m, p);
+		e.rewordsOfVictory(p, m);
 		if (num == 3 && win == 0) {
 			boss2Count++;
 			System.out.println("스테이지를 모두 클리어 하셨습니다.");
 			bossStage(p, 2);
 			result = true;
+		} else if (win == 0) {
+			System.out.println("축하합니다. 전투에서 승리하였습니다!");
 		} else if (win == 1) {
 			result = e.takeDie(p);
 
@@ -237,11 +249,14 @@ public class Dungeon {
 			break;
 		}
 		int win = b.choicePlayerMovement(m, p);
+		e.rewordsOfVictory(p, m);
 		if (num == 3 && win == 0) {
 			boss3Count++;
 			System.out.println("스테이지를 모두 클리어 하셨습니다.");
 			bossStage(p, 3);
 			result = true;
+		} else if (win == 0) {
+			System.out.println("축하합니다. 전투에서 승리하였습니다!");
 		} else if (win == 1) {
 			result = e.takeDie(p);
 
