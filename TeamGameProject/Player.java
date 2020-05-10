@@ -52,8 +52,12 @@ public class Player extends Entity {
 	public D_DiamondWand D3 = new D_DiamondWand("", 0, 0, 0, 0, 0);
 
 	public Inven inven = new Inven();
-	
-	
+
+	public int invenMaxHealth;
+	public int invenCurrentHealth;
+	public int invenCurrentEvasion;
+	public int invenCurrentStrength;
+
 	private int gold;
 	private int currentLevel;
 	private int currentExp;
@@ -95,6 +99,7 @@ public class Player extends Entity {
 	}
 
 	public Player() {
+
 		setName("");
 		currentLevel = BasicInfo.BASIC_LEVEL;
 		super.setCurrentHealth(BasicInfo.BASIC_HEALTH);
@@ -105,6 +110,10 @@ public class Player extends Entity {
 		currentExp = 0;
 		levelUpExp = BasicInfo.BASIC_EXP;
 		sc = new Scanner(System.in);
+		invenMaxHealth = maxHealth + inven.equipHealth;
+		invenCurrentHealth = currentHealth + inven.equipHealth;
+		invenCurrentStrength = currentStrength + inven.equipPower;
+		invenCurrentEvasion = getEvasion() + inven.equipEvasion;
 	}
 
 	// 체력의 변화를 반환하는 메서드
@@ -123,8 +132,7 @@ public class Player extends Entity {
 
 	// 경험치 값을 확인해 레벨업 및 스테이터스 업데이트를 하는 메서드
 	void checkLevelUp() {
-		inven.calEquipStat();
-
+		calEquipStat();
 		while (true) {
 			if (getCurrentExp() >= levelUpExp) {
 
@@ -137,14 +145,17 @@ public class Player extends Entity {
 				super.setCurrentHealth((int) super.getMaxHealth());
 				super.setCurrentStrength((int) (super.getCurrentStrength() * 1.3f));
 				super.setEvasion(super.getEvasion() + 1);
+				invenCurrentStrength = currentStrength + inven.equipPower;
+				invenMaxHealth = maxHealth + inven.equipHealth;
+				invenCurrentHealth = currentHealth + inven.equipHealth;
+				invenCurrentEvasion = getEvasion() + inven.equipEvasion;
 
 				System.out.println("레벨업 하였습니다!\n");
 				System.out.println("이름 : " + this.name);
 				System.out.println("레벨 : " + this.currentLevel + " UP↑");
-				System.out.println("HP : " + (this.getCurrentHealth() + inven.equipHealth) + "/"
-						+ (this.getMaxHealth() + inven.equipHealth));
-				System.out.println("공격력 : " + (this.getCurrentStrength() + inven.equipPower));
-				System.out.println("회피율 : " + (this.getEvasion() + inven.equipEvasion) + "%");
+				System.out.println("HP : " + invenCurrentHealth + "/" + invenMaxHealth);
+				System.out.println("공격력 : " + invenCurrentStrength);
+				System.out.println("회피율 : " + invenCurrentEvasion + "%");
 				System.out.println("EXP : " + this.currentExp + "/" + this.levelUpExp);
 				System.out.println("+++++++++++++++++++++++++++++++++");
 
@@ -157,17 +168,53 @@ public class Player extends Entity {
 		}
 	}
 
+	public void equipItem() {
+
+		System.out.println("=======================================");
+		System.out.println("장착할 장비를 골라주세요.");
+		System.out.println("=======================================");
+
+		System.out.println("0. 마을로 돌아가기");
+
+		int select = sc.nextInt();
+
+		sc.nextLine();
+
+		if (select == 0) {
+			return;
+		}
+
+		inven.checkType(inven.inven.get((select - 1)).equipmentType); // 장비 타입 비교해서 중복된 타입일 시 장비 반환
+
+		inven.equip.add(inven.inven.get((select - 1)));
+
+		System.out.println(inven.inven.get((select - 1)).equipmentName + "장착");
+
+		inven.inven.remove((select - 1));
+
+		int dmg = invenMaxHealth - invenCurrentHealth;
+
+		calEquipStat();
+		invenCurrentStrength = currentStrength + inven.equipPower;
+		invenMaxHealth = maxHealth + inven.equipHealth;
+		invenCurrentHealth = currentHealth + inven.equipHealth - dmg;
+		invenCurrentEvasion = getEvasion() + inven.equipEvasion;
+
+		inven.showInventory();
+		inven.showEquip();
+
+	}
+
 	void showStatus() {
 
-		inven.calEquipStat();
+		calEquipStat();
 
 		System.out.println("================================");
 		System.out.println("플레이어 이름 : " + getName());
 		System.out.println("레벨 : " + currentLevel);
-		System.out.println("HP : " + (this.getCurrentHealth() + inven.equipHealth) + "/"
-				+ (this.getMaxHealth() + inven.equipHealth));
-		System.out.println("공격력 : " + (this.getCurrentStrength() + inven.equipPower));
-		System.out.println("회피율 : " + (this.getEvasion() + inven.equipEvasion) + "%");
+		System.out.println("HP : " + invenCurrentHealth + "/" + invenMaxHealth);
+		System.out.println("공격력 : " + invenCurrentStrength);
+		System.out.println("회피율 : " + invenCurrentEvasion + "%");
 		System.out.println("EXP : " + currentExp + "/" + levelUpExp);
 		System.out.println("소지금 : " + gold + " Gold");
 
@@ -220,11 +267,17 @@ public class Player extends Entity {
 			potion.set(0, new Potion("Small Potion", 30, (potion.get(0).pNum) - 1, 20));
 
 			// 체력 증가 세터
+//
+//			setCurrentHealth(getCurrentHealth() + 30);
+//
+//			if (getCurrentHealth() > getMaxHealth()) {
+//				setCurrentHealth(getMaxHealth());
+//			}
 
-			setCurrentHealth(getCurrentHealth() + 30);
+			invenCurrentHealth = invenCurrentHealth + 30;
 
-			if (getCurrentHealth() > getMaxHealth()) {
-				setCurrentHealth(getMaxHealth());
+			if (invenCurrentHealth > invenMaxHealth) {
+				invenCurrentHealth = invenMaxHealth;
 			}
 
 			break;
@@ -233,10 +286,16 @@ public class Player extends Entity {
 			potion.set(1, new Potion("Normal Potion", 60, (potion.get(1).pNum) - 1, 30));
 
 			// 체력 증가 세터
-			setCurrentHealth(getCurrentHealth() + 60);
+//			setCurrentHealth(getCurrentHealth() + 60);
+//
+//			if (getCurrentHealth() > getMaxHealth()) {
+//				setCurrentHealth(getMaxHealth());
+//			}
 
-			if (getCurrentHealth() > getMaxHealth()) {
-				setCurrentHealth(getMaxHealth());
+			invenCurrentHealth = invenCurrentHealth + 60;
+
+			if (invenCurrentHealth > invenMaxHealth) {
+				invenCurrentHealth = invenMaxHealth;
 			}
 
 			break;
@@ -245,10 +304,16 @@ public class Player extends Entity {
 
 			// 체력 증가 세터
 
-			setCurrentHealth(getCurrentHealth() + 150);
+//			setCurrentHealth(getCurrentHealth() + 150);
+//
+//			if (getCurrentHealth() > getMaxHealth()) {
+//				setCurrentHealth(getMaxHealth());
+//			}
 
-			if (getCurrentHealth() > getMaxHealth()) {
-				setCurrentHealth(getMaxHealth());
+			invenCurrentHealth = invenCurrentHealth + 150;
+
+			if (invenCurrentHealth > invenMaxHealth) {
+				invenCurrentHealth = invenMaxHealth;
 			}
 			break;
 
@@ -421,16 +486,29 @@ public class Player extends Entity {
 		if (select == 0) {
 			return;
 		}
-		setGold(getGold()+inven.inven.get(select-1).gold);
-		inven.inven.remove(select-1);
-		
+		setGold(getGold() + inven.inven.get(select - 1).gold);
+		inven.inven.remove(select - 1);
+
 		System.out.println("판매 되었습니다.");
 
 	}
-	
-	
-	
- 
+
+	// 장비의 스탯 계산
+	public void calEquipStat() {
+
+		for (int i = 0; i < inven.equip.size(); i++) {
+
+			inven.equipPower = inven.equip.get(i).attackPower;
+			inven.equipHealth = inven.equip.get(i).health;
+			inven.equipEvasion = inven.equip.get(i).evasion;
+
+		}
+
+		System.out.println("장비공격력 : " + inven.equipPower + ", " + "장비체력 : " + inven.equipHealth + ", " + "장비회피율 : "
+				+ inven.equipEvasion);
+
+	}
+
 	public int getGold() {
 		return gold;
 	}

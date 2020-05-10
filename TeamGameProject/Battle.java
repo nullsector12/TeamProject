@@ -23,9 +23,9 @@ public class Battle {
 //공격을 정의한다.
 	void playerAttack(Player p, Monster m) {
 		
-		p.inven.calEquipStat();
 		
-		dmg = (p.getCurrentStrength()+p.inven.equipPower) * 10;
+		
+		dmg = (p.invenCurrentStrength) * 3;
 
 		if (monsterEvasion(m)) {
 			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
@@ -36,7 +36,6 @@ public class Battle {
 	}
 
 	void monsterAttack(Player p, Monster m) {
-		p.inven.calEquipStat();
 
 		mdmg = m.getCurrentStrength();
 
@@ -45,21 +44,28 @@ public class Battle {
 			mdmg = 0;
 		}
 		
-		p.setCurrentHealth((p.getCurrentHealth()+p.inven.equipHealth) - mdmg);
+
+		p.invenCurrentHealth = p.invenCurrentHealth -mdmg;
 		
-		System.out.println(mdmg + " 만큼 가격!   " + p.getName() + " 플레이어님의 체력은:" + p.getCurrentHealth());
+		if(p.invenCurrentHealth<0)
+			p.invenCurrentHealth=0;
+		
+//		p.setCurrentHealth(p.getCurrentHealth() - mdmg);
+//		
+//		System.out.println(p.getCurrentHealth());
+		
+		System.out.println(mdmg + " 만큼 가격!   " + p.getName() + " 플레이어님의 체력은:" + p.invenCurrentHealth);
 	
 	
-		p.setCurrentHealth((p.getCurrentHealth()-p.inven.equipHealth));
+		
 
 	}
 
 //회피를 정의 한다.	
 	boolean playerEvasion(Player p) {
-		p.inven.calEquipStat();
 
 
-		if ((rand.nextInt(100) + 1) <= p.getEvasion()+p.inven.equipEvasion) {
+		if ((rand.nextInt(100) + 1) <= p.invenCurrentEvasion) {
 			return pass = true;
 		} else {
 			return pass = false;
@@ -91,16 +97,16 @@ public class Battle {
 
 				playerAttack(p, m);
 				monsterAttack(p, m);
-				if (p.getCurrentHealth() <= 0) {
+				if (p.invenCurrentHealth <= 0) {
 
-					// 패배 시 result = 1;
+					// 패배 시 resul t = 1;
 					result = 1;
-
 					break;
 
 				} else if (m.getCurrentHealth() <= 0) {
 
 					// 승리 시 reuslt = 0;
+					
 					p.showStatus();
 					break;
 

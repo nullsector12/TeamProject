@@ -71,7 +71,7 @@ public class Events {
 //계속 진행하시겠습니까?
 	public boolean takeDie(Player p) {
 		
-		if (p.getCurrentHealth() <= 0) {
+		if (p.invenCurrentHealth <= 0) {
 			// 새로운 쓰레드
 			Thread death = new Thread() {
 				@Override

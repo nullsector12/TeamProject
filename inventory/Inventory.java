@@ -12,7 +12,7 @@ public class Inventory {
 		System.out.println("=============================================");
 		p.showPotion();
 		p.inven.showEquip();
-		p.inven.equipItem();
+		p.equipItem();
 		
 		
 		
