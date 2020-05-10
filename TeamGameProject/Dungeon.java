@@ -1,5 +1,4 @@
 package TeamGameProject;
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -401,9 +400,21 @@ public class Dungeon {
 		Monster randMonster = new Monster();
 
 		int randIndex = rand.nextInt(numOfMonsters);// 랜덤 인덱스
-
+		int randValue=rand.nextInt(20)+10;
 		for (int i = 0; i < numOfMonsters; i++) {// 이름, 능력치 다른 같은 종류의 여러마리의 몬스터 생성
 			m = m.makeMonster(stage);
+			if(m.title.equals("날쏀 ")) {//종류가 '날쎈'일 경우에 evasion값 랜덤으로 증가시킴
+				m.setEvasion(m.getEvasion()+randValue);
+			}else if(m.title.equals("덩치가 큰 ")) {//종류가 '덩치가 큰'일 경우에 health값 랜덤으로 증가시킴
+				m.setCurrentHealth(m.getCurrentHealth()+randValue);
+			}else if(m.title.equals("이빨이 날카로운 ")) {//종류가 '이빨이 날카로운'일 경우에 strength값 랜덤으로 증가시킴
+				m.setCurrentStrength(m.getCurrentStrength()+randValue);
+			}else if(m.title.equals("알 수 없는 ")) {//종류가 '알 수 없는'일 경우에 evasion/health/strength값 랜덤으로 증가시킴
+				m.setEvasion(m.getEvasion()+randValue);
+				m.setCurrentHealth(m.getCurrentHealth()+randValue);
+				m.setCurrentStrength(m.getCurrentStrength()+randValue);
+			}
+			
 			monsters.add(m);
 //			monsters.get(i).showData();
 		}

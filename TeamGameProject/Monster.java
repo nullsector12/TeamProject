@@ -1,5 +1,4 @@
 package TeamGameProject;
-
 import java.util.Random;
 
 import enemies.Chicken;
@@ -208,7 +207,7 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 	public void showData() {
 		System.out.println("현재 스테이지: " + this.getStage());// 1-1 형식으로 바꿔야됨
 		System.out.println("몬스터 이름: " + this.getName());
-		System.out.println("공격력 : " + getBaseStrength());
+		System.out.println("공격력 : " + this.getCurrentStrength());
 		System.out.println("체력: " + this.getCurrentHealth());
 		System.out.println("획득 가능 경험치: " + this.getExpWorth());
 		System.out.println("획득 가능 골드: " + this.getGoldWorth());
@@ -235,14 +234,16 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 		else
 			return true;
 	}
-	// ==========================================================05/08 추가 메서드
-	
+	// ==========================================================05/08 추가 메서드====05/10 메서드 수정
+	String title;
 	public void setName(String name) {//이름 랜덤하게 나오도록
-		String[] kinds= {"빨간 ","파란 ","노란 ","검은 ","흰 "};
+		String[] kinds= {"기본 ","날쏀 ","덩치가 큰 ","이빨이 날카로운 ","알 수 없는 "};//알 수 없는(랜덤)
 		Random rand=new Random();
-		int numOfkinds=rand.nextInt(5);
+		int randIndex=rand.nextInt(5);
 		
-		this.name=kinds[numOfkinds]+name;
+		this.name=kinds[randIndex]+name;
+		title=kinds[randIndex];
+		
 
 		
 	}
