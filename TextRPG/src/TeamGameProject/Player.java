@@ -117,6 +117,7 @@ public class Player extends Entity {
 				System.out.println("공격력 : " + this.getCurrentStrength());
 				System.out.println("회피율 : " + this.getEvasion() + "%");
 				System.out.println("EXP : " + this.currentExp + "/" + this.levelUpExp);
+				System.out.println("소지금 : " + getGold() + "Gold");
 				System.out.println("+++++++++++++++++++++++++++++++++");
 
 				if (currentExp < levelUpExp) {

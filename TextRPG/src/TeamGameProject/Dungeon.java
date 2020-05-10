@@ -157,6 +157,7 @@ public class Dungeon {
 	}
 
 	boolean stage1(Player p, int num) {
+		boolean result = false;
 		switch (num) {
 		case 1:
 //			m = new Monkey();
@@ -172,6 +173,7 @@ public class Dungeon {
 			break;
 		}
 		int win = b.choicePlayerMovement(m, p);
+		e.rewordsOfVictory(p, m);
 		if (num == 3 && win == 0) {
 			boss1Count++;
 			System.out.println("스테이지를 모두 클리어 하셨습니다.");
@@ -249,8 +251,10 @@ public class Dungeon {
 		int num = sc.nextInt();
 		sc.nextLine();
 		if (num == 2 && stage2Check()) {
+			num = 4;
 			return num;
 		} else if (num == 3 && stage3Check()) {
+			num = 4;
 			return num;
 		}
 		return num;

@@ -20,7 +20,7 @@ public class Chicken extends Monster {// should be resistant to physical attacks
 		setGoldWorth(getExpWorth());
 		setWeakness(1); // See Monster class for list of types
 
-		setEvasion();// 이건 그냥 랜덤 확률
+		setEvasion(0);// 이건 그냥 랜덤 확률
 		initCurrentStats();
 	}
 //  public void showData() {
