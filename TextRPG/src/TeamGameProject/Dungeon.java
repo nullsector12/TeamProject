@@ -314,7 +314,7 @@ public class Dungeon {
 
 	// 보스선택
 	int bossChoice() {
-		System.out.println("보스를 선택해주세요");
+		System.out.println("보스를 선택해주세요.");
 		System.out.println("1. 1단계 2. 2단계 3. 3단계");
 		int num = sc.nextInt();
 		sc.nextLine();
