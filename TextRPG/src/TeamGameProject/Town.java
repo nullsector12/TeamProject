@@ -1,6 +1,8 @@
 package TeamGameProject;
 
 import java.util.Scanner;
+import inventory.Inventory;
+import store.Store;
 
 /**
  * 앞으로 추가 할 사항 :
@@ -13,6 +15,8 @@ public class Town {
 
 	Scanner input = new Scanner(System.in);
 	Dungeon d = new Dungeon();
+	Store store = new Store();
+	Inventory inven = new Inventory();
 
 	void town() throws InterruptedException {
 
@@ -36,9 +40,12 @@ public class Town {
 				d.p.showStatus();
 				break;
 
-//			case 3: 
+			case 3: // 인벤토리 확인
+				inven.Inventory(d.p);
+				break;
 
 			case 4: // 상점 이용
+				store.store(d.p);
 				break;
 
 			case 5: // 여관 이용 ( 골드 소모에 따라 플레이어 현재 체력 회복 )
@@ -64,6 +71,7 @@ public class Town {
 
 	}
 
+	
 	void inn() throws InterruptedException {
 
 		System.out.println("	어서오세요, 모험가님. JAVA 여관에 오신걸 환영합니다.");

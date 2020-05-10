@@ -22,31 +22,44 @@ public class Battle {
 	// 적중 확률 = ((정확도-회피 확률)/정확도) * 100 (%)
 //공격을 정의한다.
 	void playerAttack(Player p, Monster m) {
-		dmg = p.getCurrentStrength() * 10;
+		
+		p.inven.calEquipStat();
+		
+		dmg = (p.getCurrentStrength()+p.inven.equipPower) * 10;
 
 		if (monsterEvasion(m)) {
-			System.out.println("	몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
+			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
 			dmg = 0;
 		}
 		m.setCurrentHealth(m.getCurrentHealth() - dmg);
-		System.out.println("	" + dmg + " 만큼 가격! 몬스터의 체력은:" + (m.getCurrentHealth()));
+		System.out.println(dmg + " 만큼 가격! 몬스터의 체력은:" + (m.getCurrentHealth()));
 	}
 
 	void monsterAttack(Player p, Monster m) {
+		p.inven.calEquipStat();
+
 		mdmg = m.getCurrentStrength();
 
 		if (playerEvasion(p)) {
-			System.out.println("	플레이어가 몬스터의 공격을 회피했습니다! 데미지가 0이 됩니다.");
+			System.out.println("플레이어가 몬스터의 공격을 회피했습니다! 데미지가 0이 됩니다.");
 			mdmg = 0;
 		}
-		p.setCurrentHealth(p.getCurrentHealth() - mdmg);
-		System.out.println("	"+mdmg + " 만큼 가격!   " + p.getName() + " 플레이어님의 체력은:" + (p.getCurrentHealth()));
+		
+		p.setCurrentHealth((p.getCurrentHealth()+p.inven.equipHealth) - mdmg);
+		
+		System.out.println(mdmg + " 만큼 가격!   " + p.getName() + " 플레이어님의 체력은:" + p.getCurrentHealth());
+	
+	
+		p.setCurrentHealth((p.getCurrentHealth()-p.inven.equipHealth));
+
 	}
 
 //회피를 정의 한다.	
 	boolean playerEvasion(Player p) {
+		p.inven.calEquipStat();
 
-		if ((rand.nextInt(100) + 1) <= p.getEvasion()) {
+
+		if ((rand.nextInt(100) + 1) <= p.getEvasion()+p.inven.equipEvasion) {
 			return pass = true;
 		} else {
 			return pass = false;
@@ -65,12 +78,12 @@ public class Battle {
 //사용자의 입력에 따른 공격
 	int choicePlayerMovement(Monster m, Player p) {
 		int result = 0;
-		battleResult = result;
+		this.battleResult = result;
 
-		System.out.println("	====== 전투 시작 ======");
+		System.out.println("====== 전투 시작 ======");
 
 		while (true) {
-			System.out.println("	1. 공격	/	2. 도망");
+			System.out.println("1.공격 2.도망 4.포션");
 			int choice = Integer.parseInt(bt.nextLine());
 
 			switch (choice) {
@@ -82,12 +95,13 @@ public class Battle {
 
 					// 패배 시 result = 1;
 					result = 1;
+
 					break;
 
 				} else if (m.getCurrentHealth() <= 0) {
 
 					// 승리 시 reuslt = 0;
-					result = 0;
+					p.showStatus();
 					break;
 
 				} else {
@@ -96,12 +110,37 @@ public class Battle {
 				}
 
 				// 전투 메뉴 추가 생각해보기
-		case 2:
-			result = 2;
-			break;
-			}
-			return result;
-		}
+			case 2:
+				result = 2;
+				break;
 
+			case 4:
+				System.out.println("사용할 포션을 골라주세요");
+				
+				p.showPotion();
+				
+				
+				int select = bt.nextInt();
+				
+				bt.nextLine();
+				
+				
+				
+				if(select == 0) {
+					continue;
+				}
+				
+				
+				p.usePotion(select);
+				
+				continue;
+			
+
+			}
+
+			return result;
+
+		}
 	}
+
 }
