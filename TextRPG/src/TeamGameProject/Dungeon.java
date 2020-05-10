@@ -253,7 +253,7 @@ public class Dungeon {
 
 	// 스테이지 선택
 	int stageChoice() {
-		System.out.println("=====================");
+		System.out.println("====================");
 		System.out.println("스테이지를 선택해주세요.");
 		System.out.println("1. Easy 2. Nomal 3. Hard");
 		int num = sc.nextInt();
