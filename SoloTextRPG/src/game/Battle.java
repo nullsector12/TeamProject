@@ -1,44 +1,142 @@
 package game;
 
 import java.util.Scanner;
+import java.util.InputMismatchException;
+import java.util.Random;
 
 public class Battle {
-	
-	int damage;
-	public boolean result;
-	Scanner commands = new Scanner(System.in);
-	String command;
-	
-	void battle (Player p, Monsters m) {
-		
-		System.out.println("야생의 " + m.getMonsterName() + "이(가) 나타났다!");
-		m.showMonsterInfo();
-		System.out.println("플레이어 =" + p.playerName + "= 의 턴");
-		
 
-		while(true) {
-			
-			System.out.println("커맨드를 입력해주세요. : 공격");
-			command = commands.nextLine();
-			
-			switch(command) {
-				case "공격":
-					System.out.println( p.playerName +" 의 공격!");
-					m.currentHealth = m.currentHealth - p.attackPower;
-					System.out.println(m.getMonsterName() +" 의 체력이 " + m.currentHealth + "남았습니다.");
-					if(m.currentHealth > 0) {
-						System.out.println(m.getMonsterName() +" 의 반격!");
-						p.currentHealth = p.currentHealth - m.attackPower;
-						System.out.println(p.playerName + " 의 체력이 현재 " + p.currentHealth + " 남았습니다.");
-					}
-					break;
-				}
-			if (m.currentHealth <=0) {
-				break;	
-			}else if(p.currentHealth <=0) {
-				break;
-			}
-			}
+	Scanner bt = new Scanner(System.in);
+//플레이어 몬스터 모두 불러온다.
+
+	int turns;
+	boolean pass;
+	int pdmg;
+	int mdmg;
+
+	int dmg;
+	Random rand = new Random();
+	int battleResult;
+	Player p;
+	Monster m;
+
+//던전을 불러온다.
+
+	// 적중 확률 = ((정확도-회피 확률)/정확도) * 100 (%)
+//공격을 정의한다.
+	void playerAttack(Player p, Monster m) {
+		// p.inven.cal
+		dmg = p.getCurrentStrength() * 100;
+
+		if (monsterEvasion(m)) {
+			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
+			dmg = 0;
+		}
+		m.setCurrentHealth(m.getCurrentHealth() - dmg);
+		System.out.println(dmg + " 만큼 가격! 몬스터의 체력은:" + (m.getCurrentHealth()));
+	}
+
+	void monsterAttack(Player p, Monster m) {
+		mdmg = m.getCurrentStrength();
+
+		if (playerEvasion(p)) {
+			System.out.println("플레이어가 몬스터의 공격을 회피했습니다! 데미지가 0이 됩니다.");
+			mdmg = 0;
+		}
+		p.setCurrentHealth(p.getCurrentHealth() - mdmg);
+		System.out.println(mdmg + " 만큼 가격!   " + p.getName() + " 플레이어님의 체력은:" + (p.getCurrentHealth()));
+	}
+
+//회피를 정의 한다.	
+	boolean playerEvasion(Player p) {
+
+		if ((rand.nextInt(100) + 1) <= p.getEvasion()) {
+			return pass = true;
+		} else {
+			return pass = false;
 		}
 	}
 
+	boolean monsterEvasion(Monster m) {
+
+		if ((rand.nextInt(100)) <= m.getEvasion()) {
+			return pass = true;
+		} else {
+			return pass = false;
+		}
+	}
+
+//방어한다.
+	void playerDefenced(Player p) {
+		
+	}
+	
+	
+	
+//사용자의 입력에 따른 공격
+	int choicePlayerMovement(Monster m, Player p) {
+		int result = 0;
+		this.battleResult = result;
+
+		System.out.println("====== 전투 시작 ======");
+
+		while (true) {
+			int choice;
+			try {
+			System.out.println("1.공격 2.도망 3.방어 4.포션");
+			choice = Integer.parseInt(bt.nextLine());
+			if(!(choice>0 && choice<5)) {
+				System.out.println("정상적인 메뉴 선택이 아닙니다.\n 메뉴를 다시 선택해 주세요.");
+			continue;
+			}
+			}catch (NumberFormatException e){
+				System.out.println("잘못입력하셨습니다. 다시 선택해 주세요.");
+				continue;
+			}catch (InputMismatchException e){
+				System.out.println("잘못입력하셨습니다. 다시 선택해 주세요.");
+				continue;
+			}
+			switch (choice) {
+			case 1:
+
+				playerAttack(p, m);
+				monsterAttack(p, m);
+				if (p.getCurrentHealth() <= 0) {
+
+					// 패배 시 result = 1;
+					result = 1;
+
+					break;
+
+				} else if (m.getCurrentHealth() <= 0) {
+
+					// 승리 시 reuslt = 0;
+					p.showStatus();
+					break;
+
+				} else {
+					continue;
+					// 추가 메뉴 반환값 구상해보기
+				}
+
+				// 전투 메뉴 추가 생각해보기
+			case 2:
+				
+					result = 2;
+					break;
+			
+			case 3:
+				
+				continue;		
+				
+				
+			}return result;
+		}
+
+	}
+
+//
+//	
+	
+
+}
