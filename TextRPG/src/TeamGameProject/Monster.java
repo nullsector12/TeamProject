@@ -2,19 +2,8 @@ package TeamGameProject;
 
 import java.util.Random;
 
-import enemies.Chicken;
-import enemies.Cow;
-import enemies.Dog;
-import enemies.Dragon;
-import enemies.EnemyBasics;
-import enemies.Horse;
-import enemies.Monkey;
-import enemies.Pig;
-import enemies.Rabbit;
-import enemies.Rat;
-import enemies.Sheep;
-import enemies.Snake;
-import enemies.Tiger;
+import enemies.*;
+
 public class Monster extends Entity {//이름 랜덤하게 나오도록
 	
 	// 회피 확률->공격 무효화 기능
@@ -103,8 +92,8 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 	public void setGoldWorth(int exp) {
 		goldWorth = exp;
 		// 스테이지 별 몬스터 경험치의 10퍼센트를 골드로 반환(최대 10퍼센트까지 골드 받을 수 있음) or 랜덤 반환
-		int gold_max = (int) (exp * 0.5);
-		int gold_min = (int) (exp * 0.1);// 최소 골드
+		int gold_max = exp * 5;
+		int gold_min = exp * 1;// 최소 골드
 		goldWorth = rand.nextInt(gold_max - gold_min + 1) + gold_min;// 수식 변경
 //        int gMin = (int)(g*.7);
 //        int gMax = (int)(g*1.2);
@@ -121,7 +110,7 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 //		exp*=(stage*(rand.nextInt(2)+1));
 
 		int exp_max = (int) (stage * 10);
-		int exp_min = (int) (stage * 2);
+		int exp_min = (int) (stage * 5);
 		expWorth = stage * 10 + rand.nextInt(exp_max - exp_min + 1) + exp_min;
 	}
 
@@ -206,15 +195,15 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 	 */
 
 	public void showData() {
-		System.out.println("현재 스테이지: " + this.getStage());// 1-1 형식으로 바꿔야됨
-		System.out.println("몬스터 이름: " + this.getName());
-		System.out.println("공격력 : " + getBaseStrength());
-		System.out.println("체력: " + this.getCurrentHealth());
-		System.out.println("획득 가능 경험치: " + this.getExpWorth());
-		System.out.println("획득 가능 골드: " + this.getGoldWorth());
-		System.out.println("회피율: " + this.getEvasion() + "%");
+		System.out.println("	현재 스테이지: " + this.getStage());// 1-1 형식으로 바꿔야됨
+		System.out.println("	몬스터 이름: " + this.getName());
+		System.out.println("	공격력 : " + this.getCurrentStrength());
+		System.out.println("	체력: " + this.getCurrentHealth());
+		System.out.println("	획득 가능 경험치: " + this.getExpWorth());
+		System.out.println("	획득 가능 골드: " + this.getGoldWorth());
+		System.out.println("	회피율: " + this.getEvasion() + "%");
 //		System.out.println("방어력: " + this.getDefense());
-		System.out.println("약점 : " + this.getWeakness());
+//		System.out.println("	강함 : " + this.getWeakness());
 
 	}
 
@@ -235,14 +224,16 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 		else
 			return true;
 	}
-	// ==========================================================05/08 추가 메서드
-	
+	// ==========================================================05/08 추가 메서드====05/10 메서드 수정
+	String title;
 	public void setName(String name) {//이름 랜덤하게 나오도록
-		String[] kinds= {"빨간 ","파란 ","노란 ","검은 ","흰 "};
+		String[] kinds= {"기본 ","날쏀 ","덩치가 큰 ","이빨이 날카로운 ","알 수 없는 "};//알 수 없는(랜덤)
 		Random rand=new Random();
-		int numOfkinds=rand.nextInt(5);
+		int randIndex=rand.nextInt(5);
 		
-		this.name=kinds[numOfkinds]+name;
+		this.name=kinds[randIndex]+name;
+		title=kinds[randIndex];
+		
 
 		
 	}

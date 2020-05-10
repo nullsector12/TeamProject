@@ -33,18 +33,18 @@ public class Player extends Entity {
 		super.setName(JOptionPane.showInputDialog("캐릭터의 이름을 입력해주세요."));
 
 		while (true) {
-			System.out.println("입력하신 이름이 " + super.getName() + "님이 맞습니까? 맞으면 y 틀리면n");
+			System.out.println("	입력하신 이름이  >>>" + super.getName() + "<<< 님이 맞습니까? 맞으면 y 틀리면n");
 			String check = sc.nextLine();
 
 			if (check.equals("y") || check.equals("Y")) {
-				System.out.println("캐릭터가 생성되었습니다!");
+				System.out.println("	캐릭터가 생성되었습니다!");
 				break;
 
 			} else if (check.equals("n") || check.equals("N")) {
 				addName();
 				break;
 			} else {
-				System.out.println("잘못 누르셨습니다.");
+				System.out.println("	잘못 누르셨습니다.");
 				continue;
 			}
 		}
