@@ -251,6 +251,13 @@ public class Player extends Entity {
 
 		switch (i) {
 		case 1:
+			
+			if (potion.get(0).price*num>gold) {
+				System.out.println("골드가 부족하여 구매할수없습니다.");
+				break;
+			}
+			
+			
 			potion.set(0, new Potion("Small Potion", 30, (potion.get(0).pNum) + num, 20));
 
 			gold = gold - 20 * num;
@@ -258,12 +265,24 @@ public class Player extends Entity {
 			break;
 
 		case 2:
+			
+			if (potion.get(1).price*num>gold) {
+				System.out.println("골드가 부족하여 구매할수없습니다.");
+				break;
+			}
+			
 			potion.set(1, new Potion("Normal Potion", 60, (potion.get(1).pNum) + num, 30));
 
 			gold = gold - 30 * num;
 
 			break;
 		case 3:
+			
+			if (potion.get(2).price*num>gold) {
+				System.out.println("골드가 부족하여 구매할수없습니다.");
+				break;
+			}
+			
 			potion.set(2, new Potion("Big Potion", 150, (potion.get(2).pNum) + num, 60));
 
 			gold = gold - 60 * num;
@@ -287,6 +306,12 @@ public class Player extends Entity {
 		}
 		switch (i) {
 
+		
+		
+		case 0:
+			System.out.println("전투창으로 돌아갑니다.");
+			break;
+		
 		case 1:
 
 			if (potion.get(0).pNum == 0) {
@@ -532,8 +557,17 @@ public class Player extends Entity {
 	// 장비의 스탯 계산
 	public void calEquipStat() {
 
+		inven.equipPower =0;
+		inven.equipHealth = 0;
+		inven.equipEvasion =0;
+		
 		for (int i = 0; i < inven.equip.size(); i++) {
 
+			
+			
+			
+			
+			
 			inven.equipPower = inven.equipPower + inven.equip.get(i).attackPower;
 			inven.equipHealth = inven.equipHealth + inven.equip.get(i).health;
 			inven.equipEvasion = inven.equipEvasion + inven.equip.get(i).evasion;

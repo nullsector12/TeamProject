@@ -12,6 +12,13 @@ public class SkillInven {
 
 	public void buySkill(Player p, Skill s) {
 
+		
+		if (s.gold>p.getGold()) {
+			System.out.println("골드가 부족하여 구매할수없습니다.");
+			return;
+		}		
+		
+		
 		for (int i = 0; i < skill.size(); i++) {
 
 			if (s.skillName.equals(skill.get(i).skillName)) {

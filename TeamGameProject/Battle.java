@@ -37,7 +37,7 @@ public class Battle {
 
 	void playerAttackS(Player p, Monster m, Skill s) {
 
-		dmg = (p.invenCurrentStrength) * 3 *s.multiple;
+		dmg = (p.invenCurrentStrength) * 3 * s.multiple;
 
 		if (monsterEvasion(m)) {
 			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
@@ -46,7 +46,6 @@ public class Battle {
 		m.setCurrentHealth(m.getCurrentHealth() - dmg);
 		System.out.println(dmg + " 만큼 가격! 몬스터의 체력은:" + (m.getCurrentHealth()));
 	}
-	
 
 	void monsterAttack(Player p, Monster m) {
 
@@ -134,23 +133,22 @@ public class Battle {
 				System.out.println("사용할 스킬을 골라주세요");
 
 				p.skill.showSkill();
-				
+
 				int select = 0;
-				
-				select = (bt.nextInt()-1);
+
+				select = (bt.nextInt() - 1);
 				bt.nextLine();
 
 				if (p.skill.skill.get(select).numOfChance == 0) {
 					System.out.println("기회가 남아있지않습니다.");
 					continue;
 				}
-				
 
 				Skill s = p.skill.useSkill(p, select);
 
 				playerAttackS(p, m, s);
 				monsterAttack(p, m);
-				
+
 				if (p.invenCurrentHealth == 0) {
 
 					// 패배 시 resul t = 1;
@@ -167,11 +165,9 @@ public class Battle {
 				} else {
 					continue;
 					// 추가 메뉴 반환값 구상해보기
-				
+
 				}
-				
-				
-				
+
 			case 4:
 				System.out.println("사용할 포션을 선택해주세요");
 				if (p.potion.size() == 0) {
@@ -198,7 +194,7 @@ public class Battle {
 				if (select2 == 0) {
 					continue;
 				}
-
+				while(true) {
 				try {
 					p.usePotion(select2);
 				} catch (Exception e) {
@@ -207,8 +203,8 @@ public class Battle {
 					System.out.println("잘못누르셨습니다.");
 					continue;
 				}
-
-				continue;
+				}
+	
 
 			}
 
