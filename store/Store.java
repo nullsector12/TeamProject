@@ -4,7 +4,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import TeamGameProject.Player;
+import items.Inven;
 import potionStore.Potion;
+import skills.Angry;
+import skills.Skill;
 
 public class Store {
 
@@ -12,10 +15,11 @@ public class Store {
 	int num;
 	int select;
 	Potion potion = new Potion(null, num, num, num);
+	Skill skill = new Skill("", 0, 0, 0);
 
 	public void store(Player p) {
 
-		System.out.println("1.포션 2.장비 3.판매"); //
+		System.out.println("1.포션 2.장비 3.스킬 4.판매"); //
 		System.out.println("===========================");
 		System.out.println("현재 골드 :" + p.getGold());
 		int i = sc.nextInt();
@@ -29,16 +33,12 @@ public class Store {
 			System.out.println("3. 큰 포션 -회복량 :150 [60G]");
 			System.out.println("0. 마을로 돌아가기");
 
-		
-			
-
-			
 			try {
 				select = sc.nextInt();
 
-			}catch (InputMismatchException e) {
-			System.out.println("잘못 누르셨습니다.");
-			return;
+			} catch (InputMismatchException e) {
+				System.out.println("잘못 누르셨습니다.");
+				return;
 			}
 
 			catch (Exception e) {
@@ -47,12 +47,12 @@ public class Store {
 			} finally {
 				sc.nextLine();
 			}
-			
+
 			if (select == 0) {
 				System.out.println("마을로 돌아갑니다.");
 				return;
 			}
-			
+
 			System.out.println("구매할 포션의 개수를 입력해주세요");
 			num = sc.nextInt();
 			sc.nextLine();
@@ -65,7 +65,7 @@ public class Store {
 			}
 
 			break;
-			
+
 		case 2:
 
 			System.out.println("1. A_Hat 공격력 : +10, 체력: +50, 회피율 +0 (100G)");
@@ -94,6 +94,41 @@ public class Store {
 			break;
 
 		case 3:
+
+			System.out.println("1. 화내기  기회:3, 배율 2 (5000G)");
+			System.out.println("2. 두배화내기 기회:3, 배율3 (8000G)");
+			System.out.println("3. 세배화내기 기회:3 , 배율4 (15000G)");
+
+			System.out.println("구매할 스킬을 선택해주세요");
+
+			select = 0;
+
+			select = sc.nextInt();
+
+			sc.nextLine();
+
+			// 캐릭터에있는 인스턴스
+
+			if (select == 1) {
+
+				skill = p.Skill1;
+
+			} else if (select == 2) {
+
+				skill = p.Skill2;
+
+			} else if (select == 3) {
+
+				skill = p.Skill3;
+
+			}
+
+			p.skill.buySkill(p, skill);
+
+			p.skill.showSkill();
+
+			break;
+		case 4:
 
 			p.inven.showInventory();
 			p.sellItem();

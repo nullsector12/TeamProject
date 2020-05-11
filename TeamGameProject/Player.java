@@ -20,39 +20,28 @@ import items.D_GoldWand;
 import items.D_SilverWand;
 import items.Inven;
 import potionStore.Potion;
+import skills.Angry;
+import skills.DoubleAngry;
+import skills.SkillInven;
+import skills.TripleAngry;
 
 public class Player extends Entity {
 
-	// 변수선언
-	// private String name;
-	// private int currentStrength;;
-	// private int currentHealth;
-	// private int maxHealth;
-	// private float evasion;
-
-	public A_Hat A1 = new A_Hat("", 0, 0, 0, 0, 0);
-
-	public A_HeadPiece A2 = new A_HeadPiece("", 0, 0, 0, 0, 0);
-
-	public B_OldArmor B1 = new B_OldArmor("", 0, 0, 0, 0, 0);
-
-	public B_ShiningArmor B2 = new B_ShiningArmor("", 0, 0, 0, 0, 0);
-
-	public B_DiamondArmor B3 = new B_DiamondArmor("", 0, 0, 0, 0, 0);
-
-	public C_OldCloak C1 = new C_OldCloak("", 0, 0, 0, 0, 0);
-
-	public C_ShiningCloak C2 = new C_ShiningCloak("", 0, 0, 0, 0, 0);
-
-	public C_InvisibilityCloak C3 = new C_InvisibilityCloak("", 0, 0, 0, 0, 0);
-
-	public D_SilverWand D1 = new D_SilverWand("", 0, 0, 0, 0, 0);
-
-	public D_GoldWand D2 = new D_GoldWand("", 0, 0, 0, 0, 0);
-
-	public D_DiamondWand D3 = new D_DiamondWand("", 0, 0, 0, 0, 0);
 
 	public Inven inven = new Inven();
+	public A_Hat A1 = new A_Hat("", 0, 0, 0, 0, 0);
+	public A_HeadPiece A2 = new A_HeadPiece("", 0, 0, 0, 0, 0);
+	public B_OldArmor B1 = new B_OldArmor("", 0, 0, 0, 0, 0);
+	public B_ShiningArmor B2 = new B_ShiningArmor("", 0, 0, 0, 0, 0);
+	public B_DiamondArmor B3 = new B_DiamondArmor("", 0, 0, 0, 0, 0);
+	public C_OldCloak C1 = new C_OldCloak("", 0, 0, 0, 0, 0);
+	public C_ShiningCloak C2 = new C_ShiningCloak("", 0, 0, 0, 0, 0);
+	public C_InvisibilityCloak C3 = new C_InvisibilityCloak("", 0, 0, 0, 0, 0);
+	public D_SilverWand D1 = new D_SilverWand("", 0, 0, 0, 0, 0);
+	public D_GoldWand D2 = new D_GoldWand("", 0, 0, 0, 0, 0);
+	public D_DiamondWand D3 = new D_DiamondWand("", 0, 0, 0, 0, 0);
+
+	public ArrayList<Potion> potion = new ArrayList<Potion>(3);
 
 	public int invenMaxHealth;
 	public int invenCurrentHealth;
@@ -63,16 +52,31 @@ public class Player extends Entity {
 	private int currentLevel;
 	private int currentExp;
 	private int levelUpExp;
-	private Scanner sc;
-	public ArrayList<Potion> potion = new ArrayList<Potion>(3);
 
+	private Scanner sc;
 	// S M L
 	public Potion sp = new Potion("Small Potion", 30, 0, 20);
-
 	public Potion np = new Potion("Normal Potion", 60, 0, 30);
-
 	public Potion bp = new Potion("Big Potion", 150, 0, 60);
+	
+	public SkillInven skill = new SkillInven();
+	
+	public Angry Skill1 = new Angry("", 0, 0, 0);
+	public DoubleAngry Skill2 = new DoubleAngry("", 0, 0, 0);
+	public TripleAngry Skill3 = new TripleAngry("", 0, 0, 0);
 
+	
+	
+	
+	public int bossCount;
+	public int stage2Count;
+	public int stage3Count;
+	
+
+	
+	
+	
+	
 	// 캐릭터의 이름을 받는 메서드
 	void addName() {
 //
@@ -538,6 +542,10 @@ public class Player extends Entity {
 
 	}
 
+	
+	
+	
+	
 	public int getGold() {
 		return gold;
 	}
@@ -561,5 +569,35 @@ public class Player extends Entity {
 	public int setCurrentLevel(int currentLevel) {
 		return this.currentLevel = currentLevel;
 	}
+	
+	public int getBossCount() {
+		return bossCount;
+	}
+
+	public void setBossCount(int bossCount) {
+		this.bossCount = bossCount;
+	}
+
+	public int getStage2Count() {
+		return stage2Count;
+	}
+
+	public void setStage2Count(int stage2Count) {
+		this.stage2Count = stage2Count;
+	}
+
+	public int getStage3Count() {
+		return stage3Count;
+	}
+
+	public void setStage3Count(int stage3Count) {
+		this.stage3Count = stage3Count;
+	}
+
+
+	
+	
+	
+	
 
 }
