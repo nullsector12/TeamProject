@@ -7,32 +7,27 @@ package TeamGameProject;
 //모든 살아있는 객체들이 상속하는 클래스
 //하위 클래스들이 공통적으로 갖는 기본값들 초기화
 
-public class Entity {//상속할 때 상위클래스에 private 처리하지 말 것
-	 String name;
-	 //멤버변수 추가===================================
-	 int evasion;
-	 int goldWorth;
-	 int expWorth;
-	 //==================================================
-	 
-	 int baseHealth, currentHealth, maxHealth;// 기본, 현재, 최대 체력
+public class Entity {// 상속할 때 상위클래스에 private 처리하지 말 것
+	String name;
+	// 멤버변수 추가===================================
+	int evasion;
+	int goldWorth;
+	int expWorth;
+	// ==================================================
+
+	int baseHealth, currentHealth, maxHealth;// 기본, 현재, 최대 체력
 //	 int baseMana, currentMana, maxMana;// 기본, 현재, 최대 마나
-	 int baseStrength, currentStrength;// 기본, 현재 힘
+	int baseStrength, currentStrength;// 기본, 현재 힘
 //	 int baseMagic, currentMagic;// 기본, 현재 마력
 //	 int baseAgility, currentAgility;// 기본, 현재 민첩성
-	 int baseDefense, currentDefense;// 기본, 현재 방어력
+	int baseDefense, currentDefense;// 기본, 현재 방어력
 //	 int baseMagicDefense, currentMagicDefense;// 기본, 현재 마법 방어력
 	int currentExp;
 	int currentLevel;
 	int gold;
 
-//	 Entity(int currentHealth){
-//		 this.currentHealth=currentHealth;
-//	 }
-	 
-	 
 	public String getName() {
-		return name;	
+		return name;
 	}// 이름 반환
 
 	public int getEvasion() {
@@ -87,6 +82,10 @@ public class Entity {//상속할 때 상위클래스에 private 처리하지 말
 	}
 
 	public int setCurrentHealth(int input) {
+		if (currentHealth<=maxHealth ) {
+			currentHealth=maxHealth;
+		}
+			
 		return currentHealth = input;
 	}
 
@@ -103,7 +102,7 @@ public class Entity {//상속할 때 상위클래스에 private 처리하지 말
 	}
 
 	public void setMaxHealth(int input) {
-		 maxHealth = input;
+		maxHealth = input;
 	}
 
 	public int getCurrentStrength() {
@@ -114,17 +113,12 @@ public class Entity {//상속할 때 상위클래스에 private 처리하지 말
 	}
 
 	public void setCurrentStrength(int input) {
-		 currentStrength = input;
+		currentStrength = input;
 	}
 
 	public int getBaseStrength() {
 		return baseStrength;
 	}
-
-	public void setBaseStrength(int input) {
-		baseStrength = input;
-	}
-
 
 	public void initCurrentStats() {// 현재 스탯 초기화
 		currentHealth = baseHealth;

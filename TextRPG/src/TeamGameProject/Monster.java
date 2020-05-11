@@ -1,5 +1,4 @@
 package TeamGameProject;
-
 import java.util.Random;
 
 import enemies.Chicken;

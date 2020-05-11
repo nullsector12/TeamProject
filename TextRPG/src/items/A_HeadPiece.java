@@ -8,7 +8,7 @@ public class A_HeadPiece extends Item {
 	public A_HeadPiece(String equipmentName, int equipmentType, int attackPower, int health, int evasion, int gold) {
 		super(equipmentName, equipmentType, attackPower, health, evasion, gold);
 
-		this.equipmentName = "BrokenSword";
+		this.equipmentName = "A_HeadPiece";
 		
 		this.equipmentType =1;
 		
@@ -18,19 +18,24 @@ public class A_HeadPiece extends Item {
 		
 		this.evasion = 1;
 		
-		this.gold = 20;
+		this.gold = 200;
 		
+	}
+
+	
+	
+	
+	@Override
+	public String toString() {
+		return "A_HeadPiece [equipmentName=" + equipmentName + ", equipmentType=" + equipmentType + ", attackPower="
+				+ attackPower + ", health=" + health + ", evasion=" + evasion + ", gold=" + gold + "]";
 	}
 	
 	
 	
 	
 
-	@Override
-	public String toString() {
-		return "BrokenSword [equipmentName=" + equipmentName + ", equipmentType=" + equipmentType + ", attackPower="
-				+ attackPower + ", health=" + health + ", evasion=" + evasion + ", gold=" + gold + "]";
-	}
+	
 
 	
 
