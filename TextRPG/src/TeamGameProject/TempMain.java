@@ -15,7 +15,7 @@ public class TempMain {
 		System.out.println("		-------------------------");
 		System.out.println("		|	GAME START	|");
 		System.out.println("		-------------------------");
-		System.out.println("	1.새로시작	2.이어하기");
+		System.out.println("		1.새로시작	2.이어하기");
 		choice = sc.nextInt();
 		if (choice == 1) {// 새로 시작
 			t.d.p.addName();
@@ -27,7 +27,7 @@ public class TempMain {
 		}
 		System.out.println("	어서오세요." + t.d.p.getName() + "님, JAVA 마을에 오신 것을 환영합니다.");
 
-		while (true) {
+		while (true) { 
 			t.town();
 		}
 

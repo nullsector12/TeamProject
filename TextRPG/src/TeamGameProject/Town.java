@@ -31,7 +31,9 @@ public class Town {
 			System.out.println("	|	  3. 장비창			|");
 			System.out.println("	|	  4. 상점 이용			|");
 			System.out.println("	|	  5. 여관 이용 (체력 회복 가능)		|");
-			System.out.println("	|	  6. 게임 종료			|");
+			System.out.println("	|	  6. 현재 데이터 저장하기		|");
+			System.out.println("	|	  7. 이전 데이터 불러오기		|");
+			System.out.println("	|	  8. 게임 종료			|");
 			System.out.println("	|					|");
 			System.out.println("	+++++++++++++++++++++++++++++++++++++++++");
 

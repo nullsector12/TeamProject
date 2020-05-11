@@ -230,7 +230,7 @@ public class Monster extends Entity {// 이름 랜덤하게 나오도록
 	String title;
 
 	public void setName(String name) {// 이름 랜덤하게 나오도록
-		String[] kinds = { "기본 ", "날쏀 ", "덩치가 큰 ", "이빨이 날카로운 ", "알 수 없는 " };// 알 수 없는(랜덤)
+		String[] kinds = { "기본 ", "날쌘 ", "덩치가 큰 ", "이빨이 날카로운 ", "알 수 없는 " };// 알 수 없는(랜덤)
 		Random rand = new Random();
 		int randIndex = rand.nextInt(5);
 
