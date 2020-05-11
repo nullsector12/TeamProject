@@ -599,7 +599,11 @@ public class Player extends Entity {
 		invenCurrentEvasion = getEvasion() + inven.equipEvasion;*/
 		
 		int invenCurrentHealth,invenMaxHealth,invenCurrentStrength,invenCurrentEvasion;
+		/*public int bossCount;//저장해야됨
+			public int stage2Count;
+			public int stage3Count;*/
 		
+		int bossCount,stage2Count,stage3Count;
 		try {
 			f = new FileInputStream("data.ser");
 			oos = new ObjectInputStream(f);
@@ -623,6 +627,10 @@ public class Player extends Entity {
 			invenMaxHealth = ((Integer) oos.readObject());
 			invenCurrentStrength = ((Integer) oos.readObject());
 			invenCurrentEvasion = ((Integer) oos.readObject());
+			// ============================================================== 수정사항
+			bossCount = ((Integer) oos.readObject());
+			stage2Count = ((Integer) oos.readObject());
+			stage3Count = ((Integer) oos.readObject());
 			
 			
 			/*
@@ -669,6 +677,10 @@ public class Player extends Entity {
 			this.invenMaxHealth = invenMaxHealth;
 			this.invenCurrentStrength =invenCurrentStrength;
 			this.invenCurrentEvasion =invenCurrentEvasion;
+			System.out.println("=======================================카운트");
+			this.bossCount=bossCount;
+			this.stage2Count=stage2Count;
+			this.stage3Count=stage3Count;
 			
 			/*invenCurrentStrength = currentStrength + inven.equipPower;
 			invenMaxHealth = maxHealth + inven.equipHealth;
@@ -744,7 +756,10 @@ public class Player extends Entity {
 			oos.writeObject(this.invenMaxHealth);
 			oos.writeObject(this.invenCurrentStrength);
 			oos.writeObject(this.invenCurrentEvasion);
-			
+			// ============================================================== 추가사항
+			oos.writeObject(this.bossCount);
+			oos.writeObject(this.stage2Count);
+			oos.writeObject(this.stage3Count);
 //			System.out.println("=====exp:"+this.getCurrentExp());
 //			oos.writeObject(Save);
 
