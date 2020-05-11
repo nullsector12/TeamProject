@@ -22,9 +22,18 @@ public class Town {
 
 		while (true) {
 			System.out.println("\n");
-			System.out.println("	+++++++ JAVA TOWN +++++++\n");
-			System.out.println(
-					"	무엇을 하시겠습니까  >>> \n 	1. 던전 가기  \n 	2. 캐릭터 정보창  \n 	3. 장비창  \n 	4. 상점 이용 \n 	5. 여관 이용 (체력 회복 가능) \n 	6. 게임 종료");
+			System.out.println("	++++++++	JAVA TOWN	+++++++++");
+			System.out.println("	|					|");
+			System.out.println("	|	          무엇을 하시겠습니까?		|");
+			System.out.println("	|					|");
+			System.out.println("	|	  1. 던전 가기			|");
+			System.out.println("	|	  2. 캐릭터 정보			|");
+			System.out.println("	|	  3. 장비창			|");
+			System.out.println("	|	  4. 상점 이용			|");
+			System.out.println("	|	  5. 여관 이용 (체력 회복 가능)		|");
+			System.out.println("	|	  6. 게임 종료			|");
+			System.out.println("	|					|");
+			System.out.println("	+++++++++++++++++++++++++++++++++++++++++");
 
 			int choiceMenu = input.nextInt();
 			input.nextLine();
@@ -53,15 +62,21 @@ public class Town {
 				inn();
 				break;
 
-			case 6: // 게임 완전 종료
-				System.out.println("	게임을 정말 종료하시겠습니까? 종료하면 지금까지의 플레이 기록은 삭제됩니다. y or n");
+			case 6:// 저장
+				d.p.savePlayer();
+				break;
+			case 7:// 불러오기
+				d.p.loadPlayer();
+				break;
+			case 8: // 게임 완전 종료
+				System.out.println("게임을 정말 종료하시겠습니까? 종료하면 지금까지의 플레이 기록은 삭제됩니다. y or n");
 				String exit = input.nextLine();
 				if (exit.equals("y")) {
-					System.out.println("	게임을 종료합니다. 안녕히 가세요!");
+					System.out.println("게임을 종료합니다. 안녕히 가세요!");
 					System.exit(0);
 					break;
 				} else if (exit.equals("n")) {
-					System.out.println("	마을로 돌아갑니다.");
+					System.out.println("마을로 돌아갑니다.");
 					break;
 				}
 
@@ -98,10 +113,10 @@ public class Town {
 			switch (choiceRoomClass) {
 
 			case 1:
-				System.out.println("다락방을 선택하셨습니다. 35Gold를 지불합니다.");
+				System.out.println("	다락방을 선택하셨습니다. 35Gold를 지불합니다.");
 				if (d.p.getGold() > 35) {
 					d.p.setGold(d.p.getGold() - 35);
-					System.out.println("현재 소지금 : " + d.p.getGold());
+					System.out.println("	현재 소지금 : " + d.p.getGold());
 					// d.p.setCurrentHealth(d.p.invenCurrentHealth + (int) (d.p.invenMaxHealth *
 					// 1.15));
 
@@ -111,21 +126,21 @@ public class Town {
 						d.p.invenCurrentHealth = d.p.invenMaxHealth;
 
 					}
-					System.out.println("값이 싼 만큼 찬 바람이 그대로 느껴지지만 지붕이 있다는 것에 만족하며 잠에 듭니다.");
-					System.out.println("체력이 미량 회복되었습니다.");
-					System.out.println("현재 체력 : " + d.p.invenCurrentHealth);
+					System.out.println("	값이 싼 만큼 찬 바람이 그대로 느껴지지만 지붕이 있다는 것에 만족하며 잠에 듭니다.");
+					System.out.println("	체력이 미량 회복되었습니다.");
+					System.out.println("	현재 체력 : " + d.p.invenCurrentHealth);
 
 				} else {
-					System.out.println("system : 소지금이 부족합니다.");
-					System.out.println("여관 주인 : 돈이 없으면 나가서 주무세연.");
+					System.out.println("	system : 소지금이 부족합니다.");
+					System.out.println("	여관 주인 : 돈이 없으면 나가서 주무세연.");
 				}
 				break;
 
 			case 2:
-				System.out.println("저급 숙소를 선택하셨습니다. 50Gold를 지불합니다.");
+				System.out.println("	저급 숙소를 선택하셨습니다. 50Gold를 지불합니다.");
 				if (d.p.getGold() > 50) {
 					d.p.setGold(d.p.getGold() - 50);
-					System.out.println("현재 소지금 : " + d.p.getGold());
+					System.out.println("	현재 소지금 : " + d.p.getGold());
 					// d.p.setCurrentHealth(d.p.invenCurrentHealth + (int) (d.p.invenMaxHealth *
 					// 1.25));
 					d.p.invenCurrentHealth = d.p.invenCurrentHealth + (int) (d.p.invenMaxHealth * 0.25);
@@ -134,18 +149,18 @@ public class Town {
 						// d.p.setCurrentHealth(d.p.getMaxHealth());
 						d.p.invenCurrentHealth = d.p.invenMaxHealth;
 					}
-					System.out.println("짚으로 만든 잠자리에 몸을 뉘우고 조각천을 대충 기워놓은 엉성한 이불을 덮고 잠에 듭니다.");
-					System.out.println("체력이 소량 회복되었습니다.");
-					System.out.println("현재 체력 : " + d.p.invenCurrentHealth);
+					System.out.println("	짚으로 만든 잠자리에 몸을 뉘우고 조각천을 대충 기워놓은 엉성한 이불을 덮고 잠에 듭니다.");
+					System.out.println("	체력이 소량 회복되었습니다.");
+					System.out.println("	현재 체력 : " + d.p.invenCurrentHealth);
 
 				} else {
-					System.out.println("system : 소지금이 부족합니다.");
-					System.out.println("여관 주인 : 돈이 없으면 나가서 주무세연.");
+					System.out.println("	system : 소지금이 부족합니다.");
+					System.out.println("	여관 주인 : 돈이 없으면 나가서 주무세연.");
 				}
 				break;
 
 			case 3:
-				System.out.println("보통 숙소를 선택하셨습니다. 100Gold를 지불합니다.");
+				System.out.println("	보통 숙소를 선택하셨습니다. 100Gold를 지불합니다.");
 				if (d.p.getGold() > 100) {
 					d.p.setGold(d.p.getGold() - 100);
 					System.out.println("현재 소지금 : " + d.p.getGold());
@@ -158,18 +173,18 @@ public class Town {
 						// d.p.setCurrentHealth(d.p.getMaxHealth());
 						d.p.invenCurrentHealth = d.p.invenMaxHealth;
 					}
-					System.out.println("적당히 푹신한 침대와 적당히 따뜻한 이불을 덮고 잠에 듭니다.");
-					System.out.println("체력이 회복되었습니다.");
-					System.out.println("현재 체력 : " + d.p.invenCurrentHealth);
+					System.out.println("	적당히 푹신한 침대와 적당히 따뜻한 이불을 덮고 잠에 듭니다.");
+					System.out.println("	체력이 회복되었습니다.");
+					System.out.println("	현재 체력 : " + d.p.invenCurrentHealth);
 				} else {
-					System.out.println("system : 소지금이 부족합니다.");
-					System.out.println("여관 주인 : 돈이 없으면 나가서 주무세연.");
+					System.out.println("	system : 소지금이 부족합니다.");
+					System.out.println("	여관 주인 : 돈이 없으면 나가서 주무세연.");
 				}
 
 				break;
 
 			case 4:
-				System.out.println("고급 숙소를 선택하셨습니다. 150Gold를 지불합니다.");
+				System.out.println("	고급 숙소를 선택하셨습니다. 150Gold를 지불합니다.");
 				if (d.p.getGold() > 150) {
 					d.p.setGold(d.p.getGold() - 150);
 					System.out.println("현재 소지금 : " + d.p.getGold());
@@ -180,35 +195,35 @@ public class Town {
 						// d.p.setCurrentHealth(d.p.getMaxHealth());
 						d.p.invenCurrentHealth = d.p.invenMaxHealth;
 					}
-					System.out.println("꽤 푹신한 침대와 이불이 반겨줍니다. 오랜만에 편안한 잠자리에 들 수 있을 것 같습니다.");
-					System.out.println("체력이 대량 회복되었습니다.");
-					System.out.println("현재 체력 : " + d.p.invenCurrentHealth);
+					System.out.println("	꽤 푹신한 침대와 이불이 반겨줍니다. 오랜만에 편안한 잠자리에 들 수 있을 것 같습니다.");
+					System.out.println("	체력이 대량 회복되었습니다.");
+					System.out.println("	현재 체력 : " + d.p.invenCurrentHealth);
 				} else {
-					System.out.println("system : 소지금이 부족합니다.");
-					System.out.println("여관 주인 : 돈이 없으면 나가서 주무세연.");
+					System.out.println("	system : 소지금이 부족합니다.");
+					System.out.println("	여관 주인 : 돈이 없으면 나가서 주무세연.");
 				}
 				break;
 
 			case 5:
-				System.out.println("FLEX를 선택하셨습니다. 250Gold를 지불합니다.");
+				System.out.println("	F.L.E.X. 를 선택하셨습니다. 250Gold를 지불합니다.");
 				if (d.p.getGold() > 250) {
 					d.p.setGold(d.p.getGold() - 250);
-					System.out.println("현재 소지금 : " + d.p.getGold());
+					System.out.println("	현재 소지금 : " + d.p.getGold());
 					// d.p.setCurrentHealth(d.p.getMaxHealth());
 
 					d.p.invenCurrentHealth = d.p.invenMaxHealth;
 
-					System.out.println("돈이 남아 돕니까 휴먼?");
-					System.out.println("체력이 전부 회복되었습니다.");
-					System.out.println("현재 체력 : " + d.p.invenCurrentHealth);
+					System.out.println("	돈이 남아 돕니까 휴먼?");
+					System.out.println("	체력이 전부 회복되었습니다.");
+					System.out.println("	현재 체력 : " + d.p.invenCurrentHealth);
 				} else {
-					System.out.println("system : 소지금이 부족합니다.");
-					System.out.println("여관 주인 : 돈이 없으면 나가서 주무세연.");
+					System.out.println("	system : 소지금이 부족합니다.");
+					System.out.println("	여관 주인 : 돈이 없으면 나가서 주무세연.");
 				}
 				break;
 
 			case 6:
-				System.out.println("여관을 나섭니다.");
+				System.out.println("	여관 밖으로 나갑니다.");
 				return;
 
 			}
