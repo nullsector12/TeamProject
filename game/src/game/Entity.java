@@ -3,7 +3,9 @@
 //하위 클래스들이 공통적으로 갖는 기본값들 초기화
 package game;
 
-public class Entity {//상속할 때 상위클래스에 private 처리하지 말 것
+import java.io.Serializable;
+
+public class Entity implements Serializable {//상속할 때 상위클래스에 private 처리하지 말 것
 	 String name;
 	 //멤버변수 추가===================================
 	 int evasion;

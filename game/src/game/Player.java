@@ -2,11 +2,12 @@
 
 package game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
-public class Player extends Entity{
+public class Player extends Entity implements Serializable{
 	
 
 	// 변수선언
@@ -111,11 +112,12 @@ public class Player extends Entity{
 
 	void showStatus() {
 		System.out.println("================================");
-		System.out.println("레벨 : " + currentLevel);
-		System.out.println("HP : " + super.getCurrentHealth() + "/" + super.getMaxHealth());
-		System.out.println("공격력 : " + super.getCurrentStrength());
-		System.out.println("회피율 : " + super.getEvasion() + "%");
-		System.out.println("EXP : " + currentExp + "/" + levelUpExp);
+		System.out.println("레벨 : " + this.getCurrentLevel());
+		System.out.println("HP : " + this.getCurrentHealth() + "/" + super.getMaxHealth());
+		System.out.println("공격력 : " + this.getCurrentStrength());
+		System.out.println("회피율 : " + this.getEvasion() + "%");
+		System.out.println("EXP : " + this.getExpWorth() + "/" + levelUpExp);
+		System.out.println("확인========="+this.getExpWorth());
 	
 	}
 

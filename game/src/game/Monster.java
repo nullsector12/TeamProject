@@ -15,7 +15,7 @@ import enemies.Rat;
 import enemies.Sheep;
 import enemies.Snake;
 import enemies.Tiger;
-public class Monster extends Entity {//이름 랜덤하게 나오도록
+public class Monster extends Entity{//이름 랜덤하게 나오도록
 	
 	// 회피 확률->공격 무효화 기능
 //	private int evasion;
@@ -28,6 +28,8 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 	private int weakness;// 몬스터가 가진 기본 약점
 	private int stage;
 	Random rand;
+
+//	t.start();//예외처리
 
 	protected Monster() {
 		rand = new Random();
@@ -151,6 +153,19 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 		@SuppressWarnings("unused")
 		int numOfMonsters =rand.nextInt(5)+1;//스테이지마다 랜덤하게 나오는 몬스터 마리 수
 		
+		//스테이지 예외처리
+		try {
+			if(!(stage>=Rounds.first && stage<=Rounds.twelveth)) {
+				OutOfStage o=new OutOfStage();
+				throw o;
+			}
+		}catch(OutOfStage o) {
+			System.out.println("올바른 스테이지 범위가 아닙니다");
+		}catch(Exception e) {
+			
+		}finally {
+			
+		}
 		switch (stage) {//스테이지 별 같은 종류/다른 능력치  몬스터 여러마리 생성
 		case Rounds.first:
 			monster = new Rat();// 자동 형변환
@@ -192,9 +207,9 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 		return monster;
 	}
 
-	public void encounterMonster() {
-		printName();
-	}
+//	public void encounterMonster() {
+//		printName();
+//	}
 
 	/*
 	 * private int evasion;
