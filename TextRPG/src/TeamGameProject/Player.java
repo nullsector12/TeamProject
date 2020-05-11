@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;//maxExp
 
 import items.A_Hat;
 import items.A_HeadPiece;
@@ -555,14 +555,20 @@ public class Player extends Entity {
 		this.gold = gold;
 	}
 
-	public int getCurrentExp() {
+	public int getCurrentExp() {//levelUpExp
 		return currentExp;
 	}
 
 	public int setCurrentExp(int currentExp) {
 		return this.currentExp = currentExp;
 	}
+	public int getLevelUpExp() {//levelUpExp
+		return levelUpExp;
+	}
 
+	public int setLevelUpExp(int levelUpExp) {
+		return this.levelUpExp = levelUpExp;
+	}
 	public int getCurrentLevel() {
 		return currentLevel;
 	}
@@ -600,7 +606,7 @@ public class Player extends Entity {
 		ObjectInputStream oos = null;
 //		Player load = new Player();
 		String name;
-		int currentLevel, currentHealth, maxHealth, currentStrength, evasion, exp, gold;
+		int currentLevel, currentHealth, maxHealth, currentStrength, evasion, exp, gold,levelUpExp;
 		/*		invenMaxHealth = maxHealth + inven.equipHealth;
 		invenCurrentHealth = currentHealth + inven.equipHealth;
 		invenCurrentStrength = currentStrength + inven.equipPower;
@@ -628,6 +634,7 @@ public class Player extends Entity {
 //			load.setEvasion((Integer) oos.readObject());
 
 			exp = ((Integer) oos.readObject());
+			levelUpExp = ((Integer) oos.readObject());//추가
 			// ============================================================== 추가사항
 			gold = ((Integer) oos.readObject());
 			// ============================================================== 수정사항
@@ -678,6 +685,7 @@ public class Player extends Entity {
 			this.setEvasion(evasion);
 
 			this.setCurrentExp(exp);
+			this.setLevelUpExp(levelUpExp);
 			this.setGold(gold);
 
 //			System.out.println("=======================================인벤토리");
@@ -758,6 +766,7 @@ public class Player extends Entity {
 //			System.out.println("저장 회피율:" + this.getEvasion());
 
 			oos.writeObject(this.getCurrentExp());
+			oos.writeObject(this.getLevelUpExp());
 			oos.writeObject(this.getGold());
 			// ============================================================== 추가사항
 			oos.writeObject(this.invenCurrentHealth);
