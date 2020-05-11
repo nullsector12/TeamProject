@@ -3,8 +3,6 @@ package items;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import TeamGameProject.Player;
-
 public class Inven {
 
 	int check = -1;
@@ -82,25 +80,5 @@ public class Inven {
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
