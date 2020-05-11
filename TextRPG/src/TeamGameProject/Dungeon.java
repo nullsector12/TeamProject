@@ -404,7 +404,18 @@ public class Dungeon {
 		ArrayList<Monster> monsters = new ArrayList<>(numOfMonsters);
 
 		Monster randMonster = new Monster();
-
+		try {
+			if(!(stage>=Rounds.first)&&(stage<=Rounds.twelveth)) {//스테이지 예외처리
+				OutOfStage o=new OutOfStage();
+				throw o;
+			}
+		}catch(OutOfStage o) {
+			System.out.println("올바른 스테이지 범위가 아닙니다");
+		}catch(Exception e) {
+			
+		}finally {
+			
+		}
 		int randIndex = rand.nextInt(numOfMonsters);// 랜덤 인덱스
 		int randValue=rand.nextInt(20)+10;
 		for (int i = 0; i < numOfMonsters; i++) {// 이름, 능력치 다른 같은 종류의 여러마리의 몬스터 생성

@@ -1,14 +1,14 @@
 package TeamGameProject;
 
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Random;
 
 public class Battle {
 
 	Scanner bt = new Scanner(System.in);
 //플레이어 몬스터 모두 불러온다.
-
-	
 
 	int turns;
 	boolean pass;
@@ -36,7 +36,6 @@ public class Battle {
 
 	void monsterAttack(Player p, Monster m) {
 		mdmg = m.getCurrentStrength();
-
 		if (playerEvasion(p)) {
 			System.out.println("플레이어가 몬스터의 공격을 회피했습니다! 데미지가 0이 됩니다.");
 			mdmg = 0;
@@ -67,42 +66,94 @@ public class Battle {
 //사용자의 입력에 따른 공격
 	int choicePlayerMovement(Monster m, Player p) {
 		int result = 0;
+		int count = 0;
 		this.battleResult = result;
-		
-		System.out.println("====== 전투 시작 ======");
 
+		System.out.println("====== 전투 시작 ======");
 		while (true) {
+
+			System.out.println("5초 안에 공격하세요");
+			Thread t1 = new Thread() {
+				@Override
+				public void run() {
+					for (int i = 5; i >= 0; i--) {
+						System.out.println(i);
+
+						// super.
+
+						try {
+							sleep(1000);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			};
+			t1.start();
 			System.out.println("1.공격");
 			int choice = Integer.parseInt(bt.nextLine());
-
+			int cnt=0;
 			switch (choice) {
 			case 1:
-
+				t1.stop();
 				playerAttack(p, m);
+				System.out.println("===== 몬스터 공격중=====");
+				while(true) {
+					
+				Thread t2 = new Thread() {
+					@Override
+					public void run() {
+//						for (int i = 5; i >= 0; i--) {
+							System.out.print(".");
+							
+							// super.
+
+							try {
+								sleep(1000);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+//						}
+					}
+				};
+				cnt++;
+				t2.start();
+				if(cnt==5) {t2.stop();break;}
+				try {
+					t2.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				}
+				System.out.println();
 				monsterAttack(p, m);
 				if (p.getCurrentHealth() <= 0) {
-					
+
 					// 패배 시 result = 1;
 					result = 1;
-					
+
 					break;
 
 				} else if (m.getCurrentHealth() <= 0) {
-					
+
 					// 승리 시 reuslt = 0;
 					p.showStatus();
 					break;
 
 				} else {
+					
+					
 					continue;
 					// 추가 메뉴 반환값 구상해보기
 				}
+			}
+			try {
+				t1.join();
 
-				// 전투 메뉴 추가 생각해보기
-//		case 2:
-//			
-//			playerAttack(m, pdmg);
-//			break;
+			} catch (InterruptedException e) {
+
+				// e.printStackTrace();
 			}
 			return result;
 
