@@ -1,5 +1,6 @@
 package store;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import TeamGameProject.Player;
@@ -14,7 +15,7 @@ public class Store {
 
 	public void store(Player p) {
 
-		System.out.println("1.포션 2.장비 3.판매"); // 
+		System.out.println("1.포션 2.장비 3.판매"); //
 		System.out.println("===========================");
 		System.out.println("현재 골드 :" + p.getGold());
 		int i = sc.nextInt();
@@ -28,25 +29,43 @@ public class Store {
 			System.out.println("3. 큰 포션 -회복량 :150 [60G]");
 			System.out.println("0. 마을로 돌아가기");
 
-			select = sc.nextInt();
-			sc.nextLine();
+		
+			
 
+			
+			try {
+				select = sc.nextInt();
+
+			}catch (InputMismatchException e) {
+			System.out.println("잘못 누르셨습니다.");
+			return;
+			}
+
+			catch (Exception e) {
+				System.out.println("잘못 누르셨습니다.");
+				return;
+			} finally {
+				sc.nextLine();
+			}
+			
 			if (select == 0) {
 				System.out.println("마을로 돌아갑니다.");
 				return;
 			}
 			
-			
-			
-			
 			System.out.println("구매할 포션의 개수를 입력해주세요");
 			num = sc.nextInt();
 			sc.nextLine();
+			try {
+				p.buyPotion(select, num);
+			} catch (Exception e) {
 
-			p.buyPotion(select, num);
-			
+				System.out.println("잘못 누르셨습니다.");
+				return;
+			}
+
 			break;
-
+			
 		case 2:
 
 			System.out.println("1. A_Hat 공격력 : +10, 체력: +50, 회피율 +0 (100G)");
@@ -74,21 +93,14 @@ public class Store {
 			p.buyEquipment(select);
 			break;
 
-		  case 3 :
-			  
-			  p.inven.showInventory();
-			  p.sellItem();
-			  
-			  
-			  
-			  
-			  break;
-			  
-			  
-			  
-			  
-			  
-			  //		  
+		case 3:
+
+			p.inven.showInventory();
+			p.sellItem();
+
+			break;
+
+		//
 //		  break;
 
 		}

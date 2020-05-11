@@ -236,7 +236,7 @@ public class Player extends Entity {
 	}
 
 	// 포션구매 메서드
-	public void buyPotion(int i, int num) {
+	public void buyPotion(int i, int num) throws Exception{
 
 		// 처음에만 포션틀을 추가
 		if (potion.size() == 0) {
