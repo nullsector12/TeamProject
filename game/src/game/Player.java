@@ -69,7 +69,7 @@ public class Player extends Entity {
 	public DoubleAngry Skill2 = new DoubleAngry("", 0, 0, 0);
 	public TripleAngry Skill3 = new TripleAngry("", 0, 0, 0);
 
-	public int bossCount;
+	public int bossCount;//저장해야됨
 	public int stage2Count;
 	public int stage3Count;
 
@@ -592,7 +592,14 @@ public class Player extends Entity {
 		ObjectInputStream oos = null;
 //		Player load = new Player();
 		String name;
-		int currentLevel, currentHealth,maxHealth, currentStrength, evasion, exp, gold;
+		int currentLevel, currentHealth, maxHealth, currentStrength, evasion, exp, gold;
+		/*		invenMaxHealth = maxHealth + inven.equipHealth;
+		invenCurrentHealth = currentHealth + inven.equipHealth;
+		invenCurrentStrength = currentStrength + inven.equipPower;
+		invenCurrentEvasion = getEvasion() + inven.equipEvasion;*/
+		
+		int invenCurrentHealth,invenMaxHealth,invenCurrentStrength,invenCurrentEvasion;
+		
 		try {
 			f = new FileInputStream("data.ser");
 			oos = new ObjectInputStream(f);
@@ -609,17 +616,24 @@ public class Player extends Entity {
 //			load.setEvasion((Integer) oos.readObject());
 
 			exp = ((Integer) oos.readObject());
-			//============================================================== 추가사항
+			// ============================================================== 추가사항
 			gold = ((Integer) oos.readObject());
-			//============================================================== 수정사항
-			/*				System.out.println("이름 : " + this.name);
-				System.out.println("레벨 : " + this.currentLevel + " UP↑");
-				System.out.println("HP : " + invenCurrentHealth + "/" + invenMaxHealth);
-				System.out.println("공격력 : " + invenCurrentStrength);
-				System.out.println("회피율 : " + invenCurrentEvasion + "%");
-				System.out.println("EXP : " + this.currentExp + "/" + this.levelUpExp);*/
-			//============================================================== 수정사항
+			// ============================================================== 수정사항
+			invenCurrentHealth = ((Integer) oos.readObject());
+			invenMaxHealth = ((Integer) oos.readObject());
+			invenCurrentStrength = ((Integer) oos.readObject());
+			invenCurrentEvasion = ((Integer) oos.readObject());
 			
+			
+			/*
+			 * System.out.println("이름 : " + this.name); System.out.println("레벨 : " +
+			 * this.currentLevel + " UP↑"); System.out.println("HP : " + invenCurrentHealth
+			 * + "/" + invenMaxHealth); System.out.println("공격력 : " + invenCurrentStrength);
+			 * System.out.println("회피율 : " + invenCurrentEvasion + "%");
+			 * System.out.println("EXP : " + this.currentExp + "/" + this.levelUpExp);
+			 */
+			// ============================================================== 수정사항
+
 //			System.out.println("이름: "+load.name);
 //			System.out.println("레벨 : " + load.getCurrentLevel() );
 //			System.out.println("최대 HP : " + load.getCurrentHealth());
@@ -629,12 +643,38 @@ public class Player extends Entity {
 //			System.out.println("경험치확인(불러오기 전)====="+this.expWorth);
 			this.setName(name);// 이름밖에 안불러와짐
 			this.setCurrentLevel(currentLevel);
+
+			/*
+			 * oos.writeObject(this.invenCurrentHealth);
+			 * System.out.println("현재 체력"+this.invenCurrentHealth);
+			 * oos.writeObject(this.getMaxHealth());//최대체력도 저장
+			 * System.out.println("최대 체력:"+this.getMaxHealth());
+			 * oos.writeObject(this.getCurrentStrength());
+			 * System.out.println("저장 공격력:"+this.getCurrentStrength());
+			 * oos.writeObject(this.getEvasion());
+			 * System.out.println("저장 회피율:"+this.getEvasion());
+			 */
+
 			this.setCurrentHealth(currentHealth);
+			System.out.println("현재 체력 확인!:" + currentHealth);
 			this.setMaxHealth(maxHealth);
 			this.setCurrentStrength(currentStrength);
 			this.setEvasion(evasion);
+
 			this.setCurrentExp(exp);
 			this.setGold(gold);
+
+			System.out.println("=======================================인벤토리");
+			this.invenCurrentHealth =invenCurrentHealth; //변수 필요없음
+			this.invenMaxHealth = invenMaxHealth;
+			this.invenCurrentStrength =invenCurrentStrength;
+			this.invenCurrentEvasion =invenCurrentEvasion;
+			
+			/*invenCurrentStrength = currentStrength + inven.equipPower;
+			invenMaxHealth = maxHealth + inven.equipHealth;
+			invenCurrentHealth = currentHealth + inven.equipHealth - dmg;
+			invenCurrentEvasion = getEvasion() + inven.equipEvasion;*/
+
 //			System.out.println("경험치확인(불러온 후)====="+this.expWorth);
 //			System.out.println("불러온 후======");
 //			this.showStatus();
@@ -671,29 +711,40 @@ public class Player extends Entity {
 //			System.out.println("==========확인");
 			f = new FileOutputStream("data.ser");
 			oos = new ObjectOutputStream(f);
-			//============================================================== 수정사항
-			/*				System.out.println("이름 : " + this.name);
-				System.out.println("레벨 : " + this.currentLevel + " UP↑");
-				System.out.println("HP : " + invenCurrentHealth + "/" + invenMaxHealth);
-				System.out.println("공격력 : " + invenCurrentStrength);
-				System.out.println("회피율 : " + invenCurrentEvasion + "%");
-				System.out.println("EXP : " + this.currentExp + "/" + this.levelUpExp);*/
-			//============================================================== 수정사항
+			// ============================================================== 수정사항
+			/*
+			 * System.out.println("이름 : " + this.name); System.out.println("레벨 : " +
+			 * this.currentLevel + " UP↑"); System.out.println("HP : " + invenCurrentHealth
+			 * + "/" + invenMaxHealth); System.out.println("공격력 : " + invenCurrentStrength);
+			 * System.out.println("회피율 : " + invenCurrentEvasion + "%");
+			 * System.out.println("EXP : " + this.currentExp + "/" + this.levelUpExp);
+			 */
+			// ============================================================== 수정사항
 
-			//============================================================== 수정사항
+			// ============================================================== 수정사항
 			oos.writeObject(this.getName());
 //			System.out.println("=====이름:"+this.getName());
 			oos.writeObject(this.getCurrentLevel());
 //			System.out.println("=====레벨:"+this.getCurrentLevel());
-			oos.writeObject(this.invenCurrentHealth);//최대체력도 저장
-			oos.writeObject(this.getMaxHealth());//최대체력도 저장
+//			oos.writeObject(this.invenCurrentHealth);//최대체력도 저장
+
+			oos.writeObject(this.invenCurrentHealth);
+			System.out.println("현재 체력" + this.invenCurrentHealth);
+			oos.writeObject(this.getMaxHealth());// 최대체력도 저장
+			System.out.println("최대 체력:" + this.getMaxHealth());
 			oos.writeObject(this.getCurrentStrength());
+			System.out.println("저장 공격력:" + this.getCurrentStrength());
 			oos.writeObject(this.getEvasion());
+			System.out.println("저장 회피율:" + this.getEvasion());
+
 			oos.writeObject(this.getCurrentExp());
-			//============================================================== 추가사항
-			
-			
 			oos.writeObject(this.getGold());
+			// ============================================================== 추가사항
+			oos.writeObject(this.invenCurrentHealth);
+			oos.writeObject(this.invenMaxHealth);
+			oos.writeObject(this.invenCurrentStrength);
+			oos.writeObject(this.invenCurrentEvasion);
+			
 //			System.out.println("=====exp:"+this.getCurrentExp());
 //			oos.writeObject(Save);
 
