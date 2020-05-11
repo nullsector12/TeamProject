@@ -22,9 +22,7 @@ public class Battle {
 	// 적중 확률 = ((정확도-회피 확률)/정확도) * 100 (%)
 //공격을 정의한다.
 	void playerAttack(Player p, Monster m) {
-		
-		
-		
+
 		dmg = (p.invenCurrentStrength) * 3;
 
 		if (monsterEvasion(m)) {
@@ -43,27 +41,22 @@ public class Battle {
 			System.out.println("플레이어가 몬스터의 공격을 회피했습니다! 데미지가 0이 됩니다.");
 			mdmg = 0;
 		}
-		
 
-		p.invenCurrentHealth = p.invenCurrentHealth -mdmg;
-		
-		if(p.invenCurrentHealth<0)
-			p.invenCurrentHealth=0;
-		
+		p.invenCurrentHealth = p.invenCurrentHealth - mdmg;
+
+		if (p.invenCurrentHealth < 0)
+			p.invenCurrentHealth = 0;
+
 //		p.setCurrentHealth(p.getCurrentHealth() - mdmg);
 //		
 //		System.out.println(p.getCurrentHealth());
-		
+
 		System.out.println(mdmg + " 만큼 가격!   " + p.getName() + " 플레이어님의 체력은:" + p.invenCurrentHealth);
-	
-	
-		
 
 	}
 
 //회피를 정의 한다.	
 	boolean playerEvasion(Player p) {
-
 
 		if ((rand.nextInt(100) + 1) <= p.invenCurrentEvasion) {
 			return pass = true;
@@ -93,11 +86,12 @@ public class Battle {
 			int choice = Integer.parseInt(bt.nextLine());
 
 			switch (choice) {
+			
 			case 1:
 
 				playerAttack(p, m);
 				monsterAttack(p, m);
-				if (p.invenCurrentHealth <= 0) {
+				if (p.invenCurrentHealth == 0) {
 
 					// 패배 시 resul t = 1;
 					result = 1;
@@ -106,7 +100,7 @@ public class Battle {
 				} else if (m.getCurrentHealth() <= 0) {
 
 					// 승리 시 reuslt = 0;
-					
+
 					p.showStatus();
 					break;
 
@@ -122,25 +116,42 @@ public class Battle {
 
 			case 4:
 				System.out.println("사용할 포션을 골라주세요");
-				
+				if (p.potion.size() == 0) {
+					p.potion.add(p.sp);
+					p.potion.add(p.np);
+					p.potion.add(p.bp);
+				}
 				p.showPotion();
-				
-				
-				int select = bt.nextInt();
-				
-				bt.nextLine();
-				
-				
-				
-				if(select == 0) {
+				int select;
+
+				try {
+					select = bt.nextInt();
+					
+
+				} catch (NumberFormatException e) {
+					System.out.println("잘못 누르셨습니다.");
+					continue;
+				} catch (Exception e) {
+					System.out.println("잘못 누르셨습니다.");
+					continue;
+				} finally {
+					bt.nextLine();
+				}
+
+				if (select == 0) {
 					continue;
 				}
-				
-				
-				p.usePotion(select);
-				
+
+				try {
+					p.usePotion(select);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("잘못누르셨습니다.");
+					continue;
+				}
+
 				continue;
-			
 
 			}
 

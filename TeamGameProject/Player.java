@@ -4,6 +4,7 @@ package TeamGameProject;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 
 import items.A_Hat;
@@ -81,7 +82,8 @@ public class Player extends Entity {
 		super.setName(JOptionPane.showInputDialog("캐릭터의 이름을 입력해주세요."));
 
 		while (true) {
-			System.out.println("입력하신 이름이 " + super.getName() + "님이 맞습니까? 맞으면 y 틀리면n");
+			System.out.println("입력하신 이름이 " + super.getName() + "님이 맞습니까? \n> 맞으면 y 틀리면n");
+
 			String check = sc.nextLine();
 
 			if (check.equals("y") || check.equals("Y")) {
@@ -176,16 +178,27 @@ public class Player extends Entity {
 
 		System.out.println("0. 마을로 돌아가기");
 
-		int select = sc.nextInt();
+		int select = 0;
+		try {
+			select = sc.nextInt();
+		} catch (Exception e) {
+			System.out.println("잘못누르셨습니다.");
+			return;
+		} finally {
 
-		sc.nextLine();
+			sc.nextLine();
+
+		}
 
 		if (select == 0) {
 			return;
 		}
-
-		inven.checkType(inven.inven.get((select - 1)).equipmentType); // 장비 타입 비교해서 중복된 타입일 시 장비 반환
-
+		try {
+			inven.checkType(inven.inven.get((select - 1)).equipmentType); // 장비 타입 비교해서 중복된 타입일 시 장비 반환
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("해당칸에 장비가 없습니다.");
+			return;
+		}
 		inven.equip.add(inven.inven.get((select - 1)));
 
 		System.out.println(inven.inven.get((select - 1)).equipmentName + "장착");
@@ -195,6 +208,8 @@ public class Player extends Entity {
 		int dmg = invenMaxHealth - invenCurrentHealth;
 
 		calEquipStat();
+		System.out.println("장비공격력 : " + inven.equipPower + ", " + "장비체력 : " + inven.equipHealth + ", " + "장비회피율 : "
+				+ inven.equipEvasion);
 		invenCurrentStrength = currentStrength + inven.equipPower;
 		invenMaxHealth = maxHealth + inven.equipHealth;
 		invenCurrentHealth = currentHealth + inven.equipHealth - dmg;
@@ -260,19 +275,24 @@ public class Player extends Entity {
 	}
 
 	// 포션 사용 메서드
-	public void usePotion(int i) {
-
+	public void usePotion(int i) throws Exception {
+		if (potion.size() == 0) {
+			potion.add(sp);
+			potion.add(np);
+			potion.add(bp);
+		}
 		switch (i) {
+
 		case 1:
+
+			if (potion.get(0).pNum == 0) {
+				System.out.println("포션이 없으므로 돌아갑니다.");
+				break;
+			}
+
 			potion.set(0, new Potion("Small Potion", 30, (potion.get(0).pNum) - 1, 20));
 
-			// 체력 증가 세터
-//
-//			setCurrentHealth(getCurrentHealth() + 30);
-//
-//			if (getCurrentHealth() > getMaxHealth()) {
-//				setCurrentHealth(getMaxHealth());
-//			}
+			System.out.println("포션을 사용하였습니다.");
 
 			invenCurrentHealth = invenCurrentHealth + 30;
 
@@ -283,14 +303,12 @@ public class Player extends Entity {
 			break;
 
 		case 2:
+			if (potion.get(1).pNum == 0) {
+				System.out.println("포션이 없으므로 돌아갑니다.");
+				break;
+			}
 			potion.set(1, new Potion("Normal Potion", 60, (potion.get(1).pNum) - 1, 30));
-
-			// 체력 증가 세터
-//			setCurrentHealth(getCurrentHealth() + 60);
-//
-//			if (getCurrentHealth() > getMaxHealth()) {
-//				setCurrentHealth(getMaxHealth());
-//			}
+			System.out.println("포션을 사용하였습니다.");
 
 			invenCurrentHealth = invenCurrentHealth + 60;
 
@@ -300,15 +318,13 @@ public class Player extends Entity {
 
 			break;
 		case 3:
+			if (potion.get(2).pNum == 0) {
+				System.out.println("포션이 없으므로 돌아갑니다.");
+				break;
+			}
 			potion.set(2, new Potion("Big Potion", 150, (potion.get(2).pNum) - 1, 60));
 
-			// 체력 증가 세터
-
-//			setCurrentHealth(getCurrentHealth() + 150);
-//
-//			if (getCurrentHealth() > getMaxHealth()) {
-//				setCurrentHealth(getMaxHealth());
-//			}
+			System.out.println("포션을 사용하였습니다.");
 
 			invenCurrentHealth = invenCurrentHealth + 150;
 
@@ -322,6 +338,11 @@ public class Player extends Entity {
 	}
 
 	public void showPotion() {
+		if (potion.size() == 0) {
+			potion.add(sp);
+			potion.add(np);
+			potion.add(bp);
+		}
 		System.out.println("==========보유 포션==========");
 		System.out.println(potion.toString());
 
@@ -479,14 +500,25 @@ public class Player extends Entity {
 
 		System.out.println("0. 마을로 돌아가기");
 
-		int select = sc.nextInt();
-
-		sc.nextLine();
-
+		int select = 0;
+		try {
+			select = sc.nextInt();
+		} catch (Exception e) {
+			System.out.println("잘못 누르셨습니다.");
+			return;
+		} finally {
+			sc.nextLine();
+		}
 		if (select == 0) {
 			return;
 		}
-		setGold(getGold() + inven.inven.get(select - 1).gold);
+		try {
+			setGold(getGold() + inven.inven.get(select - 1).gold);
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("해당칸에 장비가 없습니다.");
+			return;
+		}
+
 		inven.inven.remove(select - 1);
 
 		System.out.println("판매 되었습니다.");
@@ -498,14 +530,11 @@ public class Player extends Entity {
 
 		for (int i = 0; i < inven.equip.size(); i++) {
 
-			inven.equipPower = inven.equip.get(i).attackPower;
-			inven.equipHealth = inven.equip.get(i).health;
-			inven.equipEvasion = inven.equip.get(i).evasion;
+			inven.equipPower = inven.equipPower + inven.equip.get(i).attackPower;
+			inven.equipHealth = inven.equipHealth + inven.equip.get(i).health;
+			inven.equipEvasion = inven.equipEvasion + inven.equip.get(i).evasion;
 
 		}
-
-		System.out.println("장비공격력 : " + inven.equipPower + ", " + "장비체력 : " + inven.equipHealth + ", " + "장비회피율 : "
-				+ inven.equipEvasion);
 
 	}
 
