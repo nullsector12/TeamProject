@@ -11,11 +11,11 @@ public class Events {
 	Scanner input = new Scanner(System.in);
 	boolean result = false;
 
-	void rewordsOfVictory(Player p, Monster m) {
+	void rewordsOfVictory(Player p, Monster m) throws InterruptedException {
 
 		// 0 = 패배 시, 1 = 승리 시
 		// 승리 시
-		System.out.println();
+		System.out.println("\n");
 		System.out.println("	┌+++++++++++++++++++++++++++++++++++++++++++++++┐");
 		System.out.println("	        > 축하합니다." + m.getName() + "을(를) 물리쳤습니다!	  ");
 
@@ -29,7 +29,6 @@ public class Events {
 					"		> " + (m.getGoldWorth() / 2) + " 골드와  경험치" + (m.getExpWorth() / 2) + " 을(를) 획득했습니다.");
 			System.out.println("	└+++++++++++++++++++++++++++++++++++++++++++++++┘");
 			p.checkLevelUp();
-			p.showStatus();
 
 		} else if (p.getCurrentLevel() > (m.getWeakness() + 4)) {
 			System.out.println("		[주의] 현재 레벨에 비해 몬스터가 너무 약합니다!");
@@ -41,7 +40,6 @@ public class Events {
 					"		> " + (m.getGoldWorth() / 3) + " 골드와 경험치" + (m.getExpWorth() / 3) + " 을(를) 획득했습니다.");
 			System.out.println("	└+++++++++++++++++++++++++++++++++++++++++++++++┘");
 			p.checkLevelUp();
-			p.showStatus();
 
 		} else if (p.getCurrentLevel() > (m.getWeakness() + 5)) {
 			System.out.println("		[주의] 약한 몬스터 좀 그만 괴롭혀");
@@ -52,7 +50,6 @@ public class Events {
 			System.out.println("		> 경험치와 골드를 얻지 못했습니다.");
 			System.out.println("	└+++++++++++++++++++++++++++++++++++++++++++++++┘");
 			p.checkLevelUp();
-			p.showStatus();
 
 		} else {
 			p.setGold(p.getGold() + m.getGoldWorth());
@@ -60,15 +57,14 @@ public class Events {
 			System.out.println("		> " + m.getGoldWorth() + " 골드와 경험치" + m.getExpWorth() + " 을(를) 획득했습니다.");
 			System.out.println("	└+++++++++++++++++++++++++++++++++++++++++++++++┘");
 			p.checkLevelUp();
-			p.showStatus();
 
 		}
 
 	}
 
 	// 패배 시
-	void penaltyOfDeath(Player p) {
-		
+	void penaltyOfDeath(Player p) throws InterruptedException {
+		Thread.sleep(1000);
 		System.out.println("	┼===============================================┼");
 		System.out.println("	    쓰러져있던 플레이어를 마을로 긴급 이송합니다. : 이송 비용 발생");
 		System.out.println();
@@ -79,7 +75,7 @@ public class Events {
 		p.invenCurrentHealth = p.invenCurrentHealth + (int) (p.invenMaxHealth * 0.5);
 		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("	>이송 비용으로 " + (p.getCurrentLevel() * 100) + " Gold가 청구됩니다.	┃");
-		System.out.println("	>남은 골드 : " + p.getGold()+"			┃"); 
+		System.out.println("	>남은 골드 : " + p.getGold() + "			┃");
 		System.out.println("	>최대 체력의 절반이 회복되었습니다.	┃");
 		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 
@@ -91,7 +87,7 @@ public class Events {
 	}
 
 	// 계속 진행하시겠습니까?
-	public boolean takeDie(Player p) {
+	public boolean takeDie(Player p) throws InterruptedException {
 
 		if (p.invenCurrentHealth <= 0) {
 			// 새로운 쓰레드

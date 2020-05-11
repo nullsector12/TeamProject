@@ -24,28 +24,37 @@ public class Battle {
 	int playerDefense;
 
 	// 스킬 정의
-	void playerUseSkills(Player p, Monster m, Skill s) {
+	void playerUseSkills(Player p, Monster m, Skill s) throws InterruptedException {
 
 		damage = (p.invenCurrentStrength) * 3 * s.multiple;
 
 		if (monsterEvasion(m)) {
-			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
+			Thread.sleep(500);
+			System.out.println("	몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
 			damage = 0;
 		}
 		m.setCurrentHealth(m.getCurrentHealth() - damage);
-		System.out.println(damage + " 만큼 가격! 몬스터의 체력은:" + (m.getCurrentHealth()));
+		Thread.sleep(500);
+		System.out.println("	플레이어의 " + s.skillName + " 사용 >>");
+		System.out.println("	┌──────────────────────────────────────────────┐");
+		System.out.println("	>" + p.getName() + " 님이	\n" + "	>" + m.getName() + " 에게 " + damage
+				+ "의 데미지를 줬습니다! 몬스터의 체력은:" + (m.getCurrentHealth()));
+		System.out.println("	└──────────────────────────────────────────────┘");
 	}
 
 	// 공격을 정의한다.
-	void playerAttack(Player p, Monster m) {
+	void playerAttack(Player p, Monster m) throws InterruptedException {
 
 		damage = (p.invenCurrentStrength) * 3;
+		System.out.println("	플레이어의 턴 >>");
 
 		if (monsterEvasion(m)) {
+			Thread.sleep(500);
 			System.out.println("	" + m.getName() + " 이(가) 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
 			damage = 0;
 		}
 		m.setCurrentHealth(m.getCurrentHealth() - damage);
+		Thread.sleep(500);
 		System.out.println("	┌──────────────────────────────────────────────┐");
 		System.out.println("	>" + p.getName() + " 님이	\n" + "	>" + m.getName() + " 에게 " + damage
 				+ "의 데미지를 줬습니다! 몬스터의 체력은:" + (m.getCurrentHealth()));
@@ -59,22 +68,27 @@ public class Battle {
 	// mdmg - 몬스터가 때리는 데미지
 	// pdf - 방어값
 	// depenseDmg - 몬스터가 날때리는거에서 방어값을 빼서 내가 실제로 맞는값
-	void playerDefense(Player p, Monster m) {
+	void playerDefense(Player p, Monster m) throws InterruptedException {
 
+		System.out.println("	플레이어의 턴 >>");
 		monsterDamage = m.getCurrentStrength();
 		playerDefense = (int) ((Math.random() * m.getCurrentStrength()) + p.getCurrentLevel());
 		depenseDmg = monsterDamage - playerDefense;
 		p.invenCurrentHealth = p.invenCurrentHealth - depenseDmg;
-
-		System.out.println("	"+depenseDmg + " 방어" + p.getName() + " 플레이어님의 체력은:" + p.invenCurrentHealth);
+		Thread.sleep(500);
+		System.out.println(
+				"	몬스터의 공격을 " + playerDefense + " 만큼 방어합니다." + p.getName() + " 플레이어 체력 : " + p.invenCurrentHealth);
 	}
 
 	// 몬스터의 공격
-	void monsterAttack(Player p, Monster m) {
+	void monsterAttack(Player p, Monster m) throws InterruptedException {
 
 		monsterDamage = m.getCurrentStrength();
+		System.out.println("\n");
+		System.out.println("	몬스터의 턴 >>");
 
 		if (playerEvasion(p)) {
+			Thread.sleep(500);
 			System.out.println("	플레이어가" + m.getName() + "	의 공격을 회피했습니다! 데미지가 0이 됩니다.");
 			monsterDamage = 0;
 		}
@@ -87,7 +101,7 @@ public class Battle {
 //		p.setCurrentHealth(p.getCurrentHealth() - mdmg);
 //		
 //		System.out.println(p.getCurrentHealth());
-		System.out.println();
+		Thread.sleep(500);
 		System.out.println("	┌──────────────────────────────────────────────┐");
 		System.out.println("	>" + m.getName() + " 에게	\n" + "	>" + monsterDamage + "의 데미지를 받았습니다! 플레이어의 현재 체력 :"
 				+ (p.invenCurrentHealth));
@@ -114,23 +128,29 @@ public class Battle {
 	}
 
 //사용자의 입력에 따른 공격
-	int choicePlayerMovement(Monster m, Player p) {
+	int choicePlayerMovement(Monster m, Player p) throws InterruptedException {
 		int result = 0;
 		this.battleResult = result;
 
 		while (true) {
+			Thread.sleep(500);
+			System.out.println("");
 			System.out.println("	┌───────────────────────┐");
-			System.out.println("	|    행동을 선택해 주세요.	|");
+			System.out.println("	│    행동을 선택해 주세요.	│");
 			System.out.println("	└───────────────────────┘");
 			System.out.println();
-			System.out.println("	>1.공격		>3.방어	\n	>2.스킬 사용	>4.포션 사용	\n	>5. 도망가기(마을로)");
+			System.out.println("	>1.공격		>5.플레이어 정보 출력	\n	>2.스킬 사용	>6.적 정보	\n	>3.방어하기	>7.마을로 귀환	\n	>4.포션 사용");
 			int choice = Integer.parseInt(bt.nextLine());
 
 			switch (choice) {
 			case 1:
 
 				playerAttack(p, m);
-				monsterAttack(p, m);
+				Thread.sleep(500);
+				// 만약 플레이어의 공격으로 몬스터가 죽었다면 몬스터는 공격하지 못하고 죽음
+				if (!(m.getCurrentHealth() <= 0)) {
+					monsterAttack(p, m);
+				}
 				if (p.invenCurrentHealth <= 0) {
 
 					// 패배 시 result = 1;
@@ -166,7 +186,10 @@ public class Battle {
 				Skill s = p.skillInven.useSkill(p, skillSelect);
 
 				playerUseSkills(p, m, s);
-				monsterAttack(p, m);
+				// 만약 플레이어의 스킬로 몬스터가 죽었다면 몬스터는 공격하지 못하고 죽음
+				if (!(m.getCurrentHealth() <= 0)) {
+					monsterAttack(p, m);
+				}
 
 				if (p.invenCurrentHealth <= 0) {
 
@@ -177,8 +200,6 @@ public class Battle {
 				} else if (m.getCurrentHealth() <= 0) {
 
 					// 승리 시 reuslt = 0;
-
-					p.showStatus();
 					break;
 
 				} else {
@@ -193,10 +214,9 @@ public class Battle {
 					// 방어 했는데도 패배 시 result = 1;
 					result = 1;
 					break;
-				}else {
+				} else {
 					continue;
 				}
-				
 
 			case 4:
 				System.out.println("	┌───────────────────────┐");
@@ -216,7 +236,16 @@ public class Battle {
 				p.usePotion(potionSelect);
 
 				continue;
-			case 5: // 도망
+
+			case 5: // 플레이어 정보 확인
+				p.showStatus();
+				continue;
+				
+			case 6: // 몬스터 상태 확인
+				m.showMonsterDetail();
+				continue;
+				
+			case 7: // 도망
 				result = 2;
 				break;
 			}

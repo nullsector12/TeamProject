@@ -36,7 +36,7 @@ public class Rat extends Monster {// should be resistant to physical attacks!
 
 	}
 
-	public void showData() {
+	public void showData() throws InterruptedException {
 		super.showData();
 	}
 }
