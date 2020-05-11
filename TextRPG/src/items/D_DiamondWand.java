@@ -5,7 +5,7 @@ public class D_DiamondWand extends Item {
 	public D_DiamondWand(String equipmentName, int equipmentType, int attackPower, int health, int evasion, int gold) {
 		super(equipmentName, equipmentType, attackPower, health, evasion, gold);
 
-		this.equipmentName = "D_DiamondWand";
+		this.equipmentName = "지휘관의 검";
 
 		this.equipmentType = 4;
 
@@ -21,8 +21,7 @@ public class D_DiamondWand extends Item {
 
 	@Override
 	public String toString() {
-		return "D_DiamondWand [equipmentName=" + equipmentName + ", equipmentType=" + equipmentType + ", attackPower="
-				+ attackPower + ", health=" + health + ", evasion=" + evasion + ", gold=" + gold + "]";
+		return "	지휘관의 검 [추가 공격력 + "+ attackPower + "/ 추가 체력 + " + health + "/ 추가 회피율 + " + evasion + "/ 가격 : " + gold + "]";
 	}
 
 }

@@ -5,7 +5,7 @@ public class A_Hat extends Item {
 	public A_Hat(String equipmentName, int equipmentType, int attackPower, int health, int evasion, int gold) {
 		super(equipmentName, equipmentType, attackPower, health, evasion, gold);
 
-		this.equipmentName = "A_Hat";
+		this.equipmentName = "철 투구";
 
 		this.equipmentType = 1;
 
@@ -21,8 +21,7 @@ public class A_Hat extends Item {
 
 	@Override
 	public String toString() {
-		return "A_Hat [equipmentName=" + equipmentName + ", equipmentType=" + equipmentType + ", attackPower="
-				+ attackPower + ", health=" + health + ", evasion=" + evasion + ", gold=" + gold + "]";
+		return "	철 투구 [추가 공격력 + "+ attackPower + "/ 추가 체력 + " + health + "/ 추가 회피율 + " + evasion + "/ 가격 : " + gold + "]";
 	}
 
 }

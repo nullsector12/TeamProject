@@ -98,11 +98,15 @@ public class Player extends Entity {
 		super.setName(JOptionPane.showInputDialog("	캐릭터의 이름을 입력해주세요."));
 
 		while (true) {
-			System.out.println("	입력하신 이름이 " + super.getName() + "님이 맞습니까? 맞으면 y 틀리면n");
+			System.out.println("	┌=====================================┐");
+			System.out.println("		입력하신 이름이 " + super.getName() + "님이 맞습니까?");
+			System.out.println("	            맞으면 y / 틀리면 n을 입력 해주세요.");
+			System.out.println("	└=====================================┘");
 			String check = sc.nextLine();
 
 			if (check.equals("y") || check.equals("Y")) {
-				System.out.println("	캐릭터가 생성되었습니다!");
+				System.out.println("		      캐릭터가 생성되었습니다!");
+				System.out.println("	              〔	GAME START	〕");
 				break;
 
 			} else if (check.equals("n") || check.equals("N")) {
@@ -148,7 +152,7 @@ public class Player extends Entity {
 	}
 
 	// 경험치 값을 확인해 레벨업 및 스테이터스 업데이트를 하는 메서드
-	void checkLevelUp() {
+	void checkLevelUp() throws InterruptedException {
 		calEquipStat();
 		while (true) {
 			if (getCurrentExp() >= levelUpExp) {
@@ -166,6 +170,8 @@ public class Player extends Entity {
 				invenMaxHealth = maxHealth + inven.equipHealth;
 				invenCurrentHealth = currentHealth + inven.equipHealth;
 				invenCurrentEvasion = getEvasion() + inven.equipEvasion;
+				Thread.sleep(1000);
+				System.out.println("\n\n\n");
 				System.out.println("	┏━━━━━Congraturations!!!!━━━━━┓");
 				System.out.println("	┃	 레벨업 하였습니다!	      ┃");
 				System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
@@ -175,7 +181,7 @@ public class Player extends Entity {
 				System.out.println("		> 회피율 : " + invenCurrentEvasion + "%	<");
 				System.out.println("		> EXP : " + this.currentExp + "/" + this.levelUpExp + "	<");
 				System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-
+				System.out.println("\n\n\n");
 				if (getCurrentExp() < levelUpExp) {
 					break;
 				}
@@ -183,6 +189,7 @@ public class Player extends Entity {
 				break;
 			}
 		}
+
 	}
 
 	public void equipItem() {
@@ -205,7 +212,7 @@ public class Player extends Entity {
 
 		inven.equip.add(inven.inven.get((select - 1)));
 
-		System.out.println(inven.inven.get((select - 1)).equipmentName + "장착");
+		System.out.println("	"+inven.inven.get((select - 1)).equipmentName + "장착");
 
 		inven.inven.remove((select - 1));
 
@@ -227,16 +234,18 @@ public class Player extends Entity {
 	void showStatus() {
 
 		calEquipStat();
+		System.out.println("\n\n");
 		System.out.println("	┏━━━━━━━━Player Status━━━━━━━━┓");
 		System.out.println("	┃	 	      	      ┃");
-		System.out.println("	>	플레이어 이름 : " + getName() + "	<");
+		System.out.println("	>	플레이어 이름 : " + getName() + "<");
 		System.out.println("	>	레벨 : " + currentLevel + "		<");
 		System.out.println("	>	HP : " + invenCurrentHealth + "/" + invenMaxHealth + "	<");
 		System.out.println("	>	공격력 : " + invenCurrentStrength + "	<");
 		System.out.println("	>	회피율 : " + invenCurrentEvasion + "%	<");
 		System.out.println("	>	EXP : " + currentExp + "/" + levelUpExp + "	<");
-		System.out.println("	>	소지금 : " + gold + " Gold<");
+		System.out.println("	>	소지금 : " + gold + " Gold	<");
 		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\n\n");
 	}
 
 	// 포션구매 메서드
@@ -251,46 +260,46 @@ public class Player extends Entity {
 
 		switch (i) {
 		case 1:
-			if (potion.get(0).price * num > gold) {
-				System.out.println("골드가 부족하여 구매할수없습니다.");
+			if (potion.get(0).price * num > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			potion.set(0, new Potion("소형 체력 물약", 30, (potion.get(0).pNum) + num, 20));
+			potion.set(0, new Potion("	소형 체력 포션", 30, (potion.get(0).pNum) + num, 20));
 
-			gold = gold - 20 * num;
+			setGold(getGold() - (20 * num));
 			System.out.println(potion.get(i - 1).pName + ", " + potion.get(i - 1).pNum);
 
 			System.out.println(potion.toString());
-			System.out.println("포션을 구매하였습니다.");
+			System.out.println("	포션을 구매하였습니다.");
 
 			break;
 
 		case 2:
-			if (potion.get(1).price * num > gold) {
-				System.out.println("골드가 부족하여 구매할수없습니다.");
+			if (potion.get(1).price * num > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			potion.set(1, new Potion("중형 체력 물약", 60, (potion.get(1).pNum) + num, 30));
+			potion.set(1, new Potion("	중형 체력 포션", 60, (potion.get(1).pNum) + num, 30));
 
-			gold = gold - 30 * num;
+			setGold(getGold() - (30 * num));
 			System.out.println(potion.get(i - 1).pName + ", " + potion.get(i - 1).pNum);
 
 			System.out.println(potion.toString());
-			System.out.println("포션을 구매하였습니다.");
+			System.out.println("	포션을 구매하였습니다.");
 
 			break;
 		case 3:
-			if (potion.get(2).price * num > gold) {
-				System.out.println("골드가 부족하여 구매할수없습니다.");
+			if (potion.get(2).price * num > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			potion.set(2, new Potion("대형 체력 물약", 150, (potion.get(2).pNum) + num, 60));
+			potion.set(2, new Potion("	대형 체력 포션", 150, (potion.get(2).pNum) + num, 60));
 
-			gold = gold - 60 * num;
+			setGold(getGold() - (60 * num));
 			System.out.println(potion.get(i - 1).pName + ", " + potion.get(i - 1).pNum);
 
 			System.out.println(potion.toString());
-			System.out.println("포션을 구매하였습니다.");
+			System.out.println("	포션을 구매하였습니다.");
 
 			break;
 
@@ -303,7 +312,7 @@ public class Player extends Entity {
 
 		switch (i) {
 		case 1:
-			potion.set(0, new Potion("소형 체력 물약", 30, (potion.get(0).pNum) - 1, 20));
+			potion.set(0, new Potion("소형 체력 포션", 30, (potion.get(0).pNum) - 1, 20));
 
 			// 체력 증가 세터
 //
@@ -322,7 +331,7 @@ public class Player extends Entity {
 			break;
 
 		case 2:
-			potion.set(1, new Potion("중형 체력 물약", 60, (potion.get(1).pNum) - 1, 30));
+			potion.set(1, new Potion("중형 체력 포션", 60, (potion.get(1).pNum) - 1, 30));
 
 			// 체력 증가 세터
 //			setCurrentHealth(getCurrentHealth() + 60);
@@ -339,7 +348,7 @@ public class Player extends Entity {
 
 			break;
 		case 3:
-			potion.set(2, new Potion("대형 체력 물약", 150, (potion.get(2).pNum) - 1, 60));
+			potion.set(2, new Potion("대형 체력 포션", 150, (potion.get(2).pNum) - 1, 60));
 
 			// 체력 증가 세터
 
@@ -370,140 +379,140 @@ public class Player extends Entity {
 		switch (select) {
 		case 1:
 
-			if (A1.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (A1.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - A1.gold;
+			setGold(getGold() - A1.gold);
 			inven.addEquipment(A1);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 2:
 
-			if (A2.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (A2.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - A2.gold;
+			setGold(getGold() - A2.gold);
 
 			inven.addEquipment(A2);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 3:
-			if (B1.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (B1.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - B1.gold;
+			setGold(getGold() - B1.gold);
 
 			inven.addEquipment(B1);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 4:
-			if (B2.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (B2.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - B2.gold;
+			setGold(getGold() - B2.gold);
 
 			inven.addEquipment(B2);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 5:
-			if (B3.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (B3.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - B3.gold;
+			setGold(getGold() - B3.gold);
 
 			inven.addEquipment(B3);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 6:
-			if (C1.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (C1.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - C1.gold;
+			setGold(getGold() - C1.gold);
 
 			inven.addEquipment(C1);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 7:
-			if (C2.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (C2.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - C2.gold;
+			setGold(getGold() - C2.gold);
 
 			inven.addEquipment(C2);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 8:
 
-			if (C3.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (C3.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 
 				break;
 			}
-			gold = gold - C3.gold;
+			setGold(getGold() - C3.gold);
 
 			inven.addEquipment(C3);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 9:
-			if (D1.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (D1.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - D1.gold;
+			setGold(getGold() - D1.gold);
 
 			inven.addEquipment(D1);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 10:
-			if (D2.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (D2.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - D2.gold;
+			setGold(getGold() - D2.gold);
 
 			inven.addEquipment(D2);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 11:
-			if (D3.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (D3.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - D3.gold;
+			setGold(getGold() - D3.gold);
 
 			inven.addEquipment(D3);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 		default:
-			System.out.println("잘못 선택하셨습니다.");
+			System.out.println("	잘못 선택하셨습니다.");
 			break;
 
 		}
@@ -512,11 +521,11 @@ public class Player extends Entity {
 
 	public void sellItem() {
 
-		System.out.println("=======================================");
-		System.out.println("판매할 장비를 골라주세요.");
-		System.out.println("=======================================");
+		System.out.println("	=======================================");
+		System.out.println("	판매할 장비를 골라주세요.");
+		System.out.println("	=======================================");
 
-		System.out.println("0. 마을로 돌아가기");
+		System.out.println("	0. 마을로 돌아가기");
 
 		int select = sc.nextInt();
 
@@ -528,7 +537,7 @@ public class Player extends Entity {
 		setGold(getGold() + inven.inven.get(select - 1).gold);
 		inven.inven.remove(select - 1);
 
-		System.out.println("판매 되었습니다.");
+		System.out.println("	판매 되었습니다.");
 
 	}
 
@@ -571,6 +580,14 @@ public class Player extends Entity {
 		return this.currentLevel = currentLevel;
 	}
 
+	public int getLevelUpExp() {// levelUpExp
+		return levelUpExp;
+	}
+
+	public int setLevelUpExp(int levelUpExp) {
+		return this.levelUpExp = levelUpExp;
+	}
+
 	public int getBossCount() {
 		return bossCount;
 	}
@@ -594,24 +611,26 @@ public class Player extends Entity {
 	public void setStage3Count(int stage3Count) {
 		this.stage3Count = stage3Count;
 	}
+
 	// 플레이어 상태 저장/불러오기 메서드
 	public void loadPlayer() {// 불러오기
 		FileInputStream f = null;
 		ObjectInputStream oos = null;
 //		Player load = new Player();
 		String name;
-		int currentLevel, currentHealth, maxHealth, currentStrength, evasion, exp, gold;
-		/*		invenMaxHealth = maxHealth + inven.equipHealth;
-		invenCurrentHealth = currentHealth + inven.equipHealth;
-		invenCurrentStrength = currentStrength + inven.equipPower;
-		invenCurrentEvasion = getEvasion() + inven.equipEvasion;*/
-		
-		int invenCurrentHealth,invenMaxHealth,invenCurrentStrength,invenCurrentEvasion;
-		/*public int bossCount;//저장해야됨
-			public int stage2Count;
-			public int stage3Count;*/
-		
-		int bossCount,stage2Count,stage3Count;
+		int currentLevel, currentHealth, maxHealth, currentStrength, evasion, exp, gold, levelUpExp;
+		/*
+		 * invenMaxHealth = maxHealth + inven.equipHealth; invenCurrentHealth =
+		 * currentHealth + inven.equipHealth; invenCurrentStrength = currentStrength +
+		 * inven.equipPower; invenCurrentEvasion = getEvasion() + inven.equipEvasion;
+		 */
+
+		int invenCurrentHealth, invenMaxHealth, invenCurrentStrength, invenCurrentEvasion;
+		/*
+		 * public int bossCount;//저장해야됨 public int stage2Count; public int stage3Count;
+		 */
+
+		int bossCount, stage2Count, stage3Count;
 		try {
 			f = new FileInputStream("data.ser");
 			oos = new ObjectInputStream(f);
@@ -628,6 +647,7 @@ public class Player extends Entity {
 //			load.setEvasion((Integer) oos.readObject());
 
 			exp = ((Integer) oos.readObject());
+			levelUpExp = ((Integer) oos.readObject());// 추가
 			// ============================================================== 추가사항
 			gold = ((Integer) oos.readObject());
 			// ============================================================== 수정사항
@@ -639,8 +659,7 @@ public class Player extends Entity {
 			bossCount = ((Integer) oos.readObject());
 			stage2Count = ((Integer) oos.readObject());
 			stage3Count = ((Integer) oos.readObject());
-			
-			
+
 			/*
 			 * System.out.println("이름 : " + this.name); System.out.println("레벨 : " +
 			 * this.currentLevel + " UP↑"); System.out.println("HP : " + invenCurrentHealth
@@ -681,19 +700,21 @@ public class Player extends Entity {
 			this.setGold(gold);
 
 //			System.out.println("=======================================인벤토리");
-			this.invenCurrentHealth =invenCurrentHealth; //변수 필요없음
+			this.invenCurrentHealth = invenCurrentHealth; // 변수 필요없음
 			this.invenMaxHealth = invenMaxHealth;
-			this.invenCurrentStrength =invenCurrentStrength;
-			this.invenCurrentEvasion =invenCurrentEvasion;
+			this.invenCurrentStrength = invenCurrentStrength;
+			this.invenCurrentEvasion = invenCurrentEvasion;
 //			System.out.println("=======================================카운트");
-			this.bossCount=bossCount;
-			this.stage2Count=stage2Count;
-			this.stage3Count=stage3Count;
-			
-			/*invenCurrentStrength = currentStrength + inven.equipPower;
-			invenMaxHealth = maxHealth + inven.equipHealth;
-			invenCurrentHealth = currentHealth + inven.equipHealth - dmg;
-			invenCurrentEvasion = getEvasion() + inven.equipEvasion;*/
+			this.bossCount = bossCount;
+			this.stage2Count = stage2Count;
+			this.stage3Count = stage3Count;
+
+			/*
+			 * invenCurrentStrength = currentStrength + inven.equipPower; invenMaxHealth =
+			 * maxHealth + inven.equipHealth; invenCurrentHealth = currentHealth +
+			 * inven.equipHealth - dmg; invenCurrentEvasion = getEvasion() +
+			 * inven.equipEvasion;
+			 */
 
 //			System.out.println("경험치확인(불러온 후)====="+this.expWorth);
 //			System.out.println("불러온 후======");
@@ -702,7 +723,7 @@ public class Player extends Entity {
 			// 불러오기 전의 정보를 불러온 정보로 교체
 
 			oos.close();
-			System.out.println("플레이어 정보를 불러왔습니다");
+			System.out.println("	플레이어 정보를 불러왔습니다");
 		} catch (Exception e) {
 
 			// TODO Auto-generated catch block
@@ -758,6 +779,7 @@ public class Player extends Entity {
 //			System.out.println("저장 회피율:" + this.getEvasion());
 
 			oos.writeObject(this.getCurrentExp());
+			oos.writeObject(this.getLevelUpExp());
 			oos.writeObject(this.getGold());
 			// ============================================================== 추가사항
 			oos.writeObject(this.invenCurrentHealth);

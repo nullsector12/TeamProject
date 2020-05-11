@@ -14,7 +14,7 @@ public class SkillInven {
 
 		
 		if (s.gold>p.getGold()) {
-			System.out.println("골드가 부족하여 구매할수없습니다.");
+			System.out.println("	골드가 부족하여 구매할수없습니다.");
 			return;
 		}		
 		
@@ -22,7 +22,7 @@ public class SkillInven {
 		for (int i = 0; i < skill.size(); i++) {
 
 			if (s.skillName.equals(skill.get(i).skillName)) {
-				System.out.println("이미 가지고 있는 스킬입니다.");
+				System.out.println("	이미 가지고 있는 스킬입니다.");
 				return;
 			}
 		}
