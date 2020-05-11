@@ -664,7 +664,7 @@ public class Player extends Entity {
 			 */
 
 			this.setCurrentHealth(currentHealth);
-			System.out.println("현재 체력 확인!:" + currentHealth);
+//			System.out.println("현재 체력 확인!:" + currentHealth);
 			this.setMaxHealth(maxHealth);
 			this.setCurrentStrength(currentStrength);
 			this.setEvasion(evasion);
@@ -672,12 +672,12 @@ public class Player extends Entity {
 			this.setCurrentExp(exp);
 			this.setGold(gold);
 
-			System.out.println("=======================================인벤토리");
+//			System.out.println("=======================================인벤토리");
 			this.invenCurrentHealth =invenCurrentHealth; //변수 필요없음
 			this.invenMaxHealth = invenMaxHealth;
 			this.invenCurrentStrength =invenCurrentStrength;
 			this.invenCurrentEvasion =invenCurrentEvasion;
-			System.out.println("=======================================카운트");
+//			System.out.println("=======================================카운트");
 			this.bossCount=bossCount;
 			this.stage2Count=stage2Count;
 			this.stage3Count=stage3Count;
@@ -741,13 +741,13 @@ public class Player extends Entity {
 //			oos.writeObject(this.invenCurrentHealth);//최대체력도 저장
 
 			oos.writeObject(this.invenCurrentHealth);
-			System.out.println("현재 체력" + this.invenCurrentHealth);
+//			System.out.println("현재 체력" + this.invenCurrentHealth);
 			oos.writeObject(this.getMaxHealth());// 최대체력도 저장
-			System.out.println("최대 체력:" + this.getMaxHealth());
+//			System.out.println("최대 체력:" + this.getMaxHealth());
 			oos.writeObject(this.getCurrentStrength());
-			System.out.println("저장 공격력:" + this.getCurrentStrength());
+//			System.out.println("저장 공격력:" + this.getCurrentStrength());
 			oos.writeObject(this.getEvasion());
-			System.out.println("저장 회피율:" + this.getEvasion());
+//			System.out.println("저장 회피율:" + this.getEvasion());
 
 			oos.writeObject(this.getCurrentExp());
 			oos.writeObject(this.getGold());

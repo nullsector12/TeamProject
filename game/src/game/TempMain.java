@@ -32,7 +32,7 @@ public class TempMain {
 		System.out.println("---------------------------");
 		System.out.println("게임을 시작합니다.");//게임 이어서할건지
 		//1새로 시작 2이어하기
-		
+			
 		System.out.println("---------------------------");
 		System.out.println("1.새로시작	2.이어하기");
 		choice=sc.nextInt();
