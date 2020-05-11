@@ -199,9 +199,9 @@ public class Monster extends Entity {// 이름 랜덤하게 나오도록
 		System.out.println("	몬스터 이름: " + this.getName());
 		System.out.println("	공격력 : " + this.getCurrentStrength());
 		System.out.println("	체력: " + this.getCurrentHealth());
-		System.out.println("	획득 가능 경험치: " + this.getExpWorth());
-		System.out.println("	획득 가능 골드: " + this.getGoldWorth());
-		System.out.println("	회피율: " + this.getEvasion() + "%");
+//		System.out.println("	획득 가능 경험치: " + this.getExpWorth());
+//		System.out.println("	획득 가능 골드: " + this.getGoldWorth());
+//		System.out.println("	회피율: " + this.getEvasion() + "%");
 //		System.out.println("방어력: " + this.getDefense());
 //		System.out.println("	강함 : " + this.getWeakness());
 
