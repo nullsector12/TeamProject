@@ -84,18 +84,18 @@ public class Dungeon implements Serializable{
 				try {
 //					Player Save=p;
 					this.p.showStatus();
-					System.out.println("==========확인");
+//					System.out.println("==========확인");
 					f=new FileOutputStream("data.ser");
 					oos = new ObjectOutputStream(f);
 					oos.writeObject(p.getName());
-					System.out.println("=====이름:"+p.getName());
+//					System.out.println("=====이름:"+p.getName());
 					oos.writeObject(p.getCurrentLevel());
-					System.out.println("=====레벨:"+p.getCurrentLevel());
+//					System.out.println("=====레벨:"+p.getCurrentLevel());
 					oos.writeObject(p.getCurrentHealth());
 					oos.writeObject(p.getCurrentStrength());
 					oos.writeObject(p.getEvasion());
 					oos.writeObject(p.getCurrentExp());
-					System.out.println("=====exp:"+p.getCurrentExp());
+//					System.out.println("=====exp:"+p.getCurrentExp());
 //					oos.writeObject(Save);
 					
 					
