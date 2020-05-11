@@ -18,7 +18,7 @@ public class Dungeon {
 	Events e;
 
 	boolean result;
-	
+
 	boolean runCount;
 
 	public Dungeon() {
@@ -28,7 +28,7 @@ public class Dungeon {
 		p = new Player();
 		m = new Monster();
 		sc = new Scanner(System.in);
-		runCount = false;
+		// runCount = false;
 
 	}
 
@@ -40,17 +40,19 @@ public class Dungeon {
 		switch (num) {
 		case DungeonIf.EASY:
 			result = stageEasy(p);
-			
-
+			// if (runCount) {
 			break;
+		// }
 		case DungeonIf.NOMAL:
 			result = stageNomal(p);
-
+			// if (runCount) {
 			break;
+		// }
 		case DungeonIf.HARD:
 			result = stageHard(p);
-
+			// if (runCount) {
 			break;
+		// }
 		case 4:
 			result = true;
 			break;
@@ -59,9 +61,7 @@ public class Dungeon {
 		return result;
 	}
 
-	boolean bossStage(Player p, int num) {
-
-		boolean win = false;
+	void bossStage(Player p, int num) {
 
 		if (playBoss()) {
 			switch (num) {
@@ -88,7 +88,7 @@ public class Dungeon {
 					System.out.println("	-----------------------------------------");
 					p.setStage2Count(1);
 					e.rewordsOfVictory(p, m);
-					win = true;
+
 					break;
 				case 2:
 					System.out.println("	-----------------------------------------");
@@ -98,7 +98,7 @@ public class Dungeon {
 					System.out.println("	-----------------------------------------");
 					p.setStage3Count(1);
 					e.rewordsOfVictory(p, m);
-					win = true;
+
 					break;
 				case 3:
 					System.out.println("	------------------------");
@@ -106,23 +106,21 @@ public class Dungeon {
 					System.out.println("	마지막 보스를 클리어 하셨습니다!");
 					System.out.println("	------------------------");
 					e.rewordsOfVictory(p, m);
-					win = true;
+
 					break;
 				}
 			} else if (result == 1) {
-				win = e.takeDie(p);
+				e.takeDie(p);
 			} else if (result == 2) {
 
-				win = true;
 			} else {
 				System.out.println("	------------------------");
 				System.out.println("	|	패배하셨습니다.	|");
 				System.out.println("	------------------------");
-				win = false;
+
 			}
 		}
 
-		return win;
 	}
 
 	// 초급스테이지
@@ -182,7 +180,7 @@ public class Dungeon {
 	boolean stage1(Player p, int num) {
 
 		result = false;
-
+		// runCount = false;
 		switch (num) {
 		case 1:
 
@@ -224,6 +222,7 @@ public class Dungeon {
 			System.out.println("	========================= ");
 			System.out.println("	|	마을로 돌아갑니다.	|");
 			System.out.println("	=========================");
+			// runCount = true;
 			result = true;
 		}
 		return result;
@@ -231,7 +230,7 @@ public class Dungeon {
 
 	boolean stage2(Player p, int num) {
 		result = false;
-
+		// runCount = false;
 		switch (num) {
 		case 1:
 
@@ -269,6 +268,7 @@ public class Dungeon {
 			System.out.println("	========================= ");
 			System.out.println("	|	마을로 돌아갑니다.	|");
 			System.out.println("	=========================");
+			// runCount = true;
 			result = true;
 		}
 		return result;
@@ -276,6 +276,7 @@ public class Dungeon {
 
 	boolean stage3(Player p, int num) {
 		result = false;
+		// runCount = false;
 		switch (num) {
 		case 1:
 
@@ -313,6 +314,7 @@ public class Dungeon {
 			System.out.println("	========================= ");
 			System.out.println("	|	마을로 돌아갑니다.	|");
 			System.out.println("	=========================");
+			// runCount = true;
 			result = true;
 		}
 		return result;
