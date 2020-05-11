@@ -14,12 +14,11 @@ public class Store {
 
 	public void store(Player p) {
 
-		System.out.println("1.포션 2.장비 3.판매"); // 
+		System.out.println("1.포션 2.장비 3.판매"); //
 		System.out.println("===========================");
 		System.out.println("현재 골드 :" + p.getGold());
 		int i = sc.nextInt();
 		sc.nextLine();
-
 		switch (i) {
 
 		case 1:
@@ -35,14 +34,13 @@ public class Store {
 				System.out.println("마을로 돌아갑니다.");
 				return;
 			}
-			
-			
+
 			System.out.println("구매할 포션의 개수를 입력해주세요");
 			num = sc.nextInt();
 			sc.nextLine();
 
 			p.buyPotion(select, num);
-			
+
 			break;
 
 		case 2:
@@ -72,21 +70,14 @@ public class Store {
 			p.buyEquipment(select);
 			break;
 
-		  case 3 :
-			  
-			  p.inven.showInventory();
-			  p.sellItem();
-			  
-			  
-			  
-			  
-			  break;
-			  
-			  
-			  
-			  
-			  
-			  //		  
+		case 3:
+
+			p.inven.showInventory();
+			p.sellItem();
+
+			break;
+
+		//
 //		  break;
 
 		}

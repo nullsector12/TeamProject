@@ -8,7 +8,7 @@ public class TempMain {
 	public static void main(String[] args) throws InterruptedException {
 
 		Town t = new Town();
-		
+
 		System.out.println("		    ADVENTURE OF JAVA");
 		System.out.println("		-------------------------");
 		System.out.println("		|	GAME START	|");

@@ -18,7 +18,7 @@ public class Pig extends Monster {//should be resistant to physical attacks!
         setGoldWorth(getExpWorth());
         setWeakness(14); //See Monster class for list of types
         
-        setEvasion(5);//이건 그냥 랜덤 확률
+        setEvasion(2);//이건 그냥 랜덤 확률
         initCurrentStats();
 
     }
