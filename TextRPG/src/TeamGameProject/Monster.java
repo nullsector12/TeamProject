@@ -119,7 +119,6 @@ public class Monster extends Entity {// 이름 랜덤하게 나오도록
 	}
 
 	public void setWeakness(int i) {// 몬스터 회피
-		i *= rand.nextInt(10) + 1;
 		weakness = i;
 	}
 

@@ -69,21 +69,63 @@ public class Events {
 		System.out.println("	    쓰러져있던 플레이어를 마을로 긴급 이송합니다. : 이송 비용 발생");
 		System.out.println();
 
-		// 패널티를 지불할 충분한 골드가 있을 시
-//		if ((p.getGold() - (p.getCurrentLevel() * 100)) > 0) {
-		p.setGold(p.getGold() - (p.getCurrentLevel() * 100));
-		p.invenCurrentHealth = p.invenCurrentHealth + (int) (p.invenMaxHealth * 0.5);
-		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("	>이송 비용으로 " + (p.getCurrentLevel() * 100) + " Gold가 청구됩니다.	┃");
-		System.out.println("	>남은 골드 : " + p.getGold() + "			┃");
-		System.out.println("	>최대 체력의 절반이 회복되었습니다.	┃");
-		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+//		 패널티를 지불할 충분한 골드가 있을 시
+		if ((p.getGold() - (p.getCurrentLevel() * 100)) > 0) {
+			p.setGold(p.getGold() - (p.getCurrentLevel() * 100));
+			p.setCurrentExp(p.getCurrentExp() - (p.getCurrentLevel() * 50));
+			if ((p.getCurrentExp()-(p.getCurrentLevel()*50)<=0)) {
+				p.setCurrentExp(0);
+			}
+			p.invenCurrentHealth = p.invenCurrentHealth + (int) (p.invenMaxHealth * 0.5);
+			System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("	>이송 비용으로 " + (p.getCurrentLevel() * 100) + " Gold가 청구됩니다.	┃");
+			System.out.println("	>남은 골드 : " + p.getGold() + "			┃");
+			System.out.println("	>최대 체력의 절반이 회복되었습니다.	┃");
+			System.out.println("	>패배로 인해 경험치가 " + (p.getCurrentLevel() * 50) + " 만큼 줄어듭니다.	┃");
+			System.out.println("	>남은 골드 : " + p.getGold() + "			┃");
+			System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 
-		// 패널티를 지불할 충분한 골드가 없을 시
-//		} else if ((p.getGold() - (p.getCurrentLevel() * 100)) < 0) {
-//			System.out.println("이송 비용을 지불할 소지금이 부족합니다.");
-//		}
-//
+			// 패널티를 지불할 충분한 골드가 없을 시
+		} else if ((p.getGold() - (p.getCurrentLevel() * 100)) < 0) {
+			System.out.println("	이송 비용을 지불할 소지금이 부족합니다.");
+			System.out.println("	가장 최근의 세이브 파일을 불러옵니다.");
+			p.loadPlayer();
+		}
+
+	}
+
+	void ranAwayPenaltyOfBoss(Player p) {
+		
+		if ((p.getGold() - (p.getCurrentLevel() * 200) <= 0)) {
+			p.setGold(0);
+		}else {
+			p.setGold(p.getGold()-(p.getCurrentLevel()*200));
+		}
+	
+		if ((p.getCurrentExp()-(p.getCurrentLevel()*50)<=0)) {
+			p.setCurrentExp(0);
+		}else {
+			p.setCurrentExp(p.getCurrentExp()-(p.getCurrentLevel()*50));
+		}
+		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("	>보스전 포기 패널티로 " + (p.getCurrentLevel() * 200) + " Gold를 잃었습니다.	┃");
+		System.out.println("	>남은 골드 : " + p.getGold() + "			┃");
+		System.out.println("	>보스전 포기 패널티로 경험치를 " + (p.getCurrentLevel() * 50) + " 만큼 잃었습니다.	┃");
+		System.out.println("	>남은 경험치 : " + p.getCurrentExp()+ "			┃");
+		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+	}
+
+	void pulsrewordsOfBoss(Player p, Monster m) throws InterruptedException {
+
+		p.setGold(p.getGold() + (m.getWeakness() * 200));
+		p.setCurrentExp(p.getCurrentExp() + (m.getWeakness() * 50));
+		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("	>보스 토벌 보상으로 " + (m.getWeakness() * 200) + " Gold를 추가로 얻었습니다.	┃");
+		System.out.println("	>소지금 : " + p.getGold() + "			┃");
+		System.out.println("	>보스 토벌 보상으로 " + (m.getWeakness() * 50) + " 경험치를 추가로 얻었습니다.	┃");
+		System.out.println("	>현재 경험치 : " + p.getCurrentExp()+ "			┃");
+		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		p.checkLevelUp();
 	}
 
 	// 계속 진행하시겠습니까?

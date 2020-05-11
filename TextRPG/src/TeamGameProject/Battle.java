@@ -45,7 +45,7 @@ public class Battle {
 	// 공격을 정의한다.
 	void playerAttack(Player p, Monster m) throws InterruptedException {
 
-		damage = (p.invenCurrentStrength) * 3;
+		damage = (p.invenCurrentStrength);
 		System.out.println("	플레이어의 턴 >>");
 
 		if (monsterEvasion(m)) {

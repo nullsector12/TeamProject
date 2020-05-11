@@ -88,6 +88,7 @@ public class Dungeon {
 					System.out.println("	-----------------------------------------");
 					p.setStage2Count(1);
 					e.rewordsOfVictory(p, m);
+					e.pulsrewordsOfBoss(p, m);
 					win = true;
 					break;
 				case 2:
@@ -99,6 +100,8 @@ public class Dungeon {
 					System.out.println("	-----------------------------------------");
 					p.setStage3Count(1);
 					e.rewordsOfVictory(p, m);
+					e.pulsrewordsOfBoss(p, m);
+					
 					win = true;
 					break;
 				case 3:
@@ -108,6 +111,7 @@ public class Dungeon {
 					System.out.println("	│	마지막 보스를 클리어 하셨습니다!	│");
 					System.out.println("	------------------------");
 					e.rewordsOfVictory(p, m);
+					e.pulsrewordsOfBoss(p, m);
 					win = true;
 					break;
 				}
@@ -120,7 +124,10 @@ public class Dungeon {
 				win = e.takeDie(p);
 				
 			} else if (result == 2) {
-				System.out.println("	보스와의 전투에선 도망칠 수 없습니다.");
+				System.out.println("	보스와의 전투에서 귀환 했습니다.");
+				e.ranAwayPenaltyOfBoss(p);
+				
+				win = false;
 				
 				
 			} else {
@@ -211,20 +218,20 @@ public class Dungeon {
 
 		if (num == 3 && win == 0) {
 			e.rewordsOfVictory(p, m);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			System.out.println("	-----------------------------------------");
 			System.out.println("	|	스테이지를 모두 클리어 하셨습니다.	|");
 			System.out.println("	-----------------------------------------");
-			Thread.sleep(1000);
+			Thread.sleep(500);
 			bossStage(p, 1);
 			result = true;
 		} else if (win == 0) {
 			e.rewordsOfVictory(p, m);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			System.out.println("	---------------------------------");
 			System.out.println("	|	다음 스테이지로 이동합니다.	|");
 			System.out.println("	---------------------------------");
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} else if (win == 1) {
 			Thread.sleep(500);
 			System.out.println("	 _______________________________");
@@ -264,20 +271,20 @@ public class Dungeon {
 
 		if (num == 3 && win == 0) {
 			e.rewordsOfVictory(p, m);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			System.out.println("	-----------------------------------------");
 			System.out.println("	|	스테이지를 모두 클리어 하셨습니다.	|");
 			System.out.println("	-----------------------------------------");
-			Thread.sleep(1000);
+			Thread.sleep(500);
 			bossStage(p, 2);
 			result = true;
 		} else if (win == 0) {
 			e.rewordsOfVictory(p, m);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			System.out.println("	---------------------------------");
 			System.out.println("	|	다음 스테이지로 이동합니다.	|");
 			System.out.println("	---------------------------------");
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} else if (win == 1) {
 			Thread.sleep(500);
 			System.out.println("	 _______________________________");
@@ -316,20 +323,20 @@ public class Dungeon {
 
 		if (num == 3 && win == 0) {
 			e.rewordsOfVictory(p, m);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			System.out.println("	-----------------------------------------");
 			System.out.println("	│	스테이지를 모두 클리어 하셨습니다.	│");
 			System.out.println("	-----------------------------------------");
-			Thread.sleep(1000);
+			Thread.sleep(500);
 			bossStage(p, 3);
 			result = true;
 		} else if (win == 0) {
 			e.rewordsOfVictory(p, m);
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			System.out.println("	---------------------------------");
 			System.out.println("	│	다음 스테이지로 이동합니다.	│");
 			System.out.println("	---------------------------------");
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		} else if (win == 1) {
 			Thread.sleep(500);
 			System.out.println("	 _______________________________");

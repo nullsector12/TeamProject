@@ -170,7 +170,7 @@ public class Player extends Entity {
 				invenMaxHealth = maxHealth + inven.equipHealth;
 				invenCurrentHealth = currentHealth + inven.equipHealth;
 				invenCurrentEvasion = getEvasion() + inven.equipEvasion;
-				Thread.sleep(1000);
+				Thread.sleep(500);
 				System.out.println("\n\n\n");
 				System.out.println("	┏━━━━━Congraturations!!!!━━━━━┓");
 				System.out.println("	┃	 레벨업 하였습니다!	      ┃");

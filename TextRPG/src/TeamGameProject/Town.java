@@ -51,8 +51,8 @@ public class Town {
 
 			case 2: // 현재 정보 확인
 				d.p.showStatus();
-				System.out.println("	5초 뒤에 마을화면으로 돌아갑니다.");
-				Thread.sleep(5000);
+				System.out.println("	2초 뒤에 마을화면으로 돌아갑니다.");
+				Thread.sleep(2000);
 				break;
 
 			case 3: // 인벤토리 확인
