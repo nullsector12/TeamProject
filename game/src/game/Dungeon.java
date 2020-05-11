@@ -67,52 +67,52 @@ public class Dungeon implements Serializable{
 		switch (num) {
 		case DungeonIf.EASY:
 			result = stageEasy(p);
-			System.out.println("현재 플레이어 정보를 저장하시겠습니까?");
-			save = sc.nextLine();
-			if (save.equals("y") || save.equals("Y")) {// 저장
+//			System.out.println("현재 플레이어 정보를 저장하시겠습니까?");
+//			save = sc.nextLine();
+//			if (save.equals("y") || save.equals("Y")) {// 저장
+////				try {
+////					ObjectOutputStream obs=new ObjectOutputStream(new FileOutputStream("data.ser"));
+//////					obs.writeObject(p.getName());
+////					obs.writeObject(p);
+//////					obs.writeObject(p.getCurrentLevel());
+////					obs.close();
+////				} catch (IOException e) {
+////                    e.printStackTrace();
+////                }
+//				FileOutputStream f=null;
+//				ObjectOutputStream oos=null;
 //				try {
-//					ObjectOutputStream obs=new ObjectOutputStream(new FileOutputStream("data.ser"));
-////					obs.writeObject(p.getName());
-//					obs.writeObject(p);
-////					obs.writeObject(p.getCurrentLevel());
-//					obs.close();
-//				} catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-				FileOutputStream f=null;
-				ObjectOutputStream oos=null;
-				try {
-//					Player Save=p;
-					this.p.showStatus();
-//					System.out.println("==========확인");
-					f=new FileOutputStream("data.ser");
-					oos = new ObjectOutputStream(f);
-					oos.writeObject(p.getName());
-//					System.out.println("=====이름:"+p.getName());
-					oos.writeObject(p.getCurrentLevel());
-//					System.out.println("=====레벨:"+p.getCurrentLevel());
-					oos.writeObject(p.getCurrentHealth());
-					oos.writeObject(p.getCurrentStrength());
-					oos.writeObject(p.getEvasion());
-					oos.writeObject(p.getCurrentExp());
-//					System.out.println("=====exp:"+p.getCurrentExp());
-//					oos.writeObject(Save);
-					
-					
-					
-					f.close();
-					oos.close();
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}finally{
-					if(f != null) try{f.close();}catch(IOException e){}
-					if(oos != null) try{oos.close();}catch(IOException e){}	
-
-				}
-				System.out.println("플레이어 정보가 저장되었습니다");
-
-			}
+////					Player Save=p;
+//					this.p.showStatus();//이름도 출력
+////					System.out.println("==========확인");
+//					f=new FileOutputStream("data.ser");
+//					oos = new ObjectOutputStream(f);
+//					oos.writeObject(p.getName());
+////					System.out.println("=====이름:"+p.getName());
+//					oos.writeObject(p.getCurrentLevel());
+////					System.out.println("=====레벨:"+p.getCurrentLevel());
+//					oos.writeObject(p.getCurrentHealth());
+//					oos.writeObject(p.getCurrentStrength());
+//					oos.writeObject(p.getEvasion());
+//					oos.writeObject(p.getCurrentExp());
+////					System.out.println("=====exp:"+p.getCurrentExp());
+////					oos.writeObject(Save);
+//					
+//					
+//					
+//					f.close();
+//					oos.close();
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}finally{
+//					if(f != null) try{f.close();}catch(IOException e){}
+//					if(oos != null) try{oos.close();}catch(IOException e){}	
+//
+//				}
+//				System.out.println("플레이어 정보가 저장되었습니다");
+//
+//			}
 //				break;
 //				if ((bossStage(m, p, 1))) {//bossStage메서드 승패 여부를 나타내기 위해서 boolean값 반환하도록 변경함
 //					stageNomal(p);
