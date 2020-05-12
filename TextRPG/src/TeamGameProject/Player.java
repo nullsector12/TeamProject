@@ -302,6 +302,11 @@ public class Player extends Entity {
 
 	// 포션 사용 메서드
 	public void usePotion(int i) {
+		
+		if(potion.get(i-1).pNum==0) {
+			System.out.println("해당 포션이 없어서 사용할 수 없습니다.");
+			return;
+		}
 
 		switch (i) {
 		case 1:
@@ -363,6 +368,13 @@ public class Player extends Entity {
 	}
 
 	public void showPotion() {
+		
+		// 처음에만 포션틀을 추가
+				if (potion.size() == 0) {
+					potion.add(sp);
+					potion.add(np);
+					potion.add(bp);
+				}
 		System.out.println("	==========보유 포션==========");
 		System.out.println("	" + potion.toString());
 

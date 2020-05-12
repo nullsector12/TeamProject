@@ -40,14 +40,17 @@ public class Dungeon {
 		switch (num) {
 		case DungeonIf.EASY:
 			result = stageEasy(p);
+			p.skillInven.resetSkillChance();
 
 			break;
 		case DungeonIf.NOMAL:
 			result = stageNomal(p);
+			p.skillInven.resetSkillChance();
 
 			break;
 		case DungeonIf.HARD:
 			result = stageHard(p);
+			p.skillInven.resetSkillChance();
 
 			break;
 		case 4:
@@ -129,7 +132,7 @@ public class Dungeon {
 				win = false;
 			}
 		}
-
+		p.skillInven.resetSkillChance();
 		return win;
 	}
 
@@ -323,6 +326,7 @@ public class Dungeon {
 			System.out.println("	=========================");
 			result = true;
 		}
+		
 		return result;
 	}
 

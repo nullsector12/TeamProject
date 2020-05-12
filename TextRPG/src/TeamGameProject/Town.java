@@ -4,13 +4,6 @@ import java.util.Scanner;
 import inventory.Inventory;
 import store.Store;
 
-/**
- * 앞으로 추가 할 사항 :
- * 
- * 보스 사냥 성공 후 다음 스테이지 도전 or 마을 복귀 선택지 장비 탈착 기능
- * 
- *
- */
 public class Town {
 
 	Scanner input = new Scanner(System.in);
@@ -41,13 +34,11 @@ public class Town {
 			input.nextLine();
 
 			switch (choiceMenu) {
-
 			case 1: // 던전 들어가기
 				if (d.stage(d.p)) {
 					continue;
 				}
 				break;
-
 			case 2: // 현재 정보 확인
 				System.out.println("\n\n\n\n\n\n\n");
 				System.out.println("		플레이어 정보창 확인");
@@ -57,19 +48,16 @@ public class Town {
 				System.out.println("\n\n\n\n\n\n\n");
 				Thread.sleep(3000);
 				break;
-
 			case 3: // 인벤토리 확인
 				inven.Inventory(d.p);
 				break;
-
 			case 4: // 상점 이용
 				store.store(d.p);
 				break;
-
 			case 5: // 여관 이용 ( 골드 소모에 따라 플레이어 현재 체력 회복 )
 				inn();
 				break;
-
+				
 			case 6:// 저장
 				d.p.savePlayer();
 				break;

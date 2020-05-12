@@ -78,22 +78,22 @@ public class Events {
 		System.out.println("\n\n");
 		p.checkLevelUp();
 	}
-	
+
 	void morePenaltyDieBossBattle(Player p, Monster m) {
-		
+
 		if ((p.getGold() - (m.getWeakness() * 200)) > 0) {
 			p.setGold(p.getGold() - (m.getWeakness() * 200));
-			
-		}else if((p.getGold() - (m.getWeakness() * 200)) <= 0) {
+
+		} else if ((p.getGold() - (m.getWeakness() * 200)) <= 0) {
 			p.setGold(0);
 		}
-		
-		if(p.getCurrentExp() - (m.getWeakness() * 50) >0) {
+
+		if (p.getCurrentExp() - (m.getWeakness() * 50) > 0) {
 			p.setCurrentExp(p.getCurrentExp() - (m.getWeakness() * 50));
-		}else if (p.getCurrentExp() - (m.getWeakness() * 50) <= 0) {
+		} else if (p.getCurrentExp() - (m.getWeakness() * 50) <= 0) {
 			p.setCurrentExp(0);
 		}
-		
+
 		System.out.println("\n\n");
 		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("	┃		보스 토벌 실패..		┃");
@@ -106,7 +106,7 @@ public class Events {
 		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		System.out.println("\n\n");
 
-			// 패널티를 지불할 충분한 골드가 없을 시
+		// 패널티를 지불할 충분한 골드가 없을 시
 
 //
 	}
