@@ -18,7 +18,10 @@ public class Horse extends Monster {//should be resistant to physical attacks!
         setGoldWorth(getExpWorth());
         setWeakness(2); //See Monster class for list of types
         
-        setEvasion(20);//이건 그냥 랜덤 확률
+        // 주어진 int 값 없으면 Monster 클래스의 Evasion 사용 =  랜덤 확률
+        // int 값 주어지면 Entity 클래스의 Evasion 사용 = 확률계산
+        setEvasion(20);
+        
         initCurrentStats();
 
     }

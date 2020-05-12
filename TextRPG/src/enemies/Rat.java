@@ -31,12 +31,9 @@ public class Rat extends Monster {// should be resistant to physical attacks!
 		setGoldWorth(getExpWorth());
 		setWeakness(2); // See Monster class for list of types
 
-		setEvasion(0);// 이건 그냥 랜덤 확률
+		setEvasion(5);// 이건 그냥 랜덤 확률
 		initCurrentStats();
 
 	}
 
-	public void showData() {
-		
-	}
 }

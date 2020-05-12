@@ -63,8 +63,23 @@ public class Monster extends Entity {// 이름 랜덤하게 나오도록
 //	setGoldWorth(getExpWorth());
 
 	public void setBaseStrength() {
-		baseStrength = EnemyBasics.BASE_STRENGTH + stage * 10;
+		if (stage < 4) { // 1, 2, 3
+			baseStrength = EnemyBasics.BASE_STRENGTH + stage * 5;
+		} else if (stage < 8) { // 5, 6, 7
+			baseStrength = EnemyBasics.BASE_STRENGTH + stage * 15;
+
+		} else if (stage < 12) { // 9, 10, 11
+			baseStrength = EnemyBasics.BASE_STRENGTH + stage * 25;
+		} else { // 4, 8, 12 boss 공격력
+			baseStrength = EnemyBasics.BASE_STRENGTH + stage * 40;
+		}
+
 	}
+	
+	// 직접 몬스터의 공격력 입력 할 수 있는 메서드 
+//	public int setBaseStrength(int power) {
+//		return baseStrenth = 0;
+//	}
 
 	public int getStage() {
 		return stage;
