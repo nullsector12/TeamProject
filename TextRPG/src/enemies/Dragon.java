@@ -10,7 +10,7 @@ public class Dragon extends Monster {//should be resistant to physical attacks!
 
     	setStage(12);
         setName("용");
-        setBaseHealth(getStage()+380);
+        setBaseHealth(getStage()+415);
         setBaseStrength();
         setExpWorth(getStage());//메서드 인자 stage로 바꿈
         setGoldWorth(getExpWorth());

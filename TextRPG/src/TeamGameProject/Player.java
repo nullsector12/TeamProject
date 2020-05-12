@@ -22,10 +22,12 @@ import items.D_DiamondWand;
 import items.D_GoldWand;
 import items.D_SilverWand;
 import items.Inven;
+import items.Item;
 import potionStore.Potion;
 import skills.Bash;
 import skills.Brandish;
 import skills.EdgeStrike;
+import skills.Skill;
 import skills.SkillInven;
 
 public class Player extends Entity {
@@ -637,10 +639,18 @@ public class Player extends Entity {
 
 		int bossCount, stage2Count, stage3Count;
 		try {
-			f = new FileInputStream("data.ser");
+			f = new FileInputStream("savedata.ser");
 			oos = new ObjectInputStream(f);
 //			Player load=(Player)oos.readObject();
 //			load.showStatus();
+			
+			
+//			potion = ((ArrayList<Potion>)oos.readObject());
+//			inven.equip = ((ArrayList<Item>)oos.readObject());
+//			inven.inven = ((ArrayList<Item>)oos.readObject());
+//			skillInven.skill = ((ArrayList<Skill>)oos.readObject());
+			
+			
 			name = ((String) oos.readObject());
 			currentLevel = ((Integer) oos.readObject());
 			currentHealth = ((Integer) oos.readObject());
@@ -714,7 +724,8 @@ public class Player extends Entity {
 			this.bossCount = bossCount;
 			this.stage2Count = stage2Count;
 			this.stage3Count = stage3Count;
-
+			System.out.println("========================소유 장비/장착 장비/배운 스킬/소유 포션");
+			
 			/*
 			 * invenCurrentStrength = currentStrength + inven.equipPower; invenMaxHealth =
 			 * maxHealth + inven.equipHealth; invenCurrentHealth = currentHealth +
@@ -798,7 +809,12 @@ public class Player extends Entity {
 			oos.writeObject(this.stage3Count);
 //			System.out.println("=====exp:"+this.getCurrentExp());
 //			oos.writeObject(Save);
-
+			// =========================================== 수정 필요, ArrayList 파일에 저장하고 읽어오는 처리
+//			oos.writeObject(skillInven.skill); // 배운 스킬 저장
+//			oos.writeObject(this.inven.equip); // 장비하고 있는 장비 저장
+//			oos.writeObject(this.inven.inven); // 인벤토리에 들어있는 장비 저장
+//			oos.writeObject(this.potion); // 산 포션 저장
+			
 			f.close();
 			oos.close();
 		} catch (Exception e) {
