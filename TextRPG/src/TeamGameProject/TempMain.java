@@ -1,22 +1,54 @@
 package TeamGameProject;
 
-import java.util.Random;
+import java.util.Scanner;
 
 public class TempMain {
-	Random rand = new Random();
 
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) throws InterruptedException {
+		@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
+		int choice;
 		Town t = new Town();
-		System.out.println("----------------------------------");
-		System.out.println("게임을 시작합니다.");
-		t.d.p.addName();
-		System.out.println("어서오세요." + t.d.p.getName() + "님, JAVA 마을에 오신 것을 환영합니다.");
+		System.out.println("\n");
+		System.out.println("		  Adventure In The JAVA");
+		System.out.println();
+		System.out.println("		┏━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("		│       GAME START	│");
+		System.out.println("		┗━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("		┣───────────────────────┫");
+		System.out.println("		│     1.New Player	│");
+		System.out.println("		┣───────────────────────┫");
+		System.out.println("		│     2.Load Data	│");
+		System.out.println("		┣───────────────────────┫");
+		System.out.println("		│     3.Exit Game	│");
+		System.out.println("		┗───────────────────────┛");
 		
+		choice = sc.nextInt();
 		
-		while(true) {
-		t.town();
+		if (choice == 1) {// 새로 시작
+	
+			System.out.println("	새로운 캐릭터를 생성합니다.");
+			Thread.sleep(500);
+			t.d.p.addName();
+			Thread.sleep(500);
+
+
+		} else if (choice == 2) {// 게임 이어하기
+			System.out.println("	저장된 정보를 로드합니다.");
+			Thread.sleep(500);
+			t.d.p.loadPlayer();
+		}else if (choice == 3) {
+			System.out.println("	Adventure In the JAVA 게임을 종료합니다.");
+			System.exit(0);
 		}
+		Thread.sleep(500);
+		System.out.println("\n\n\n\n");
+		System.out.println("	어서오세요." + t.d.p.getName() + "님, JAVA 마을에 오신 것을 환영합니다.");
+
+		while (true) {
+			t.town();
+		}
+
 	}
 
 }

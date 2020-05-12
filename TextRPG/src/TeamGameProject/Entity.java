@@ -82,6 +82,10 @@ public class Entity {// 상속할 때 상위클래스에 private 처리하지 �
 	}
 
 	public int setCurrentHealth(int input) {
+		if (currentHealth <= maxHealth) {
+			currentHealth = maxHealth;
+		}
+
 		return currentHealth = input;
 	}
 
