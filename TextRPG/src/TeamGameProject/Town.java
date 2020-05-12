@@ -57,15 +57,15 @@ public class Town {
 			case 5: // 여관 이용 ( 골드 소모에 따라 플레이어 현재 체력 회복 )
 				inn();
 				break;
-				
+
 			case 6:// 저장
 				d.p.savePlayer();
 				break;
-				
+
 			case 7:// 불러오기
 				d.p.loadPlayer();
 				break;
-				
+
 			case 8: // 게임 완전 종료
 				System.out.println("	게임을 정말 종료하시겠습니까? 종료하면 지금까지의 플레이 기록은 삭제됩니다. y or n");
 				String exit = input.nextLine();
@@ -119,9 +119,9 @@ public class Town {
 			switch (choiceRoomClass) {
 
 			case 1:
-				
+
 				System.out.println("	> 다락방을 선택하셨습니다. 35Gold를 지불합니다.");
-				
+
 				if (d.p.getGold() >= 35) {
 					d.p.setGold(d.p.getGold() - 35);
 					System.out.println("	> 현재 소지금 : " + d.p.getGold());
@@ -232,7 +232,7 @@ public class Town {
 					// d.p.setCurrentHealth(d.p.getMaxHealth());
 
 					d.p.invenCurrentHealth = d.p.invenMaxHealth;
-					
+
 					Thread.sleep(500);
 					System.out.println("	> 돈이 남아 돕니까 휴먼?");
 					Thread.sleep(500);

@@ -43,7 +43,7 @@ public class Store {
 			System.out.println("	+=======================================================+");
 			System.out.println("	소지금 : " + p.getGold() + " Gold");
 			System.out.println("\n\n");
-			
+
 			int i = sc.nextInt();
 			sc.nextLine();
 
@@ -168,7 +168,7 @@ public class Store {
 
 					skill = p.Skill3;
 
-				}else if (select == 4) {
+				} else if (select == 4) {
 					System.out.println("	기술 상점을 나옵니다. 상점가로 돌아갑니다.");
 					continue;
 				}
@@ -176,7 +176,7 @@ public class Store {
 				p.skillInven.buySkill(p, skill);
 				p.skillInven.showSkill();
 				break;
-				
+
 			case 4:
 				p.inven.showInventory();
 				p.sellItem();

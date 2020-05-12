@@ -19,6 +19,8 @@ public class TempMain {
 		System.out.println("		│     1.New Player	│");
 		System.out.println("		┣───────────────────────┫");
 		System.out.println("		│     2.Load Data	│");
+		System.out.println("		┣───────────────────────┫");
+		System.out.println("		│     3.Exit Game	│");
 		System.out.println("		┗───────────────────────┛");
 		
 		choice = sc.nextInt();
@@ -35,6 +37,9 @@ public class TempMain {
 			System.out.println("	저장된 정보를 로드합니다.");
 			Thread.sleep(500);
 			t.d.p.loadPlayer();
+		}else if (choice == 3) {
+			System.out.println("	Adventure In the JAVA 게임을 종료합니다.");
+			System.exit(0);
 		}
 		Thread.sleep(500);
 		System.out.println("\n\n\n\n");

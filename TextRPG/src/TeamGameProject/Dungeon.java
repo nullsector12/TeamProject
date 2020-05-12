@@ -82,7 +82,7 @@ public class Dungeon {
 
 			if (result == 0) {// result==1(몬스터 체력0이하일때=몬스터 죽었을 때)로 변경
 				switch (num) {
-				
+
 				case 1:
 					System.out.println("	-----------------------------------------");
 					System.out.println("	│	     초급 던전 보스를 처치 하셨습니다.	│");
@@ -120,7 +120,6 @@ public class Dungeon {
 			} else if (result == 1) { // 보스전 패배 시
 				e.morePenaltyDieBossBattle(p, m);
 				win = e.takeDie(p);
-				
 
 			} else if (result == 2) {
 				System.out.println("	========================= ");
@@ -326,7 +325,7 @@ public class Dungeon {
 			System.out.println("	=========================");
 			result = true;
 		}
-		
+
 		return result;
 	}
 

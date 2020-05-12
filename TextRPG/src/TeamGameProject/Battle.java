@@ -26,14 +26,14 @@ public class Battle {
 	// 스킬 정의
 	void playerUseSkills(Player p, Monster m, Skill s) {
 
-		damage = (p.invenCurrentStrength)* s.multiple;
+		damage = (p.invenCurrentStrength) * s.multiple;
 
 		if (monsterEvasion(m)) {
 			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
 			damage = 0;
 		}
 		m.setCurrentHealth(m.getCurrentHealth() - damage);
-		System.out.println("	플레이어가 "+s.skillName+" 사용 >>");
+		System.out.println("	플레이어가 " + s.skillName + " 사용 >>");
 		System.out.println("	┌──────────────────────────────────────────────┐");
 		System.out.println("	>" + p.getName() + " 님이	\n" + "	>" + m.getName() + " 에게 " + damage
 				+ "의 데미지를 줬습니다! 몬스터의 체력은:" + (m.getCurrentHealth()));
@@ -72,7 +72,7 @@ public class Battle {
 		p.invenCurrentHealth = p.invenCurrentHealth - depenseDmg;
 		System.out.println();
 		System.out.println("	플레이어의 방어 >");
-		System.out.println("	"+depenseDmg + " 만큼 방어 " + p.getName() + " 플레이어님의 체력은:" + p.invenCurrentHealth);
+		System.out.println("	" + depenseDmg + " 만큼 방어 " + p.getName() + " 플레이어님의 체력은:" + p.invenCurrentHealth);
 	}
 
 	// 몬스터의 공격
@@ -130,7 +130,8 @@ public class Battle {
 			System.out.println("	|    행동을 선택해 주세요.	|");
 			System.out.println("	└───────────────────────┘");
 			System.out.println();
-			System.out.println("	>1.공격		>5.플레이어 정보 확인	\n	>2.스킬 사용	>6.적 상세정보	\n	>3.방어		>7.마을로 귀환	\n	>4.포션 사용");
+			System.out.println(
+					"	>1.공격		>5.플레이어 정보 확인	\n	>2.스킬 사용	>6.적 상세정보	\n	>3.방어		>7.마을로 귀환	\n	>4.포션 사용");
 			int choice = Integer.parseInt(bt.nextLine());
 
 			switch (choice) {
@@ -200,10 +201,9 @@ public class Battle {
 					// 방어 했는데도 패배 시 result = 1;
 					result = 1;
 					break;
-				}else {
+				} else {
 					continue;
 				}
-				
 
 			case 4:
 				// 포션 사용
@@ -223,15 +223,15 @@ public class Battle {
 
 				p.usePotion(potionSelect);
 				continue;
-				
-			case 5 : // 플레이어 정보 출력
+
+			case 5: // 플레이어 정보 출력
 				p.showStatus();
 				continue;
-				
-			case 6 : // 적 상세 정보 출력
+
+			case 6: // 적 상세 정보 출력
 				m.showMonsterDetail();
 				continue;
-				
+
 			case 7: // 도망
 				result = 2;
 				break;
