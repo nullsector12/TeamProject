@@ -146,7 +146,7 @@ public class Events {
 			Thread death = new Thread() {
 				@Override
 				public void run() {
-					for (int i = 20; i > 0; i--) {
+					for (int i = 10; i > 0; i--) {
 						System.out.println(i);
 
 						// super.
@@ -157,6 +157,9 @@ public class Events {
 							e.printStackTrace();
 						}
 					}
+					System.out.println("	10초 동안 입력이 없어 종료합니다.");
+					System.exit(0);
+	
 				}
 			};
 			death.start();
@@ -164,7 +167,7 @@ public class Events {
 			int n;
 			while (true) {
 				String choice = JOptionPane.showInputDialog(
-						"	플레이어가 사망했습니다. \n\n ((주의!)) 20초 안에 입력해주세요.(입력 없으면 자동 종료) \n 1. 긴급마을이송 : 비용 - lv * 100 gold \n 2.게임 종료");// 메인
+						"	플레이어가 사망했습니다. \n\n ((주의!)) 10초 안에 입력해주세요.(입력 없으면 자동 종료) \n 1. 긴급마을이송 : 비용 - lv * 100 gold \n 2.게임 종료");// 메인
 																																	// 쓰레드
 
 				try {
@@ -175,10 +178,10 @@ public class Events {
 					}
 
 				} catch (NumberFormatException e) {
-					System.out.println("	잘못입력하셨습니다. 다시 선택해 주세요.");
+					System.out.println("	잘못 입력 하셨습니다. 다시 선택해 주세요.");
 					continue;
 				} catch (InputMismatchException e) {
-					System.out.println("	잘못입력하셨습니다. 다시 선택해 주세요.");
+					System.out.println("	잘못 입력 하셨습니다. 다시 선택해 주세요.");
 					continue;
 				}
 				break;
@@ -197,10 +200,6 @@ public class Events {
 				System.out.println("	프로그램을 종료합니다.");
 				System.exit(0);
 
-			default:
-				System.out.println("	20초동안 입력이 없어 종료합니다.");
-
-				System.exit(0);
 			}
 
 			try {

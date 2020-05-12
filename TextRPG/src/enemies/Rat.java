@@ -37,6 +37,6 @@ public class Rat extends Monster {// should be resistant to physical attacks!
 	}
 
 	public void showData() {
-		super.showData();
+		
 	}
 }
