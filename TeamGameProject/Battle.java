@@ -1,9 +1,10 @@
 package TeamGameProject;
 
-import java.util.Random;
 import java.util.Scanner;
 
 import skills.Skill;
+
+import java.util.Random;
 
 public class Battle {
 
@@ -12,51 +13,73 @@ public class Battle {
 
 	int turns;
 	boolean pass;
-	int pdmg;
-	int mdmg;
-	int wns;
-	int dmg;
+	int playerDamage;
+	int monsterDamage;
+	int weakness;
+	int damage;
 	Random rand = new Random();
 	int battleResult;
+	int depenseDmg;
 
-//던전을 불러온다.
+	int playerDefense;
 
-	// 적중 확률 = ((정확도-회피 확률)/정확도) * 100 (%)
-//공격을 정의한다.
+	// 스킬 정의
+	void playerUseSkills(Player p, Monster m, Skill s) {
+
+		damage = (p.invenCurrentStrength) * 3 * s.multiple;
+
+		if (monsterEvasion(m)) {
+			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
+			damage = 0;
+		}
+		m.setCurrentHealth(m.getCurrentHealth() - damage);
+		System.out.println(damage + " 만큼 가격! 몬스터의 체력은:" + (m.getCurrentHealth()));
+	}
+
+	// 공격을 정의한다.
 	void playerAttack(Player p, Monster m) {
 
-		dmg = (p.invenCurrentStrength) * 3;
+		damage = (p.invenCurrentStrength) * 3;
 
 		if (monsterEvasion(m)) {
-			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
-			dmg = 0;
+			System.out.println("	" + m.getName() + " 이(가) 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
+			damage = 0;
 		}
-		m.setCurrentHealth(m.getCurrentHealth() - dmg);
-		System.out.println(dmg + " 만큼 가격! 몬스터의 체력은:" + (m.getCurrentHealth()));
+		m.setCurrentHealth(m.getCurrentHealth() - damage);
+		System.out.println("	┌──────────────────────────────────────────────┐");
+		System.out.println("	>" + p.getName() + " 님이	\n" + "	>" + m.getName() + " 에게 " + damage
+				+ "의 데미지를 줬습니다! 몬스터의 체력은:" + (m.getCurrentHealth()));
+		System.out.println("	└──────────────────────────────────────────────┘");
 	}
 
-	void playerAttackS(Player p, Monster m, Skill s) {
+	// 방어를 정의 한다.
+	// mdmg =(int) ((((int)(Math.random()*Player.attackPower())+5)* 최대값 몬스터 공격력, 최소값
+	// 플레이어레벨
+	// Player.weakness)-m.attackPower());
+	// mdmg - 몬스터가 때리는 데미지
+	// pdf - 방어값
+	// depenseDmg - 몬스터가 날때리는거에서 방어값을 빼서 내가 실제로 맞는값
+	void playerDefense(Player p, Monster m) {
 
-		dmg = (p.invenCurrentStrength) * 3 * s.multiple;
+		monsterDamage = m.getCurrentStrength();
+		playerDefense = (int) ((Math.random() * m.getCurrentStrength()) + p.getCurrentLevel());
+		depenseDmg = monsterDamage - playerDefense;
+		p.invenCurrentHealth = p.invenCurrentHealth - depenseDmg;
 
-		if (monsterEvasion(m)) {
-			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
-			dmg = 0;
-		}
-		m.setCurrentHealth(m.getCurrentHealth() - dmg);
-		System.out.println(dmg + " 만큼 가격! 몬스터의 체력은:" + (m.getCurrentHealth()));
+		System.out.println("	"+depenseDmg + " 방어" + p.getName() + " 플레이어님의 체력은:" + p.invenCurrentHealth);
 	}
 
+	// 몬스터의 공격
 	void monsterAttack(Player p, Monster m) {
 
-		mdmg = m.getCurrentStrength();
+		monsterDamage = m.getCurrentStrength();
 
 		if (playerEvasion(p)) {
-			System.out.println("플레이어가 몬스터의 공격을 회피했습니다! 데미지가 0이 됩니다.");
-			mdmg = 0;
+			System.out.println("	플레이어가" + m.getName() + "	의 공격을 회피했습니다! 데미지가 0이 됩니다.");
+			monsterDamage = 0;
 		}
 
-		p.invenCurrentHealth = p.invenCurrentHealth - mdmg;
+		p.invenCurrentHealth = p.invenCurrentHealth - monsterDamage;
 
 		if (p.invenCurrentHealth < 0)
 			p.invenCurrentHealth = 0;
@@ -64,9 +87,11 @@ public class Battle {
 //		p.setCurrentHealth(p.getCurrentHealth() - mdmg);
 //		
 //		System.out.println(p.getCurrentHealth());
-
-		System.out.println(mdmg + " 만큼 가격!   " + p.getName() + " 플레이어님의 체력은:" + p.invenCurrentHealth);
-
+		System.out.println();
+		System.out.println("	┌──────────────────────────────────────────────┐");
+		System.out.println("	>" + m.getName() + " 에게	\n" + "	>" + monsterDamage + "의 데미지를 받았습니다! 플레이어의 현재 체력 :"
+				+ (p.invenCurrentHealth));
+		System.out.println("	└──────────────────────────────────────────────┘");
 	}
 
 //회피를 정의 한다.	
@@ -93,29 +118,28 @@ public class Battle {
 		int result = 0;
 		this.battleResult = result;
 
-		System.out.println("====== 전투 시작 ======");
-
 		while (true) {
-			System.out.println("1.공격 2.스킬 2. 3.스킬 5.");
+			System.out.println("	┌───────────────────────┐");
+			System.out.println("	|    행동을 선택해 주세요.	|");
+			System.out.println("	└───────────────────────┘");
+			System.out.println();
+			System.out.println("	>1.공격		>3.방어	\n	>2.스킬 사용	>4.포션 사용	\n	>5. 도망가기(마을로)");
 			int choice = Integer.parseInt(bt.nextLine());
 
 			switch (choice) {
-
 			case 1:
 
 				playerAttack(p, m);
 				monsterAttack(p, m);
-				if (p.invenCurrentHealth == 0) {
+				if (p.invenCurrentHealth <= 0) {
 
-					// 패배 시 resul t = 1;
+					// 패배 시 result = 1;
 					result = 1;
 					break;
 
 				} else if (m.getCurrentHealth() <= 0) {
 
 					// 승리 시 reuslt = 0;
-
-					p.showStatus();
 					break;
 
 				} else {
@@ -123,35 +147,30 @@ public class Battle {
 					// 추가 메뉴 반환값 구상해보기
 				}
 
-				// 전투 메뉴 추가 생각해보기
-			case 2:
-				result = 2;
-				break;
+			case 2: // 스킬 사용
 
-			case 3:
+				System.out.println("	사용할 스킬을 골라주세요");
 
-				System.out.println("사용할 스킬을 골라주세요");
+				p.skillInven.showSkill();
 
-				p.skill.showSkill();
+				int skillSelect = 0;
 
-				int select = 0;
-
-				select = (bt.nextInt() - 1);
+				skillSelect = (bt.nextInt() - 1);
 				bt.nextLine();
 
-				if (p.skill.skill.get(select).numOfChance == 0) {
-					System.out.println("기회가 남아있지않습니다.");
+				if (p.skillInven.skill.get(skillSelect).numOfChance == 0) {
+					System.out.println("	기회가 남아있지않습니다.");
 					continue;
 				}
 
-				Skill s = p.skill.useSkill(p, select);
+				Skill s = p.skillInven.useSkill(p, skillSelect);
 
-				playerAttackS(p, m, s);
+				playerUseSkills(p, m, s);
 				monsterAttack(p, m);
 
-				if (p.invenCurrentHealth == 0) {
+				if (p.invenCurrentHealth <= 0) {
 
-					// 패배 시 resul t = 1;
+					// 패배 시 result = 1;
 					result = 1;
 					break;
 
@@ -164,48 +183,42 @@ public class Battle {
 
 				} else {
 					continue;
-					// 추가 메뉴 반환값 구상해보기
-
 				}
+
+			case 3:
+				// 방어를 선택하면 나만 맞음!
+				playerDefense(p, m);
+				if (p.invenCurrentHealth <= 0) {
+
+					// 방어 했는데도 패배 시 result = 1;
+					result = 1;
+					break;
+				}else {
+					continue;
+				}
+				
 
 			case 4:
-				System.out.println("사용할 포션을 선택해주세요");
-				if (p.potion.size() == 0) {
-					p.potion.add(p.sp);
-					p.potion.add(p.np);
-					p.potion.add(p.bp);
-				}
+				System.out.println("	┌───────────────────────┐");
+				System.out.println("	|  사용할 포션을 선택해 주세요.	|");
+				System.out.println("	└───────────────────────┘");
+
 				p.showPotion();
-				int select2 = 0;
 
-				try {
-					select2 = bt.nextInt();
+				int potionSelect = bt.nextInt();
 
-				} catch (NumberFormatException e) {
-					System.out.println("잘못 누르셨습니다.");
-					continue;
-				} catch (Exception e) {
-					System.out.println("잘못 누르셨습니다.");
-					continue;
-				} finally {
-					bt.nextLine();
-				}
+				bt.nextLine();
 
-				if (select2 == 0) {
+				if (potionSelect == 0) {
 					continue;
 				}
-				while(true) {
-				try {
-					p.usePotion(select2);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("잘못누르셨습니다.");
-					continue;
-				}
-				}
-	
 
+				p.usePotion(potionSelect);
+
+				continue;
+			case 5: // 도망
+				result = 2;
+				break;
 			}
 
 			return result;

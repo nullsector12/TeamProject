@@ -1,18 +1,18 @@
 package skills;
 
-public class Angry extends Skill {
+public class EdgeStrike extends Skill {
 
-	public Angry(String skillName, int numOfChance, int multiple, int gold) {
+	public EdgeStrike(String skillName, int numOfChance, int multiple, int gold) {
 
 		super(skillName, numOfChance, multiple, gold);
 
-		this.skillName = "화내기";
+		this.skillName = "엣지 스트라이크";
 
 		this.numOfChance = 3;
 
-		this.multiple = 2;
+		this.multiple = 3;
 
-		this.gold = 5000;
+		this.gold = 8000;
 
 	}
 

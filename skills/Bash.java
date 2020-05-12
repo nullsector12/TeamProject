@@ -1,18 +1,18 @@
 package skills;
 
-public class DoubleAngry extends Skill {
+public class Bash extends Skill {
 
-	public DoubleAngry(String skillName, int numOfChance, int multiple, int gold) {
+	public Bash(String skillName, int numOfChance, int multiple, int gold) {
 
 		super(skillName, numOfChance, multiple, gold);
 
-		this.skillName = "두배화내기";
+		this.skillName = "배쉬";
 
 		this.numOfChance = 3;
 
-		this.multiple = 3;
+		this.multiple = 2;
 
-		this.gold = 8000;
+		this.gold = 5000;
 
 	}
 

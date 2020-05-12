@@ -6,7 +6,7 @@ import java.util.Scanner;
 import TeamGameProject.Player;
 import items.Inven;
 import potionStore.Potion;
-import skills.Angry;
+import skills.Bash;
 import skills.Skill;
 
 public class Store {
@@ -95,9 +95,9 @@ public class Store {
 
 		case 3:
 
-			System.out.println("1. 화내기  기회:3, 배율 2 (5000G)");
-			System.out.println("2. 두배화내기 기회:3, 배율3 (8000G)");
-			System.out.println("3. 세배화내기 기회:3 , 배율4 (15000G)");
+			System.out.println("1. 배쉬  기회: 3, 배율 2 (5000G)");
+			System.out.println("2. 엣지 스트라이크 기회: 3, 배율3 (8000G)");
+			System.out.println("3. 브랜디쉬 기회: 3 , 배율4 (15000G)");
 
 			System.out.println("구매할 스킬을 선택해주세요");
 
@@ -123,9 +123,9 @@ public class Store {
 
 			}
 
-			p.skill.buySkill(p, skill);
+			p.skillInven.buySkill(p, skill);
 
-			p.skill.showSkill();
+			p.skillInven.showSkill();
 
 			break;
 		case 4:

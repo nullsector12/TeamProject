@@ -2,15 +2,15 @@ package skills;
 
 
 
-public class TripleAngry extends Skill {
+public class Brandish extends Skill {
 
 	
 
-	public TripleAngry(String skillName, int numOfChance, int multiple, int gold){
+	public Brandish(String skillName, int numOfChance, int multiple, int gold){
 		
 		super(skillName, numOfChance, multiple, gold);
 		
-		this.skillName = "세배화내기";
+		this.skillName = "브랜디쉬";
 		
 		this.numOfChance = 3;
 	

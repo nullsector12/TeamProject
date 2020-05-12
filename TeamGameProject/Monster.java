@@ -1,21 +1,11 @@
 package TeamGameProject;
+
 import java.util.Random;
 
-import enemies.Chicken;
-import enemies.Cow;
-import enemies.Dog;
-import enemies.Dragon;
-import enemies.EnemyBasics;
-import enemies.Horse;
-import enemies.Monkey;
-import enemies.Pig;
-import enemies.Rabbit;
-import enemies.Rat;
-import enemies.Sheep;
-import enemies.Snake;
-import enemies.Tiger;
-public class Monster extends Entity {//이름 랜덤하게 나오도록
-	
+import enemies.*;
+
+public class Monster extends Entity {// 이름 랜덤하게 나오도록
+
 	// 회피 확률->공격 무효화 기능
 //	private int evasion;
 //	private int goldWorth;// 골드
@@ -102,8 +92,8 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 	public void setGoldWorth(int exp) {
 		goldWorth = exp;
 		// 스테이지 별 몬스터 경험치의 10퍼센트를 골드로 반환(최대 10퍼센트까지 골드 받을 수 있음) or 랜덤 반환
-		int gold_max = (int) (exp * 0.5);
-		int gold_min = (int) (exp * 0.1);// 최소 골드
+		int gold_max = exp * 5;
+		int gold_min = exp * 1;// 최소 골드
 		goldWorth = rand.nextInt(gold_max - gold_min + 1) + gold_min;// 수식 변경
 //        int gMin = (int)(g*.7);
 //        int gMax = (int)(g*1.2);
@@ -120,7 +110,7 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 //		exp*=(stage*(rand.nextInt(2)+1));
 
 		int exp_max = (int) (stage * 10);
-		int exp_min = (int) (stage * 2);
+		int exp_min = (int) (stage * 5);
 		expWorth = stage * 10 + rand.nextInt(exp_max - exp_min + 1) + exp_min;
 	}
 
@@ -128,8 +118,8 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 		return weakness;
 	}
 
-	public void setWeakness(int i) {//몬스터 회피
-		i*=rand.nextInt(10)+1;
+	public void setWeakness(int i) {// 몬스터 회피
+		i *= rand.nextInt(10) + 1;
 		weakness = i;
 	}
 
@@ -146,11 +136,11 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 
 	public Monster makeMonster(int stage) {// 스테이지 별 몬스터 생성
 		Monster monster = null;
-		
+
 		@SuppressWarnings("unused")
-		int numOfMonsters =rand.nextInt(5)+1;//스테이지마다 랜덤하게 나오는 몬스터 마리 수
-		
-		switch (stage) {//스테이지 별 같은 종류/다른 능력치  몬스터 여러마리 생성
+		int numOfMonsters = rand.nextInt(5) + 1;// 스테이지마다 랜덤하게 나오는 몬스터 마리 수
+
+		switch (stage) {// 스테이지 별 같은 종류/다른 능력치 몬스터 여러마리 생성
 		case Rounds.first:
 			monster = new Rat();// 자동 형변환
 			break;
@@ -205,15 +195,15 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 	 */
 
 	public void showData() {
-		System.out.println("현재 스테이지: " + this.getStage());// 1-1 형식으로 바꿔야됨
-		System.out.println("몬스터 이름: " + this.getName());
-		System.out.println("공격력 : " + this.getCurrentStrength());
-		System.out.println("체력: " + this.getCurrentHealth());
-		System.out.println("획득 가능 경험치: " + this.getExpWorth());
-		System.out.println("획득 가능 골드: " + this.getGoldWorth());
-		System.out.println("회피율: " + this.getEvasion() + "%");
+		System.out.println("	현재 스테이지: " + this.getStage());// 1-1 형식으로 바꿔야됨
+		System.out.println("	몬스터 이름: " + this.getName());
+		System.out.println("	공격력 : " + this.getCurrentStrength());
+		System.out.println("	체력: " + this.getCurrentHealth());
+//		System.out.println("	획득 가능 경험치: " + this.getExpWorth());
+//		System.out.println("	획득 가능 골드: " + this.getGoldWorth());
+//		System.out.println("	회피율: " + this.getEvasion() + "%");
 //		System.out.println("방어력: " + this.getDefense());
-		System.out.println("약점 : " + this.getWeakness());
+//		System.out.println("	강함 : " + this.getWeakness());
 
 	}
 
@@ -234,18 +224,19 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 		else
 			return true;
 	}
-	// ==========================================================05/08 추가 메서드====05/10 메서드 수정
-	String title;
-	public void setName(String name) {//이름 랜덤하게 나오도록
-		String[] kinds= {"기본 ","날쏀 ","덩치가 큰 ","이빨이 날카로운 ","알 수 없는 "};//알 수 없는(랜덤)
-		Random rand=new Random();
-		int randIndex=rand.nextInt(5);
-		
-		this.name=kinds[randIndex]+name;
-		title=kinds[randIndex];
-		
 
-		
+	// ==========================================================05/08 추가
+	// 메서드====05/10 메서드 수정
+	String title;
+
+	public void setName(String name) {// 이름 랜덤하게 나오도록
+		String[] kinds = { "기본 ", "날쌘 ", "덩치가 큰 ", "이빨이 날카로운 ", "알 수 없는 " };// 알 수 없는(랜덤)
+		Random rand = new Random();
+		int randIndex = rand.nextInt(5);
+
+		this.name = kinds[randIndex] + name;
+		title = kinds[randIndex];
+
 	}
 
 //	public int getDefense() {
@@ -253,33 +244,33 @@ public class Monster extends Entity {//이름 랜덤하게 나오도록
 //	}
 //
 //	public void setDefense(int dmg) {// 플레이어(로부터 받는 공격양=받은 데미지) 메서드 인자로 받아야 함
-////		if (defense >= p.getCurrentStrength())// 플레이어로부터 받은 데미지보다 방어력이 큰 경우
-////			setCurrentHealth(getCurrentHealth());// 현재 체력 유지
-////		else///플레이어로부터 받은 데미지가 방어력보다 큰 경우
-////		if (defense < dmg)
-////			if(getCurrentHealth()+defense<getCurrentHealth())
-////				setCurrentHealth(getCurrentHealth() + defense -dmg);// 현재 체력+=(방어력-받은 데미지)
+//		if (defense >= p.getCurrentStrength())// 플레이어로부터 받은 데미지보다 방어력이 큰 경우
+//			setCurrentHealth(getCurrentHealth());// 현재 체력 유지
+//		else///플레이어로부터 받은 데미지가 방어력보다 큰 경우
+//		if (defense < dmg)
+//			if(getCurrentHealth()+defense<getCurrentHealth())
+//				setCurrentHealth(getCurrentHealth() + defense -dmg);// 현재 체력+=(방어력-받은 데미지)
 //		this.defense = rand.nextInt(20) + 1;
-////		if (defense > dmg) {
-////			defense -= dmg;
-////			setCurrentHealth(getCurrentHealth() + defense);
-////		} else {
-////			defense = 0;
-////			return;
-////		}
+//		if (defense > dmg) {
+//			defense -= dmg;
+//			setCurrentHealth(getCurrentHealth() + defense);
+//		} else {
+//			defense = 0;
+//			return;
+//		}
 //		// 기본적으로 방어력은 체력에 더해지는 값(체력 증가 효과) 거기에 데미지 빼서 체력값 재정의
 //	}
 //	public void setDefense(Player p) {// 플레이어(로부터 받는 공격양=받은 데미지) 메서드 인자로 받아야 함
-////		if (defense >= p.getCurrentStrength())// 플레이어로부터 받은 데미지보다 방어력이 큰 경우
-////			setCurrentHealth(getCurrentHealth());// 현재 체력 유지
-////		else///플레이어로부터 받은 데미지가 방어력보다 큰 경우
+//		if (defense >= p.getCurrentStrength())// 플레이어로부터 받은 데미지보다 방어력이 큰 경우
+//			setCurrentHealth(getCurrentHealth());// 현재 체력 유지
+//		else///플레이어로부터 받은 데미지가 방어력보다 큰 경우
 //		if (defense < p.getCurrentStrength())
 //			if(getCurrentHealth()+defense<getCurrentHealth())
 //				setCurrentHealth(getCurrentHealth() + defense -p.getCurrentStrength());// 현재 체력+=(방어력-받은 데미지)
 //		
 //		// 기본적으로 방어력은 체력에 더해지는 값(체력 증가 효과) 거기에 데미지 빼서 체력값 재정의
 //	}
-
+//	
 //	public void  attack(Player player, int hit) {//Player에 가하는 공격의 양
 //		System.out.println(getName()+"이(가) 공격합니다");
 //		player.setCurrentHealth(player.getCurrentHealth()-hit);//공격받은 만큼 Player의 hp차감

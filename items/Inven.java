@@ -3,8 +3,6 @@ package items;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import TeamGameProject.Player;
-
 public class Inven {
 
 	int check = -1;
@@ -64,6 +62,8 @@ public class Inven {
 
 	}
 
+
+	
 	// 장비 장착 메서드
 
 	// 장비타입을 비교해서 인벤토리로 장착하던 장비 반환
@@ -82,25 +82,5 @@ public class Inven {
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
