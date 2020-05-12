@@ -1,6 +1,6 @@
 # TextRPG 파일로 들어가시면 소스파일 있습니다.
 
-TextRPG	Merge pull request #6 from nullsector12/events
+Adventure In The JAVA
 
 Team J.J.J
 첫 JAVA 팀프로젝트 : 텍스트 RPG
