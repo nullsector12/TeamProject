@@ -21,7 +21,7 @@ public class Potion {
 
 	@Override
 	public String toString() {
-		return "Potion [" + pName + ", 회복량=" + pAddHealth + ", 개수=" + pNum + ", price=" + price + "]";
+		return "	[" + pName + " / 회복량 : " + pAddHealth + " / 개수 : " + pNum + " / 가격 : " + price + "]";
 	}
 
 }

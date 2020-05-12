@@ -33,13 +33,13 @@ public class Inven {
 	public void showInventory() {
 		System.out.println("");
 
-		System.out.println("==============인벤토리==============");
+		System.out.println("	==============인벤토리==============");
 
 		for (int i = 0; i < inven.size(); i++) {
-			System.out.println((i + 1) + "." + inven.get(i).toString());
+			System.out.println("	"+(i + 1) + "." + inven.get(i).toString());
 
 			System.out.println(
-					"=========================================================================================================");
+					"	=========================================================================================================");
 
 		}
 
@@ -48,15 +48,15 @@ public class Inven {
 	public void showEquip() {
 		System.out.println("");
 
-		System.out.println("==============장착한 장비 목록==============");
+		System.out.println("	==============장착한 장비 목록==============");
 		if (equip.size() == 0) {
-			System.out.println("장착한 장비가 없습니다.");
+			System.out.println("	장착한 장비가 없습니다.");
 		}
 		for (int i = 0; i < equip.size(); i++) {
-			System.out.println((i + 1) + "." + equip.get(i).toString());
+			System.out.println("	"+(i + 1) + "." + equip.get(i).toString());
 
 			System.out.println(
-					"=========================================================================================================");
+					"	=========================================================================================================");
 
 		}
 

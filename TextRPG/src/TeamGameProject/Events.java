@@ -29,7 +29,6 @@ public class Events {
 					"		> " + (m.getGoldWorth() / 2) + " 골드와  경험치" + (m.getExpWorth() / 2) + " 을(를) 획득했습니다.");
 			System.out.println("	└+++++++++++++++++++++++++++++++++++++++++++++++┘");
 			p.checkLevelUp();
-			p.showStatus();
 
 		} else if (p.getCurrentLevel() > (m.getWeakness() + 4)) {
 			System.out.println("		[주의] 현재 레벨에 비해 몬스터가 너무 약합니다!");
@@ -41,7 +40,6 @@ public class Events {
 					"		> " + (m.getGoldWorth() / 3) + " 골드와 경험치" + (m.getExpWorth() / 3) + " 을(를) 획득했습니다.");
 			System.out.println("	└+++++++++++++++++++++++++++++++++++++++++++++++┘");
 			p.checkLevelUp();
-			p.showStatus();
 
 		} else if (p.getCurrentLevel() > (m.getWeakness() + 5)) {
 			System.out.println("		[주의] 약한 몬스터 좀 그만 괴롭혀");
@@ -52,7 +50,6 @@ public class Events {
 			System.out.println("		> 경험치와 골드를 얻지 못했습니다.");
 			System.out.println("	└+++++++++++++++++++++++++++++++++++++++++++++++┘");
 			p.checkLevelUp();
-			p.showStatus();
 
 		} else {
 			p.setGold(p.getGold() + m.getGoldWorth());
@@ -60,33 +57,84 @@ public class Events {
 			System.out.println("		> " + m.getGoldWorth() + " 골드와 경험치" + m.getExpWorth() + " 을(를) 획득했습니다.");
 			System.out.println("	└+++++++++++++++++++++++++++++++++++++++++++++++┘");
 			p.checkLevelUp();
-			p.showStatus();
 
 		}
 
 	}
 
+	// 보스 사냥 성공시 추가 보상
+	void bonusRewordsKillBoss(Player p, Monster m) {
+
+		p.setGold(p.getGold() + (m.getWeakness() * 200));
+		p.setCurrentExp(p.getCurrentExp() + (m.getWeakness() * 50));
+		System.out.println("\n\n");
+		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("	┃		보스 토벌 성공!		┃");
+		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("	>토벌 보상으로" + (m.getWeakness() * 200) + " Gold가 추가 지급됩니다.");
+		System.out.println("	>토벌 보상으로" + (m.getWeakness() * 50) + " Exp가 추가 지급됩니다.");
+		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\n\n");
+		p.checkLevelUp();
+	}
+	
+	void morePenaltyDieBossBattle(Player p, Monster m) {
+		
+		if ((p.getGold() - (m.getWeakness() * 200)) > 0) {
+			p.setGold(p.getGold() - (m.getWeakness() * 200));
+			
+		}else if((p.getGold() - (m.getWeakness() * 200)) <= 0) {
+			p.setGold(0);
+		}
+		
+		if(p.getCurrentExp() - (m.getWeakness() * 50) >0) {
+			p.setCurrentExp(p.getCurrentExp() - (m.getWeakness() * 50));
+		}else if (p.getCurrentExp() - (m.getWeakness() * 50) <= 0) {
+			p.setCurrentExp(0);
+		}
+		
+		System.out.println("\n\n");
+		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("	┃		보스 토벌 실패..		┃");
+		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("	>토벌 실패로 인해" + (m.getWeakness() * 200) + " Gold를 잃어버렸습니다.");
+		System.out.println("	>소지금 : " + p.getGold() + " Gold");
+		System.out.println("	>토벌 실패로 인해" + (m.getWeakness() * 50) + " Exp를 잃어버렸습니다.");
+		System.out.println("	>현재 경험치 : " + p.getCurrentExp());
+		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\n\n");
+
+			// 패널티를 지불할 충분한 골드가 없을 시
+
+//
+	}
+
 	// 패배 시
 	void penaltyOfDeath(Player p) {
-		
+
 		System.out.println("	┼===============================================┼");
 		System.out.println("	    쓰러져있던 플레이어를 마을로 긴급 이송합니다. : 이송 비용 발생");
 		System.out.println();
 
 		// 패널티를 지불할 충분한 골드가 있을 시
-//		if ((p.getGold() - (p.getCurrentLevel() * 100)) > 0) {
-		p.setGold(p.getGold() - (p.getCurrentLevel() * 100));
-		p.invenCurrentHealth = p.invenCurrentHealth + (int) (p.invenMaxHealth * 0.5);
-		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("	>이송 비용으로 " + (p.getCurrentLevel() * 100) + " Gold가 청구됩니다.	┃");
-		System.out.println("	>남은 골드 : " + p.getGold()+"			┃"); 
-		System.out.println("	>최대 체력의 절반이 회복되었습니다.	┃");
-		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		if ((p.getGold() - (p.getCurrentLevel() * 100)) > 0) {
+			p.setGold(p.getGold() - (p.getCurrentLevel() * 100));
+			p.invenCurrentHealth = p.invenCurrentHealth + (int) (p.invenMaxHealth * 0.5);
+			System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("	>이송 비용으로 " + (p.getCurrentLevel() * 100) + " Gold가 청구됩니다.	┃");
+			System.out.println("	>남은 골드 : " + p.getGold() + "			┃");
+			System.out.println("	>최대 체력의 절반이 회복되었습니다.	┃");
+			System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 
-		// 패널티를 지불할 충분한 골드가 없을 시
-//		} else if ((p.getGold() - (p.getCurrentLevel() * 100)) < 0) {
-//			System.out.println("이송 비용을 지불할 소지금이 부족합니다.");
-//		}
+			// 패널티를 지불할 충분한 골드가 없을 시
+		} else if ((p.getGold() - (p.getCurrentLevel() * 100)) < 0) {
+			System.out.println("	이송 비용을 지불할 소지금이 부족합니다.");
+			System.out.println("	가장 최근에 저장한 세이브 파일을 불러옵니다.");
+			p.loadPlayer();
+
+		}
 //
 	}
 

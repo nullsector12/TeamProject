@@ -227,6 +227,7 @@ public class Player extends Entity {
 	void showStatus() {
 
 		calEquipStat();
+//		System.out.println("\n\n\n\n\n\n\n");
 		System.out.println("	┏━━━━━━━━Player Status━━━━━━━━┓");
 		System.out.println("	┃	 	      	      ┃");
 		System.out.println("	>	플레이어 이름 : " + getName() + "	<");
@@ -237,6 +238,7 @@ public class Player extends Entity {
 		System.out.println("	>	EXP : " + currentExp + "/" + levelUpExp + "	<");
 		System.out.println("	>	소지금 : " + gold + " Gold<");
 		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\n\n");
 	}
 
 	// 포션구매 메서드
@@ -252,45 +254,45 @@ public class Player extends Entity {
 		switch (i) {
 		case 1:
 			if (potion.get(0).price * num > gold) {
-				System.out.println("골드가 부족하여 구매할수없습니다.");
+				System.out.println("	골드가 부족하여 구매할수없습니다.");
 				break;
 			}
-			potion.set(0, new Potion("소형 체력 물약", 30, (potion.get(0).pNum) + num, 20));
+			potion.set(0, new Potion("소형 체력 포션", 30, (potion.get(0).pNum) + num, 20));
 
 			gold = gold - 20 * num;
 			System.out.println(potion.get(i - 1).pName + ", " + potion.get(i - 1).pNum);
 
 			System.out.println(potion.toString());
-			System.out.println("포션을 구매하였습니다.");
+			System.out.println("	포션을 구매하였습니다.");
 
 			break;
 
 		case 2:
 			if (potion.get(1).price * num > gold) {
-				System.out.println("골드가 부족하여 구매할수없습니다.");
+				System.out.println("	골드가 부족하여 구매할수없습니다.");
 				break;
 			}
-			potion.set(1, new Potion("중형 체력 물약", 60, (potion.get(1).pNum) + num, 30));
+			potion.set(1, new Potion("중형 체력 포션", 60, (potion.get(1).pNum) + num, 30));
 
 			gold = gold - 30 * num;
 			System.out.println(potion.get(i - 1).pName + ", " + potion.get(i - 1).pNum);
 
 			System.out.println(potion.toString());
-			System.out.println("포션을 구매하였습니다.");
+			System.out.println("	포션을 구매하였습니다.");
 
 			break;
 		case 3:
 			if (potion.get(2).price * num > gold) {
-				System.out.println("골드가 부족하여 구매할수없습니다.");
+				System.out.println("	골드가 부족하여 구매할수없습니다.");
 				break;
 			}
-			potion.set(2, new Potion("대형 체력 물약", 150, (potion.get(2).pNum) + num, 60));
+			potion.set(2, new Potion("	대형 체력 포션", 150, (potion.get(2).pNum) + num, 60));
 
 			gold = gold - 60 * num;
 			System.out.println(potion.get(i - 1).pName + ", " + potion.get(i - 1).pNum);
 
 			System.out.println(potion.toString());
-			System.out.println("포션을 구매하였습니다.");
+			System.out.println("	포션을 구매하였습니다.");
 
 			break;
 
@@ -303,7 +305,7 @@ public class Player extends Entity {
 
 		switch (i) {
 		case 1:
-			potion.set(0, new Potion("소형 체력 물약", 30, (potion.get(0).pNum) - 1, 20));
+			potion.set(0, new Potion("	소형 체력 포션", 30, (potion.get(0).pNum) - 1, 20));
 
 			// 체력 증가 세터
 //
@@ -322,7 +324,7 @@ public class Player extends Entity {
 			break;
 
 		case 2:
-			potion.set(1, new Potion("중형 체력 물약", 60, (potion.get(1).pNum) - 1, 30));
+			potion.set(1, new Potion("	중형 체력 포션", 60, (potion.get(1).pNum) - 1, 30));
 
 			// 체력 증가 세터
 //			setCurrentHealth(getCurrentHealth() + 60);
@@ -339,7 +341,7 @@ public class Player extends Entity {
 
 			break;
 		case 3:
-			potion.set(2, new Potion("대형 체력 물약", 150, (potion.get(2).pNum) - 1, 60));
+			potion.set(2, new Potion("	대형 체력 포션", 150, (potion.get(2).pNum) - 1, 60));
 
 			// 체력 증가 세터
 
@@ -370,140 +372,140 @@ public class Player extends Entity {
 		switch (select) {
 		case 1:
 
-			if (A1.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (A1.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - A1.gold;
+			setGold(getGold() - A1.gold);
 			inven.addEquipment(A1);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 2:
 
-			if (A2.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (A2.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - A2.gold;
+			setGold(getGold() - A2.gold);
 
 			inven.addEquipment(A2);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 3:
-			if (B1.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (B1.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - B1.gold;
+			setGold(getGold() - B1.gold);
 
 			inven.addEquipment(B1);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 4:
-			if (B2.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (B2.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - B2.gold;
+			setGold(getGold() - B2.gold);
 
 			inven.addEquipment(B2);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 5:
-			if (B3.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (B3.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - B3.gold;
+			setGold(getGold() - B3.gold);
 
 			inven.addEquipment(B3);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 6:
-			if (C1.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (C1.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - C1.gold;
+			setGold(getGold() - C1.gold);
 
 			inven.addEquipment(C1);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 7:
-			if (C2.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (C2.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - C2.gold;
+			setGold(getGold() - C2.gold);
 
 			inven.addEquipment(C2);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 8:
 
-			if (C3.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (C3.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 
 				break;
 			}
-			gold = gold - C3.gold;
+			setGold(getGold() - C3.gold);
 
 			inven.addEquipment(C3);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 9:
-			if (D1.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (D1.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - D1.gold;
+			setGold(getGold() - D1.gold);
 
 			inven.addEquipment(D1);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 10:
-			if (D2.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (D2.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - D2.gold;
+			setGold(getGold() - D2.gold);
 
 			inven.addEquipment(D2);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 
 		case 11:
-			if (D3.gold > gold) {
-				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+			if (D3.gold > getGold()) {
+				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
 				break;
 			}
-			gold = gold - D3.gold;
+			setGold(getGold() - D3.gold);
 
 			inven.addEquipment(D3);
-			System.out.println("장비를 구매하였습니다.");
+			System.out.println("	장비를 구매하였습니다.");
 
 			break;
 		default:
-			System.out.println("잘못 선택하셨습니다.");
+			System.out.println("	잘못 선택하셨습니다.");
 			break;
 
 		}
@@ -512,11 +514,11 @@ public class Player extends Entity {
 
 	public void sellItem() {
 
-		System.out.println("=======================================");
-		System.out.println("판매할 장비를 골라주세요.");
-		System.out.println("=======================================");
+		System.out.println("	=======================================");
+		System.out.println("	판매할 장비를 골라주세요.");
+		System.out.println("	=======================================");
 
-		System.out.println("0. 마을로 돌아가기");
+		System.out.println("	0. 마을로 돌아가기");
 
 		int select = sc.nextInt();
 
@@ -528,7 +530,7 @@ public class Player extends Entity {
 		setGold(getGold() + inven.inven.get(select - 1).gold);
 		inven.inven.remove(select - 1);
 
-		System.out.println("판매 되었습니다.");
+		System.out.println("	판매 되었습니다.");
 
 	}
 

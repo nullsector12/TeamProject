@@ -119,7 +119,6 @@ public class Monster extends Entity {// 이름 랜덤하게 나오도록
 	}
 
 	public void setWeakness(int i) {// 몬스터 회피
-		i *= rand.nextInt(10) + 1;
 		weakness = i;
 	}
 
@@ -198,13 +197,21 @@ public class Monster extends Entity {// 이름 랜덤하게 나오도록
 		System.out.println("	현재 스테이지: " + this.getStage());// 1-1 형식으로 바꿔야됨
 		System.out.println("	몬스터 이름: " + this.getName());
 		System.out.println("	공격력 : " + this.getCurrentStrength());
-		System.out.println("	체력: " + this.getCurrentHealth());
+		System.out.println("	현재 체력: " + this.getCurrentHealth());
 //		System.out.println("	획득 가능 경험치: " + this.getExpWorth());
 //		System.out.println("	획득 가능 골드: " + this.getGoldWorth());
 //		System.out.println("	회피율: " + this.getEvasion() + "%");
 //		System.out.println("방어력: " + this.getDefense());
 //		System.out.println("	강함 : " + this.getWeakness());
 
+	}
+	void showMonsterDetail() {
+		System.out.println("	▶ 몬스터 이름: " + this.getName());
+		System.out.println("	▶ 공격력 : " + this.getCurrentStrength());
+		System.out.println("	▶ 현재 체력: " + this.getCurrentHealth());
+		System.out.println("	▶ 회피율: " + this.getEvasion() + "%");
+		System.out.println("	▶ 획득 가능 경험치: " + this.getExpWorth());
+		System.out.println("	▶ 획득 가능 골드: " + this.getGoldWorth());
 	}
 
 	@Override
@@ -214,7 +221,7 @@ public class Monster extends Entity {// 이름 랜덤하게 나오도록
 	}
 
 	void printName() {
-		System.out.println(getName() + "을(를) 만났습니다");
+		System.out.println("	▶ "+getName() + "을(를) 만났습니다");
 	}
 
 	// ==========================================================05/07 추가 메서드
