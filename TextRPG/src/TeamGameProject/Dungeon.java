@@ -122,6 +122,7 @@ public class Dungeon {
 				win = e.takeDie(p);
 
 			} else if (result == 2) {
+				e.morePenaltyDieBossBattle(p, m);
 				System.out.println("	========================= ");
 				System.out.println("	│     마을로 돌아갑니다.	│");
 				System.out.println("	=========================");

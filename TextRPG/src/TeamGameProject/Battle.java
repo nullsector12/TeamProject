@@ -43,7 +43,7 @@ public class Battle {
 	// 공격을 정의한다.
 	void playerAttack(Player p, Monster m) {
 
-		damage = (p.invenCurrentStrength) * 3;
+		damage = (p.invenCurrentStrength);
 
 		if (monsterEvasion(m)) {
 			System.out.println("	" + m.getName() + " 이(가) 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
