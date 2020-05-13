@@ -2,7 +2,7 @@
 
 Adventure In The JAVA
 
-참고 Git  https://github.com/TomaQ/TextRPG / https://github.com/Teejosity/HelloWorld
+참고 Git : https://github.com/TomaQ/TextRPG / https://github.com/Teejosity/HelloWorld
 
 
 Team J.J.J
