@@ -2,6 +2,9 @@
 
 Adventure In The JAVA
 
+참고 Git  https://github.com/TomaQ/TextRPG / https://github.com/Teejosity/HelloWorld
+
+
 Team J.J.J
 첫 JAVA 팀프로젝트 : 텍스트 RPG
 마지막 업데이트 일시 : 2020. 05. 12.
