@@ -90,7 +90,7 @@ public class Store {
 				return;
 			}
 
-			p.buyEquipment(select);
+			p.getInven().buyEquipment(p, select);
 			break;
 
 		case 3:
@@ -111,27 +111,27 @@ public class Store {
 
 			if (select == 1) {
 
-				skill = p.Skill1;
+				skill = p.getSkill1();
 
 			} else if (select == 2) {
 
-				skill = p.Skill2;
+				skill = p.getSkill2();
 
 			} else if (select == 3) {
 
-				skill = p.Skill3;
+				skill = p.getSkill3();
 
 			}
 
-			p.skillInven.buySkill(p, skill);
+			p.getSkillInven().buySkill(p, skill);
 
-			p.skillInven.showSkill();
+			p.getSkillInven().showSkill();
 
 			break;
 		case 4:
 
-			p.inven.showInventory();
-			p.sellItem();
+			p.getInven().showInventory();
+			p.getInven().sellItem(p);
 
 			break;
 

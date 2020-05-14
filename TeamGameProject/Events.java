@@ -76,7 +76,7 @@ public class Events {
 		// 패널티를 지불할 충분한 골드가 있을 시
 //		if ((p.getGold() - (p.getCurrentLevel() * 100)) > 0) {
 		p.setGold(p.getGold() - (p.getCurrentLevel() * 100));
-		p.invenCurrentHealth = p.invenCurrentHealth + (int) (p.invenMaxHealth * 0.5);
+		p.setInvenCurrentHealth(p.getInvenCurrentHealth() + (int) (p.getInvenMaxHealth() * 0.5));
 		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
 		System.out.println("	>이송 비용으로 " + (p.getCurrentLevel() * 100) + " Gold가 청구됩니다.	┃");
 		System.out.println("	>남은 골드 : " + p.getGold()+"			┃"); 
@@ -93,7 +93,7 @@ public class Events {
 	// 계속 진행하시겠습니까?
 	public boolean takeDie(Player p) {
 
-		if (p.invenCurrentHealth <= 0) {
+		if (p.getInvenCurrentHealth() <= 0) {
 			// 새로운 쓰레드
 			Thread death = new Thread() {
 				@Override

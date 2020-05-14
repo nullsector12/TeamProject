@@ -3,6 +3,8 @@ package items;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import TeamGameProject.Player;
+
 public class Inven {
 
 	int check = -1;
@@ -61,10 +63,45 @@ public class Inven {
 		}
 
 	}
+	public void equipItem(Player p) {
 
+		System.out.println("	=======================================");
+		System.out.println("	장착할 장비를 골라주세요.");
+		System.out.println("	=======================================");
 
-	
-	// 장비 장착 메서드
+		System.out.println("	0. 마을로 돌아가기");
+
+		int select = sc.nextInt();
+
+		sc.nextLine();
+
+		if (select == 0) {
+			return;
+		}
+
+		checkType(inven.get((select - 1)).equipmentType); // 장비 타입 비교해서 중복된 타입일 시 장비 반환
+
+		equip.add(inven.get((select - 1)));
+
+		System.out.println(inven.get((select - 1)).equipmentName + "장착");
+
+		inven.remove((select - 1));
+
+		int dmg = p.getInvenMaxHealth() - p.getInvenCurrentHealth();
+
+		p.calEquipStat();
+		System.out.println("	+ 장비 공격력 : " + equipPower + ", " + "+ 장비 체력 : " + equipHealth + ", "
+				+ "+ 장비 회피율 : " + equipEvasion);
+		p.setInvenCurrentStrength(p.getCurrentStrength() + equipPower);
+		p.setInvenMaxHealth(p.getMaxHealth() + equipHealth);
+		p.setInvenCurrentHealth(p.getCurrentHealth() + equipHealth - dmg);
+		p.setInvenCurrentEvasion(p.getEvasion() + equipEvasion);
+
+		showInventory();
+		showEquip();
+
+	}
+
 
 	// 장비타입을 비교해서 인벤토리로 장착하던 장비 반환
 	public void checkType(int checkNum) {
@@ -82,5 +119,171 @@ public class Inven {
 		}
 
 	}
+	
+	public void buyEquipment(Player p, int select) {
+		switch (select) {
+		case 1:
+
+			if (p.getA1().gold > p.getGold()) {
+				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+				break;
+			}
+			p.setGold(p.getGold() - p.getA1().gold);
+			addEquipment(p.getA1());
+			System.out.println("장비를 구매하였습니다.");
+
+			break;
+
+		case 2:
+
+			if (p.getA2().gold > p.getGold()) {
+				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+				break;
+			}
+			p.setGold(p.getGold() - p.getA2().gold);
+			addEquipment(p.getA2());
+			System.out.println("장비를 구매하였습니다.");
+
+			break;
+
+		case 3:
+			if (p.getB1().gold > p.getGold()) {
+				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+				break;
+			}
+			p.setGold(p.getGold() - p.getB1().gold);
+			addEquipment(p.getB1());
+			System.out.println("장비를 구매하였습니다.");
+
+			break;
+
+		case 4:
+			if (p.getB2().gold > p.getGold()) {
+				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+				break;
+			}
+			p.setGold(p.getGold() - p.getB2().gold);
+			addEquipment(p.getB2());
+			System.out.println("장비를 구매하였습니다.");
+
+			break;
+
+		case 5:
+			if (p.getB3().gold > p.getGold()) {
+				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+				break;
+			}
+			p.setGold(p.getGold() - p.getB3().gold);
+			addEquipment(p.getB3());
+			System.out.println("장비를 구매하였습니다.");
+
+			break;
+
+		case 6:
+			if (p.getC1().gold > p.getGold()) {
+				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+				break;
+			}
+			p.setGold(p.getGold() - p.getC1().gold);
+			addEquipment(p.getC1());
+			System.out.println("장비를 구매하였습니다.");
+
+			break;
+
+		case 7:
+			if (p.getC2().gold > p.getGold()) {
+				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+				break;
+			}
+			p.setGold(p.getGold() - p.getC2().gold);
+			addEquipment(p.getC2());
+			System.out.println("장비를 구매하였습니다.");
+
+			break;
+
+		case 8:
+			if (p.getC3().gold > p.getGold()) {
+				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+				break;
+			}
+			p.setGold(p.getGold() - p.getC3().gold);
+			addEquipment(p.getC3());
+			System.out.println("장비를 구매하였습니다.");
+
+			break;
+
+		case 9:
+			if (p.getD1().gold > p.getGold()) {
+				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+				break;
+			}
+			p.setGold(p.getGold() - p.getD1().gold);
+			addEquipment(p.getD1());
+			System.out.println("장비를 구매하였습니다.");
+
+			break;
+
+		case 10:
+			if (p.getD2().gold > p.getGold()) {
+				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+				break;
+			}
+			p.setGold(p.getGold() - p.getD2().gold);
+			addEquipment(p.getD2());
+			System.out.println("장비를 구매하였습니다.");
+
+			break;
+
+		case 11:
+			if (p.getD3().gold > p.getGold()) {
+				System.out.println("골드가 부족하여 구매할 수 없습니다.");
+				break;
+			}
+			p.setGold(p.getGold() - p.getD3().gold);
+			addEquipment(p.getD3());
+			System.out.println("장비를 구매하였습니다.");
+
+			break;
+		default:
+			System.out.println("잘못 선택하셨습니다.");
+			break;
+
+		}
+
+	}
+
+	public void sellItem(Player p) {
+
+		System.out.println("=======================================");
+		System.out.println("판매할 장비를 골라주세요.");
+		System.out.println("=======================================");
+
+		System.out.println("0. 마을로 돌아가기");
+
+		int select = sc.nextInt();
+
+		sc.nextLine();
+
+		if (select == 0) {
+			return;
+		}
+		p.setGold(p.getGold() + inven.get(select - 1).gold);
+		inven.remove(select - 1);
+
+		System.out.println("판매 되었습니다.");
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

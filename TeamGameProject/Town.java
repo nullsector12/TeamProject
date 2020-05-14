@@ -122,15 +122,13 @@ public class Town {
 					// d.p.setCurrentHealth(d.p.invenCurrentHealth + (int) (d.p.invenMaxHealth *
 					// 1.15));
 
-					d.p.invenCurrentHealth = d.p.invenCurrentHealth + (int) (d.p.invenMaxHealth * 0.15);
-					if (d.p.invenCurrentHealth > d.p.invenMaxHealth) {
-						// d.p.setCurrentHealth(d.p.getMaxHealth());
-						d.p.invenCurrentHealth = d.p.invenMaxHealth;
-
+					d.p.setInvenCurrentHealth(d.p.getInvenCurrentHealth() + (int) (d.p.getInvenMaxHealth() * 0.15));
+					if (d.p.getInvenCurrentHealth() > d.p.getInvenMaxHealth()) {
+						d.p.setInvenCurrentHealth(d.p.getInvenMaxHealth());
 					}
 					System.out.println("	값이 싼 만큼 찬 바람이 그대로 느껴지지만 지붕이 있다는 것에 만족하며 잠에 듭니다.");
 					System.out.println("	체력이 미량 회복되었습니다.");
-					System.out.println("	현재 체력 : " + d.p.invenCurrentHealth);
+					System.out.println("	현재 체력 : " + d.p.getInvenCurrentHealth());
 
 				} else {
 					System.out.println("	system : 소지금이 부족합니다.");
@@ -145,15 +143,15 @@ public class Town {
 					System.out.println("	현재 소지금 : " + d.p.getGold());
 					// d.p.setCurrentHealth(d.p.invenCurrentHealth + (int) (d.p.invenMaxHealth *
 					// 1.25));
-					d.p.invenCurrentHealth = d.p.invenCurrentHealth + (int) (d.p.invenMaxHealth * 0.25);
 
-					if (d.p.invenCurrentHealth > d.p.invenMaxHealth) {
-						// d.p.setCurrentHealth(d.p.getMaxHealth());
-						d.p.invenCurrentHealth = d.p.invenMaxHealth;
+					d.p.setInvenCurrentHealth(d.p.getInvenCurrentHealth() + (int) (d.p.getInvenMaxHealth() * 0.25));
+
+					if (d.p.getInvenCurrentHealth() > d.p.getInvenMaxHealth()) {
+						d.p.setInvenCurrentHealth(d.p.getInvenMaxHealth());
 					}
 					System.out.println("	짚으로 만든 잠자리에 몸을 뉘우고 조각천을 대충 기워놓은 엉성한 이불을 덮고 잠에 듭니다.");
 					System.out.println("	체력이 소량 회복되었습니다.");
-					System.out.println("	현재 체력 : " + d.p.invenCurrentHealth);
+					System.out.println("	현재 체력 : " + d.p.getInvenCurrentHealth());
 
 				} else {
 					System.out.println("	system : 소지금이 부족합니다.");
@@ -169,15 +167,14 @@ public class Town {
 					// d.p.setCurrentHealth(d.p.invenCurrentHealth + (int) (d.p.invenMaxHealth *
 					// 1.45));
 
-					d.p.invenCurrentHealth = d.p.invenCurrentHealth + (int) (d.p.invenMaxHealth * 0.45);
+					d.p.setInvenCurrentHealth(d.p.getInvenCurrentHealth() + (int) (d.p.getInvenMaxHealth() * 0.45));
 
-					if (d.p.invenCurrentHealth > d.p.invenMaxHealth) {
-						// d.p.setCurrentHealth(d.p.getMaxHealth());
-						d.p.invenCurrentHealth = d.p.invenMaxHealth;
+					if (d.p.getInvenCurrentHealth() > d.p.getInvenMaxHealth()) {
+						d.p.setInvenCurrentHealth(d.p.getInvenMaxHealth());
 					}
 					System.out.println("	적당히 푹신한 침대와 적당히 따뜻한 이불을 덮고 잠에 듭니다.");
 					System.out.println("	체력이 회복되었습니다.");
-					System.out.println("	현재 체력 : " + d.p.invenCurrentHealth);
+					System.out.println("	현재 체력 : " + d.p.getInvenCurrentHealth());
 				} else {
 					System.out.println("	system : 소지금이 부족합니다.");
 					System.out.println("	여관 주인 : 돈이 없으면 나가서 주무세연.");
@@ -192,14 +189,14 @@ public class Town {
 					System.out.println("현재 소지금 : " + d.p.getGold());
 					// d.p.setCurrentHealth(d.p.invenCurrentHealth + (int) (d.p.invenMaxHealth *
 					// 1.65));
-					d.p.invenCurrentHealth = d.p.invenCurrentHealth + (int) (d.p.invenMaxHealth * 0.65);
-					if (d.p.invenCurrentHealth > d.p.invenMaxHealth) {
-						// d.p.setCurrentHealth(d.p.getMaxHealth());
-						d.p.invenCurrentHealth = d.p.invenMaxHealth;
+					d.p.setInvenCurrentHealth(d.p.getInvenCurrentHealth() + (int) (d.p.getInvenMaxHealth() * 0.65));
+
+					if (d.p.getInvenCurrentHealth() > d.p.getInvenMaxHealth()) {
+						d.p.setInvenCurrentHealth(d.p.getInvenMaxHealth());
 					}
 					System.out.println("	꽤 푹신한 침대와 이불이 반겨줍니다. 오랜만에 편안한 잠자리에 들 수 있을 것 같습니다.");
 					System.out.println("	체력이 대량 회복되었습니다.");
-					System.out.println("	현재 체력 : " + d.p.invenCurrentHealth);
+					System.out.println("	현재 체력 : " + d.p.getInvenCurrentHealth());
 				} else {
 					System.out.println("	system : 소지금이 부족합니다.");
 					System.out.println("	여관 주인 : 돈이 없으면 나가서 주무세연.");
@@ -213,11 +210,11 @@ public class Town {
 					System.out.println("	현재 소지금 : " + d.p.getGold());
 					// d.p.setCurrentHealth(d.p.getMaxHealth());
 
-					d.p.invenCurrentHealth = d.p.invenMaxHealth;
+					d.p.setInvenCurrentHealth(d.p.getInvenMaxHealth());
 
 					System.out.println("	돈이 남아 돕니까 휴먼?");
 					System.out.println("	체력이 전부 회복되었습니다.");
-					System.out.println("	현재 체력 : " + d.p.invenCurrentHealth);
+					System.out.println("	현재 체력 : " + d.p.getInvenCurrentHealth());
 				} else {
 					System.out.println("	system : 소지금이 부족합니다.");
 					System.out.println("	여관 주인 : 돈이 없으면 나가서 주무세연.");

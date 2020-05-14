@@ -6,11 +6,11 @@ public class Inventory {
 
 	public void Inventory(Player p) {
 
-		p.inven.showInventory();
+		p.getInven().showInventory();
 		System.out.println("=============================================");
 		p.showPotion();
-		p.inven.showEquip();
-		p.equipItem();
+		p.getInven().showEquip();
+		p.getInven().equipItem(p);
 
 	}
 

@@ -26,7 +26,7 @@ public class Battle {
 	// 스킬 정의
 	void playerUseSkills(Player p, Monster m, Skill s) {
 
-		damage = (p.invenCurrentStrength) * 3 * s.multiple;
+		damage = (p.getInvenCurrentStrength()) * 3 * s.multiple;
 
 		if (monsterEvasion(m)) {
 			System.out.println("몬스터가 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
@@ -39,7 +39,7 @@ public class Battle {
 	// 공격을 정의한다.
 	void playerAttack(Player p, Monster m) {
 
-		damage = (p.invenCurrentStrength) * 3;
+		damage = (p.getInvenCurrentStrength()) * 3;
 
 		if (monsterEvasion(m)) {
 			System.out.println("	" + m.getName() + " 이(가) 플레이어의 공격을 회피했습니다! 데미지가 0이 됩니다.");
@@ -64,9 +64,9 @@ public class Battle {
 		monsterDamage = m.getCurrentStrength();
 		playerDefense = (int) ((Math.random() * m.getCurrentStrength()) + p.getCurrentLevel());
 		depenseDmg = monsterDamage - playerDefense;
-		p.invenCurrentHealth = p.invenCurrentHealth - depenseDmg;
+		p.setInvenCurrentHealth(p.getInvenCurrentHealth() - depenseDmg);
 
-		System.out.println("	"+depenseDmg + " 방어" + p.getName() + " 플레이어님의 체력은:" + p.invenCurrentHealth);
+		System.out.println("	"+depenseDmg + " 방어" + p.getName() + " 플레이어님의 체력은:" + p.getInvenCurrentHealth());
 	}
 
 	// 몬스터의 공격
@@ -78,11 +78,10 @@ public class Battle {
 			System.out.println("	플레이어가" + m.getName() + "	의 공격을 회피했습니다! 데미지가 0이 됩니다.");
 			monsterDamage = 0;
 		}
+		p.setInvenCurrentHealth(p.getInvenCurrentHealth() - monsterDamage);
 
-		p.invenCurrentHealth = p.invenCurrentHealth - monsterDamage;
-
-		if (p.invenCurrentHealth < 0)
-			p.invenCurrentHealth = 0;
+		if (p.getInvenCurrentHealth() < 0)
+			p.setInvenCurrentHealth(0);
 
 //		p.setCurrentHealth(p.getCurrentHealth() - mdmg);
 //		
@@ -90,14 +89,14 @@ public class Battle {
 		System.out.println();
 		System.out.println("	┌──────────────────────────────────────────────┐");
 		System.out.println("	>" + m.getName() + " 에게	\n" + "	>" + monsterDamage + "의 데미지를 받았습니다! 플레이어의 현재 체력 :"
-				+ (p.invenCurrentHealth));
+				+ (p.getInvenCurrentHealth()));
 		System.out.println("	└──────────────────────────────────────────────┘");
 	}
 
 //회피를 정의 한다.	
 	boolean playerEvasion(Player p) {
 
-		if ((rand.nextInt(100) + 1) <= p.invenCurrentEvasion) {
+		if ((rand.nextInt(100) + 1) <= p.getInvenCurrentEvasion()) {
 			return pass = true;
 		} else {
 			return pass = false;
@@ -131,7 +130,7 @@ public class Battle {
 
 				playerAttack(p, m);
 				monsterAttack(p, m);
-				if (p.invenCurrentHealth <= 0) {
+				if (p.getInvenCurrentHealth() <= 0) {
 
 					// 패배 시 result = 1;
 					result = 1;
@@ -151,24 +150,24 @@ public class Battle {
 
 				System.out.println("	사용할 스킬을 골라주세요");
 
-				p.skillInven.showSkill();
+				p.getSkillInven().showSkill();
 
 				int skillSelect = 0;
 
 				skillSelect = (bt.nextInt() - 1);
 				bt.nextLine();
 
-				if (p.skillInven.skill.get(skillSelect).numOfChance == 0) {
+				if (p.getSkillInven().skill.get(skillSelect).numOfChance == 0) {
 					System.out.println("	기회가 남아있지않습니다.");
 					continue;
 				}
 
-				Skill s = p.skillInven.useSkill(p, skillSelect);
+				Skill s = p.getSkillInven().useSkill(p, skillSelect);
 
 				playerUseSkills(p, m, s);
 				monsterAttack(p, m);
 
-				if (p.invenCurrentHealth <= 0) {
+				if (p.getInvenCurrentHealth() <= 0) {
 
 					// 패배 시 result = 1;
 					result = 1;
@@ -188,7 +187,7 @@ public class Battle {
 			case 3:
 				// 방어를 선택하면 나만 맞음!
 				playerDefense(p, m);
-				if (p.invenCurrentHealth <= 0) {
+				if (p.getInvenCurrentHealth() <= 0) {
 
 					// 방어 했는데도 패배 시 result = 1;
 					result = 1;
