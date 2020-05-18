@@ -12,16 +12,16 @@ public class TempMain {
 		System.out.println("\n");
 		System.out.println("		  Adventure In The JAVA");
 		System.out.println();
-		System.out.println("		┏━━━━━━━━━━━━━━━━━━━━━━━┓");
-		System.out.println("		│       GAME START	│");
-		System.out.println("		┗━━━━━━━━━━━━━━━━━━━━━━━┛");
-		System.out.println("		┣───────────────────────┫");
-		System.out.println("		│     1.New Player	│");
-		System.out.println("		┣───────────────────────┫");
-		System.out.println("		│     2.Load Data	│");
-		System.out.println("		┣───────────────────────┫");
-		System.out.println("		│     3.Exit Game	│");
-		System.out.println("		┗───────────────────────┛");
+		System.out.println("		┏━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("		│       	GAME START		│");
+		System.out.println("		┗━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("		┣────────────────────┫");
+		System.out.println("		│     		1.New Player		│");
+		System.out.println("		┣────────────────────┫");
+		System.out.println("		│     		2.Load Data		│");
+		System.out.println("		┣────────────────────┫");
+		System.out.println("		│     		3.Exit Game		│");
+		System.out.println("		┗────────────────────┛");
 		
 		choice = sc.nextInt();
 		

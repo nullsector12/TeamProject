@@ -78,7 +78,7 @@ public class Dungeon {
 				break;
 			}
 
-			int result = b.choicePlayerMovement(m, p);
+			int result = b.choicePlayerMovement(this, p);
 
 			if (result == 0) {// result==1(몬스터 체력0이하일때=몬스터 죽었을 때)로 변경
 				switch (num) {
@@ -209,7 +209,7 @@ public class Dungeon {
 			break;
 		}
 
-		int win = b.choicePlayerMovement(m, p);
+		int win = b.choicePlayerMovement(this, p);
 
 		if (num == 3 && win == 0) {
 			e.rewordsOfVictory(p, m);
@@ -258,7 +258,7 @@ public class Dungeon {
 			break;
 		}
 
-		int win = b.choicePlayerMovement(m, p);
+		int win = b.choicePlayerMovement(this, p);
 
 		if (num == 3 && win == 0) {
 			e.rewordsOfVictory(p, m);
@@ -302,7 +302,7 @@ public class Dungeon {
 			break;
 		}
 
-		int win = b.choicePlayerMovement(m, p);
+		int win = b.choicePlayerMovement(this, p);
 
 		if (num == 3 && win == 0) {
 			e.rewordsOfVictory(p, m);
@@ -441,7 +441,6 @@ public class Dungeon {
 		}
 
 		randMonster = monsters.get(randIndex);
-		System.out.println("\n" + "	▶ " + m.getName() + " 을(를) 만났습니다");
 		System.out.println("\n");
 		return randMonster;
 

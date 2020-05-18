@@ -15,20 +15,20 @@ public class Town {
 
 		while (true) {
 			System.out.println("\n");
-			System.out.println("	++++++++	JAVA TOWN	+++++++++");
+			System.out.println("	+++++++	JAVA TOWN	+++++++++");
 			System.out.println("	│					│");
-			System.out.println("	│	          무엇을 하시겠습니까?		│");
+			System.out.println("	│	         무엇을 하시겠습니까?		│");
 			System.out.println("	│					│");
 			System.out.println("	│	  1. 던전 가기			│");
-			System.out.println("	│	  2. 캐릭터 정보			│");
+			System.out.println("	│	  2. 캐릭터 정보		│");
 			System.out.println("	│	  3. 장비창			│");
 			System.out.println("	│	  4. 상점 이용			│");
 			System.out.println("	│	  5. 여관 이용 (체력 회복 가능)	│");
-			System.out.println("	│	  6. 현재 데이터 저장하기		│");
-			System.out.println("	│	  7. 이전 데이터 불러오기		│");
+			System.out.println("	│	  6. 현재 데이터 저장하기	│");
+			System.out.println("	│	  7. 이전 데이터 불러오기	│");
 			System.out.println("	│	  8. 게임 종료			│");
 			System.out.println("	│					│");
-			System.out.println("	+++++++++++++++++++++++++++++++++++++++++");
+			System.out.println("	++++++++++++++++++++++++++++++++++++++++");
 			System.out.println("\n\n\n\n\n\n\n");
 			int choiceMenu = input.nextInt();
 			input.nextLine();
