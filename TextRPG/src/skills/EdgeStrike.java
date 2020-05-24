@@ -18,7 +18,7 @@ public class EdgeStrike extends Skill {
 
 	@Override
 	public String toString() {
-		return "Skill [" + skillName + ", 횟수=" + numOfChance + ", 배수=" + multiple + ", 가격=" + gold + "]";
+		return "	[" + skillName + " / 횟수 : " + numOfChance + " / 배수 : " + multiple + " / 가격 : " + gold + "]";
 	}
 
 }

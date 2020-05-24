@@ -40,14 +40,20 @@ public class Dungeon {
 		switch (num) {
 		case DungeonIf.EASY:
 			result = stageEasy(p);
+<<<<<<< HEAD
+=======
+			p.skillInven.resetSkillChance();
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 
 			break;
 		case DungeonIf.NOMAL:
 			result = stageNomal(p);
+			p.skillInven.resetSkillChance();
 
 			break;
 		case DungeonIf.HARD:
 			result = stageHard(p);
+			p.skillInven.resetSkillChance();
 
 			break;
 		case 4:
@@ -75,22 +81,32 @@ public class Dungeon {
 				break;
 			}
 
-			int result = b.choicePlayerMovement(m, p);
+			int result = b.choicePlayerMovement(this, p);
 
 			if (result == 0) {// result==1(몬스터 체력0이하일때=몬스터 죽었을 때)로 변경
 				switch (num) {
+
 				case 1:
 					Thread.sleep(500);
 					System.out.println("	-----------------------------------------");
+<<<<<<< HEAD
 					System.out.println("	│	     초급 던전 보스를 처치 하셨습니다!	│");
+=======
+					System.out.println("	│	     초급 던전 보스를 처치 하셨습니다.	│");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 					System.out.println("	│	상위 난이도 던전 입장 권한이 생겼습니다.	│");
 					System.out.println("	│	       추가 보상을 획득합니다.		│");
 					System.out.println("	-----------------------------------------");
 					p.setStage2Count(1);
 					e.rewordsOfVictory(p, m);
+<<<<<<< HEAD
 					e.pulsrewordsOfBoss(p, m);
+=======
+					e.bonusRewordsKillBoss(p, m);
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 					win = true;
 					break;
+
 				case 2:
 					Thread.sleep(500);
 					System.out.println("	-----------------------------------------");
@@ -100,10 +116,15 @@ public class Dungeon {
 					System.out.println("	-----------------------------------------");
 					p.setStage3Count(1);
 					e.rewordsOfVictory(p, m);
+<<<<<<< HEAD
 					e.pulsrewordsOfBoss(p, m);
 					
+=======
+					e.bonusRewordsKillBoss(p, m);
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 					win = true;
 					break;
+
 				case 3:
 					Thread.sleep(500);
 					System.out.println("	------------------------");
@@ -111,17 +132,27 @@ public class Dungeon {
 					System.out.println("	│	마지막 보스를 클리어 하셨습니다!	│");
 					System.out.println("	------------------------");
 					e.rewordsOfVictory(p, m);
+<<<<<<< HEAD
 					e.pulsrewordsOfBoss(p, m);
+=======
+					e.bonusRewordsKillBoss(p, m);
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 					win = true;
 					break;
 				}
+<<<<<<< HEAD
 			} else if (result == 1) {
 				Thread.sleep(500);
 				System.out.println("	 _______________________________");
 				System.out.println("	/				\\");
 				System.out.println("	|	전투에서 패배하였습니다.	|");
 				System.out.println("	\\_______________________________/");
+=======
+			} else if (result == 1) { // 보스전 패배 시
+				e.morePenaltyDieBossBattle(p, m);
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 				win = e.takeDie(p);
+<<<<<<< HEAD
 				
 			} else if (result == 2) {
 				System.out.println("	보스와의 전투에서 귀환 했습니다.");
@@ -130,14 +161,21 @@ public class Dungeon {
 				win = false;
 				
 				
+=======
+
+			} else if (result == 2) {
+				e.morePenaltyDieBossBattle(p, m);
+				System.out.println("	========================= ");
+				System.out.println("	│     마을로 돌아갑니다.	│");
+				System.out.println("	=========================");
+				win = true;
+
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 			} else {
-				System.out.println("	------------------------");
-				System.out.println("	|	패배하셨습니다.	|");
-				System.out.println("	------------------------");
 				win = false;
 			}
 		}
-
+		p.skillInven.resetSkillChance();
 		return win;
 	}
 
@@ -214,13 +252,13 @@ public class Dungeon {
 			break;
 		}
 
-		int win = b.choicePlayerMovement(m, p);
+		int win = b.choicePlayerMovement(this, p);
 
 		if (num == 3 && win == 0) {
 			e.rewordsOfVictory(p, m);
 			Thread.sleep(1000);
 			System.out.println("	-----------------------------------------");
-			System.out.println("	|	스테이지를 모두 클리어 하셨습니다.	|");
+			System.out.println("	│	스테이지를 모두 클리어 하셨습니다.	│");
 			System.out.println("	-----------------------------------------");
 			Thread.sleep(500);
 			bossStage(p, 1);
@@ -229,21 +267,27 @@ public class Dungeon {
 			e.rewordsOfVictory(p, m);
 			Thread.sleep(1000);
 			System.out.println("	---------------------------------");
-			System.out.println("	|	다음 스테이지로 이동합니다.	|");
+			System.out.println("	│	다음 스테이지로 이동합니다.	│");
 			System.out.println("	---------------------------------");
 			Thread.sleep(500);
 		} else if (win == 1) {
 			Thread.sleep(500);
 			System.out.println("	 _______________________________");
 			System.out.println("	/				\\");
-			System.out.println("	|	전투에서 패배하였습니다.	|");
+			System.out.println("	│	전투에서 패배하였습니다.	│");
 			System.out.println("	\\_______________________________/");
 			result = e.takeDie(p);
 
 		} else if (win == 2) {
+<<<<<<< HEAD
 			System.out.println("	┌=======================┐");
 			System.out.println("	│      마을로 돌아갑니다.	│");
 			System.out.println("	└=======================┘");
+=======
+			System.out.println("	========================= ");
+			System.out.println("	│     마을로 돌아갑니다.	│");
+			System.out.println("	=========================");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 			result = true;
 		}
 		return result;
@@ -267,13 +311,13 @@ public class Dungeon {
 			break;
 		}
 
-		int win = b.choicePlayerMovement(m, p);
+		int win = b.choicePlayerMovement(this, p);
 
 		if (num == 3 && win == 0) {
 			e.rewordsOfVictory(p, m);
 			Thread.sleep(1000);
 			System.out.println("	-----------------------------------------");
-			System.out.println("	|	스테이지를 모두 클리어 하셨습니다.	|");
+			System.out.println("	│	스테이지를 모두 클리어 하셨습니다.	│");
 			System.out.println("	-----------------------------------------");
 			Thread.sleep(500);
 			bossStage(p, 2);
@@ -282,7 +326,7 @@ public class Dungeon {
 			e.rewordsOfVictory(p, m);
 			Thread.sleep(1000);
 			System.out.println("	---------------------------------");
-			System.out.println("	|	다음 스테이지로 이동합니다.	|");
+			System.out.println("	│	다음 스테이지로 이동합니다.	│");
 			System.out.println("	---------------------------------");
 			Thread.sleep(500);
 		} else if (win == 1) {
@@ -294,9 +338,15 @@ public class Dungeon {
 			result = e.takeDie(p);
 
 		} else if (win == 2) {
+<<<<<<< HEAD
 			System.out.println("	┌=======================┐");
 			System.out.println("	│      마을로 돌아갑니다.	│");
 			System.out.println("	└=======================┘");
+=======
+			System.out.println("	========================= ");
+			System.out.println("	│     마을로 돌아갑니다.	│");
+			System.out.println("	=========================");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 			result = true;
 		}
 		return result;
@@ -319,7 +369,7 @@ public class Dungeon {
 			break;
 		}
 
-		int win = b.choicePlayerMovement(m, p);
+		int win = b.choicePlayerMovement(this, p);
 
 		if (num == 3 && win == 0) {
 			e.rewordsOfVictory(p, m);
@@ -346,15 +396,23 @@ public class Dungeon {
 			result = e.takeDie(p);
 
 		} else if (win == 2) {
+<<<<<<< HEAD
 			System.out.println("	┌=======================┐");
 			System.out.println("	│      마을로 돌아갑니다.	│");
 			System.out.println("	└=======================┘");
+=======
+			System.out.println("	========================= ");
+			System.out.println("	│     마을로 돌아갑니다.	│");
+			System.out.println("	=========================");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 			result = true;
 		}
+
 		return result;
 	}
 
 	// 스테이지 선택
+<<<<<<< HEAD
 	int stageChoice() throws InterruptedException {
 		System.out.println("\n\n\n\n");
 		System.out.println("	┌===============================┐");
@@ -367,6 +425,18 @@ public class Dungeon {
 		System.out.println("	│  3. 상급 던전 (적정 레벨 14 ~ 30)	│");
 		System.out.println("	└===============================┘");
 		System.out.println("\n\n\n\n\n");
+=======
+	int stageChoice() {
+		System.out.println("\n\n\n\n\n\n\n");
+		System.out.println("	=================================");
+		System.out.println("	│	   던전을 선택해주세요		│");
+		System.out.println("	│				│");
+		System.out.println("	│   1. 초급 던전 (적정 레벨 1 ~ 9)	│");
+		System.out.println("	│  2. 중급 던전 (적정 레벨  8 ~ 15)	│");
+		System.out.println("	│  3. 상급 던전 (적정 레벨 14 ~ 30)	│");
+		System.out.println("	=================================");
+		System.out.println("\n\n\n\n");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 		int num = sc.nextInt();
 		sc.nextLine();
 
@@ -414,6 +484,7 @@ public class Dungeon {
 
 	boolean playBoss() throws InterruptedException {
 		boolean result = false;
+<<<<<<< HEAD
 		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		System.out.println("	+=================    C A U T I O N	================+");
 		System.out.println("	│	던전의 보스는 매우 강력하며 귀환을 시도할 시 패널티를 받습니다.	│");
@@ -429,11 +500,34 @@ public class Dungeon {
 		System.out.println("	│		      도전 (y) / 마을 복귀 (n)			│");
 		System.out.println("	│							│");
 		System.out.println("	+=======================================================+");
+=======
+		System.out.println("\n\n\n\n");
+		System.out.println("	+====================	C A U T I O N	========================+");
+		System.out.println("	│								│");
+		System.out.println("	│	         던전의 보스는 상당히 강력하며 귀환 시 패널티를 받습니다.		│");
+		System.out.println("	│	     패배 시에도 일반적인 사망 패널티보다 더 많은 골드를 잃습니다.		│");
+		System.out.println("	│	보스를 쓰러트렸을 경우에는 추가 경험치와 골드를 획득 할 수 있습니다.	│");
+		System.out.println("	│								│");
+		System.out.println("	+===============================================================+");
+		System.out.println("\n\n\n\n");
+		Thread.sleep(1000);
+		System.out.println("	+===============================================================+");
+		System.out.println("	│								│");
+		System.out.println("	│		           보스에 도전하시겠습니까? y or n			│");
+		System.out.println("	│								│");
+		System.out.println("	+===============================================================+");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 		String num = sc.nextLine();
 
 		if (num.equals("y")) {
+<<<<<<< HEAD
 			Thread.sleep(500);
 			System.out.println("	※ 보스와의 전투가 시작합니다. 행운을 빕니다.");
+=======
+
+			System.out.println("	던전의 보스가 등장합니다. 행운을 빕니다.");
+			Thread.sleep(1000);
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 			result = true;
 		}
 		return result;
@@ -467,9 +561,13 @@ public class Dungeon {
 		}
 
 		randMonster = monsters.get(randIndex);
+<<<<<<< HEAD
 		System.out.println("\n" + "	▶ " + m.getName() + " 을(를) 만났습니다");
 		Thread.sleep(500);
 //		m.showData();
+=======
+		System.out.println("\n");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 		return randMonster;
 
 	}

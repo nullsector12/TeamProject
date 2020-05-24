@@ -62,13 +62,68 @@ public class Events {
 
 	}
 
+	// 보스 사냥 성공시 추가 보상
+	void bonusRewordsKillBoss(Player p, Monster m) {
+
+		p.setGold(p.getGold() + (m.getWeakness() * 200));
+		p.setCurrentExp(p.getCurrentExp() + (m.getWeakness() * 50));
+		System.out.println("\n\n");
+		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("	┃		보스 토벌 성공!		┃");
+		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("	>토벌 보상으로" + (m.getWeakness() * 200) + " Gold가 추가 지급됩니다.");
+		System.out.println("	>토벌 보상으로" + (m.getWeakness() * 50) + " Exp가 추가 지급됩니다.");
+		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\n\n");
+		p.checkLevelUp();
+	}
+
+	void morePenaltyDieBossBattle(Player p, Monster m) {
+
+		if ((p.getGold() - (m.getWeakness() * 200)) > 0) {
+			p.setGold(p.getGold() - (m.getWeakness() * 200));
+
+		} else if ((p.getGold() - (m.getWeakness() * 200)) <= 0) {
+			p.setGold(0);
+		}
+
+		if (p.getCurrentExp() - (m.getWeakness() * 50) > 0) {
+			p.setCurrentExp(p.getCurrentExp() - (m.getWeakness() * 50));
+		} else if (p.getCurrentExp() - (m.getWeakness() * 50) <= 0) {
+			p.setCurrentExp(0);
+		}
+
+		System.out.println("\n\n");
+		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("	┃		보스 토벌 실패..		┃");
+		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+		System.out.println("	>토벌 실패로 인해" + (m.getWeakness() * 200) + " Gold를 잃어버렸습니다.");
+		System.out.println("	>소지금 : " + p.getGold() + " Gold");
+		System.out.println("	>토벌 실패로 인해" + (m.getWeakness() * 50) + " Exp를 잃어버렸습니다.");
+		System.out.println("	>현재 경험치 : " + p.getCurrentExp());
+		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+		System.out.println("\n\n");
+
+		// 패널티를 지불할 충분한 골드가 없을 시
+
+//
+	}
+
 	// 패배 시
+<<<<<<< HEAD
 	void penaltyOfDeath(Player p) throws InterruptedException {
 		Thread.sleep(1000);
+=======
+	void penaltyOfDeath(Player p) {
+
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 		System.out.println("	┼===============================================┼");
 		System.out.println("	    쓰러져있던 플레이어를 마을로 긴급 이송합니다. : 이송 비용 발생");
 		System.out.println();
 
+<<<<<<< HEAD
 //		 패널티를 지불할 충분한 골드가 있을 시
 		if ((p.getGold() - (p.getCurrentLevel() * 100)) > 0) {
 			p.setGold(p.getGold() - (p.getCurrentLevel() * 100));
@@ -83,11 +138,22 @@ public class Events {
 			System.out.println("	>최대 체력의 절반이 회복되었습니다.	┃");
 			System.out.println("	>패배로 인해 경험치가 " + (p.getCurrentLevel() * 50) + " 만큼 줄어듭니다.	┃");
 			System.out.println("	>남은 골드 : " + p.getGold() + "			┃");
+=======
+		// 패널티를 지불할 충분한 골드가 있을 시
+		if ((p.getGold() - (p.getCurrentLevel() * 100)) > 0) {
+			p.setGold(p.getGold() - (p.getCurrentLevel() * 100));
+			p.invenCurrentHealth = p.invenCurrentHealth + (int) (p.invenMaxHealth * 0.5);
+			System.out.println("	┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+			System.out.println("	>이송 비용으로 " + (p.getCurrentLevel() * 100) + " Gold가 청구됩니다.	┃");
+			System.out.println("	>남은 골드 : " + p.getGold() + "			┃");
+			System.out.println("	>최대 체력의 절반이 회복되었습니다.	┃");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 			System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 
 			// 패널티를 지불할 충분한 골드가 없을 시
 		} else if ((p.getGold() - (p.getCurrentLevel() * 100)) < 0) {
 			System.out.println("	이송 비용을 지불할 소지금이 부족합니다.");
+<<<<<<< HEAD
 			System.out.println("	가장 최근의 세이브 파일을 불러옵니다.");
 			p.loadPlayer();
 		}
@@ -126,6 +192,13 @@ public class Events {
 		System.out.println("	>현재 경험치 : " + p.getCurrentExp()+ "			┃");
 		System.out.println("	┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
 		p.checkLevelUp();
+=======
+			System.out.println("	가장 최근에 저장한 세이브 파일을 불러옵니다.");
+			p.loadPlayer();
+
+		}
+//
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 	}
 
 	// 계속 진행하시겠습니까?
@@ -136,7 +209,7 @@ public class Events {
 			Thread death = new Thread() {
 				@Override
 				public void run() {
-					for (int i = 20; i > 0; i--) {
+					for (int i = 10; i > 0; i--) {
 						System.out.println(i);
 
 						// super.
@@ -147,6 +220,9 @@ public class Events {
 							e.printStackTrace();
 						}
 					}
+					System.out.println("	10초 동안 입력이 없어 종료합니다.");
+					System.exit(0);
+	
 				}
 			};
 			death.start();
@@ -154,7 +230,7 @@ public class Events {
 			int n;
 			while (true) {
 				String choice = JOptionPane.showInputDialog(
-						"	플레이어가 사망했습니다. \n\n ((주의!)) 20초 안에 입력해주세요.(입력 없으면 자동 종료) \n 1. 긴급마을이송 : 비용 - lv * 100 gold \n 2.게임 종료");// 메인
+						"	플레이어가 사망했습니다. \n\n ((주의!)) 10초 안에 입력해주세요.(입력 없으면 자동 종료) \n 1. 긴급마을이송 : 비용 - lv * 100 gold \n 2.게임 종료");// 메인
 																																	// 쓰레드
 
 				try {
@@ -165,10 +241,10 @@ public class Events {
 					}
 
 				} catch (NumberFormatException e) {
-					System.out.println("	잘못입력하셨습니다. 다시 선택해 주세요.");
+					System.out.println("	잘못 입력 하셨습니다. 다시 선택해 주세요.");
 					continue;
 				} catch (InputMismatchException e) {
-					System.out.println("	잘못입력하셨습니다. 다시 선택해 주세요.");
+					System.out.println("	잘못 입력 하셨습니다. 다시 선택해 주세요.");
 					continue;
 				}
 				break;
@@ -187,10 +263,6 @@ public class Events {
 				System.out.println("	프로그램을 종료합니다.");
 				System.exit(0);
 
-			default:
-				System.out.println("	20초동안 입력이 없어 종료합니다.");
-
-				System.exit(0);
 			}
 
 			try {

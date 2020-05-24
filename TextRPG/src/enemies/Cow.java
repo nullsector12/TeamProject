@@ -10,7 +10,7 @@ public class Cow extends Monster {//should be resistant to physical attacks!
 
   	setStage(10);
       setName("소");
-      setBaseHealth(getStage()+190);
+      setBaseHealth(getStage()+210);
       setBaseStrength();
 //      setExpWorth(EnemyBasics.BASE_EXP_WORTH);
       setExpWorth(getStage());//메서드 인자 stage로 바꿈

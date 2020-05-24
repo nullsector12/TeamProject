@@ -1,5 +1,6 @@
 package TeamGameProject;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import enemies.*;
@@ -63,8 +64,23 @@ public class Monster extends Entity {// 이름 랜덤하게 나오도록
 //	setGoldWorth(getExpWorth());
 
 	public void setBaseStrength() {
-		baseStrength = EnemyBasics.BASE_STRENGTH + stage * 10;
+		if (stage < 4) { // 1, 2, 3
+			baseStrength = EnemyBasics.BASE_STRENGTH + stage * 5;
+		} else if (stage < 8) { // 5, 6, 7
+			baseStrength = EnemyBasics.BASE_STRENGTH + stage * 15;
+
+		} else if (stage < 12) { // 9, 10, 11
+			baseStrength = EnemyBasics.BASE_STRENGTH + stage * 25;
+		} else { // 4, 8, 12 boss 공격력
+			baseStrength = EnemyBasics.BASE_STRENGTH + stage * 40;
+		}
+
 	}
+
+	// 직접 몬스터의 공격력 입력 할 수 있는 메서드
+//	public int setBaseStrength(int power) {
+//		return baseStrenth = 0;
+//	}
 
 	public int getStage() {
 		return stage;
@@ -193,6 +209,7 @@ public class Monster extends Entity {// 이름 랜덤하게 나오도록
 	 * true/ 도망 불가 false
 	 */
 
+<<<<<<< HEAD
 	public void showData() throws InterruptedException {
 		System.out.println("	▶ 현재 스테이지: " + this.getStage());// 1-1 형식으로 바꿔야됨
 		Thread.sleep(250);
@@ -202,13 +219,20 @@ public class Monster extends Entity {// 이름 랜덤하게 나오도록
 		Thread.sleep(250);
 		System.out.println("	▶ 체력: " + this.getCurrentHealth());
 		Thread.sleep(250);
+=======
+	// 기존에 사용하던 몬스터 데이터 출력 메서드
+//	public void showData() {
+//		System.out.println("	현재 스테이지: " + this.getStage());// 1-1 형식으로 바꿔야됨
+//		System.out.println("	몬스터 이름: " + this.getName());
+//		System.out.println("	공격력 : " + this.getCurrentStrength());
+//		System.out.println("	현재 체력: " + this.getCurrentHealth());
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 //		System.out.println("	획득 가능 경험치: " + this.getExpWorth());
 //		System.out.println("	획득 가능 골드: " + this.getGoldWorth());
 //		System.out.println("	회피율: " + this.getEvasion() + "%");
 //		System.out.println("	방어력: " + this.getDefense());
 //		System.out.println("	강함 : " + this.getWeakness());
-
-	}
+//	}
 
 	public void showMonsterDetail() {
 		System.out.println("\n\n");
@@ -229,7 +253,11 @@ public class Monster extends Entity {// 이름 랜덤하게 나오도록
 	}
 
 	void printName() {
+<<<<<<< HEAD
 		System.out.println("▶ "+getName() + " 을(를) 만났습니다");
+=======
+		System.out.println("	▶ " + getName() + "을(를) 만났습니다");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 	}
 
 	// ==========================================================05/07 추가 메서드
@@ -254,6 +282,49 @@ public class Monster extends Entity {// 이름 랜덤하게 나오도록
 
 	}
 
+	public void showMonsterDetail() {
+		System.out.println("	▶ 몬스터 이름: " + getName());
+		System.out.println("	▶ 공격력 : " + getCurrentStrength());
+		System.out.println("	▶ 체력: " + getCurrentHealth());
+		System.out.println("	▶ 회피율: " + getEvasion() + "%");
+		System.out.println("	▶ 획득 가능 경험치: " + getExpWorth());
+		System.out.println("	▶ 획득 가능 골드: " + getGoldWorth());
+	}
+	
+//	Monster makeMonsters(int stage) {// 여러마리 중 한마리만 나오게
+//		Random rand = new Random();
+//		int numOfMonsters = rand.nextInt(5) + 1;// 몬스터 마리수
+//		ArrayList<Monster> monsters = new ArrayList<>(numOfMonsters);
+//
+//		Monster randMonster = new Monster();
+//
+//		int randIndex = rand.nextInt(numOfMonsters);// 랜덤 인덱스
+//		int randValue = rand.nextInt(20) + 10;
+//		for (int i = 0; i < numOfMonsters; i++) {// 이름, 능력치 다른 같은 종류의 여러마리의 몬스터 생성
+//			m = m.makeMonster(stage);
+//			if (m.title.equals("날쌘 ")) {// 종류가 '날쎈'일 경우에 evasion값 랜덤으로 증가시킴
+//				m.setEvasion(m.getEvasion() + randValue);
+//			} else if (m.title.equals("덩치가 큰 ")) {// 종류가 '덩치가 큰'일 경우에 health값 랜덤으로 증가시킴
+//				m.setCurrentHealth(m.getCurrentHealth() + randValue);
+//			} else if (m.title.equals("이빨이 날카로운 ")) {// 종류가 '이빨이 날카로운'일 경우에 strength값 랜덤으로 증가시킴
+//				m.setCurrentStrength(m.getCurrentStrength() + randValue);
+//			} else if (m.title.equals("알 수 없는 ")) {// 종류가 '알 수 없는'일 경우에 evasion/health/strength값 랜덤으로 증가시킴
+//				m.setEvasion(m.getEvasion() + randValue);
+//				m.setCurrentHealth(m.getCurrentHealth() + randValue);
+//				m.setCurrentStrength(m.getCurrentStrength() + randValue);
+//			}
+//
+//			monsters.add(m);
+//
+//		}
+//
+//		randMonster = monsters.get(randIndex);
+//		System.out.println("\n" + "	▶ " + m.getName() + " 을(를) 만났습니다");
+//		m.showMonsterDetail();
+//		System.out.println("\n");
+//		return randMonster;
+//
+//	}
 //	public int getDefense() {
 //		return this.defense;
 //	}

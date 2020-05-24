@@ -21,7 +21,11 @@ public class Potion {
 
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 		return "[" + pName + ", 회복량 : " + pAddHealth + ", 개수 : " + pNum + "]";
+=======
+		return "	[" + pName + " / 회복량 : " + pAddHealth + " / 개수 : " + pNum + " / 가격 : " + price + "]";
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 	}
 
 }

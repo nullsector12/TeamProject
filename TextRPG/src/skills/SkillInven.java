@@ -12,13 +12,16 @@ public class SkillInven {
 
 	public void buySkill(Player p, Skill s) {
 
+<<<<<<< HEAD
 		
 		if (s.gold>p.getGold()) {
+=======
+		if (s.gold > p.getGold()) {
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 			System.out.println("	골드가 부족하여 구매할수없습니다.");
 			return;
-		}		
-		
-		
+		}
+
 		for (int i = 0; i < skill.size(); i++) {
 
 			if (s.skillName.equals(skill.get(i).skillName)) {
@@ -34,23 +37,21 @@ public class SkillInven {
 
 	public Skill useSkill(Player p, int select) {
 
-		
+		skill.set(select, new Skill(skill.get(select).skillName, skill.get(select).numOfChance - 1,
+				skill.get(select).multiple, skill.get(select).gold));
 
-		skill.set(select , new Skill(skill.get(select).skillName, skill.get(select).numOfChance - 1, skill.get(select).multiple, skill.get(select).gold));
-		
 		Skill s = skill.get(select);
-		
-		
-		
-		
-		return  s;
-		
-		
-		
+
+		return s;
 
 	}
 
+	public void resetSkillChance() {
 
+		for (int i = 0; i < skill.size(); i++) {
+			skill.set(i, new Skill(skill.get(i).skillName, 3, skill.get(i).multiple, skill.get(i).gold));
+		}
+	}
 
 	public void showSkill() {
 		for (int i = 0; i < skill.size(); i++) {

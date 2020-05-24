@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;//maxExp
 
 import items.A_Hat;
 import items.A_HeadPiece;
@@ -22,10 +22,12 @@ import items.D_DiamondWand;
 import items.D_GoldWand;
 import items.D_SilverWand;
 import items.Inven;
+import items.Item;
 import potionStore.Potion;
 import skills.Bash;
 import skills.Brandish;
 import skills.EdgeStrike;
+import skills.Skill;
 import skills.SkillInven;
 
 public class Player extends Entity {
@@ -234,7 +236,11 @@ public class Player extends Entity {
 	void showStatus() {
 
 		calEquipStat();
+<<<<<<< HEAD
 		System.out.println("\n\n");
+=======
+//		System.out.println("\n\n\n\n\n\n\n");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 		System.out.println("	┏━━━━━━━━Player Status━━━━━━━━┓");
 		System.out.println("	┃	 	      	      ┃");
 		System.out.println("	>	플레이어 이름 : " + getName() + "<");
@@ -260,11 +266,20 @@ public class Player extends Entity {
 
 		switch (i) {
 		case 1:
+<<<<<<< HEAD
 			if (potion.get(0).price * num > getGold()) {
 				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
+=======
+			if (potion.get(0).price * num > gold) {
+				System.out.println("	골드가 부족하여 구매할수없습니다.");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 				break;
 			}
+<<<<<<< HEAD
 			potion.set(0, new Potion("	소형 체력 포션", 30, (potion.get(0).pNum) + num, 20));
+=======
+			potion.set(0, new Potion("소형 체력 포션", 30, (potion.get(0).pNum) + num, 20));
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 
 			setGold(getGold() - (20 * num));
 			System.out.println(potion.get(i - 1).pName + ", " + potion.get(i - 1).pNum);
@@ -275,11 +290,20 @@ public class Player extends Entity {
 			break;
 
 		case 2:
+<<<<<<< HEAD
 			if (potion.get(1).price * num > getGold()) {
 				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
+=======
+			if (potion.get(1).price * num > gold) {
+				System.out.println("	골드가 부족하여 구매할수없습니다.");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 				break;
 			}
+<<<<<<< HEAD
 			potion.set(1, new Potion("	중형 체력 포션", 60, (potion.get(1).pNum) + num, 30));
+=======
+			potion.set(1, new Potion("중형 체력 포션", 60, (potion.get(1).pNum) + num, 30));
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 
 			setGold(getGold() - (30 * num));
 			System.out.println(potion.get(i - 1).pName + ", " + potion.get(i - 1).pNum);
@@ -289,8 +313,13 @@ public class Player extends Entity {
 
 			break;
 		case 3:
+<<<<<<< HEAD
 			if (potion.get(2).price * num > getGold()) {
 				System.out.println("	골드가 부족하여 구매할 수 없습니다.");
+=======
+			if (potion.get(2).price * num > gold) {
+				System.out.println("	골드가 부족하여 구매할수없습니다.");
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 				break;
 			}
 			potion.set(2, new Potion("	대형 체력 포션", 150, (potion.get(2).pNum) + num, 60));
@@ -310,9 +339,18 @@ public class Player extends Entity {
 	// 포션 사용 메서드
 	public void usePotion(int i) {
 
+		if (potion.get(i - 1).pNum == 0) {
+			System.out.println("해당 포션이 없어서 사용할 수 없습니다.");
+			return;
+		}
+
 		switch (i) {
 		case 1:
+<<<<<<< HEAD
 			potion.set(0, new Potion("소형 체력 포션", 30, (potion.get(0).pNum) - 1, 20));
+=======
+			potion.set(0, new Potion("	소형 체력 포션", 30, (potion.get(0).pNum) - 1, 20));
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 
 			// 체력 증가 세터
 //
@@ -331,7 +369,11 @@ public class Player extends Entity {
 			break;
 
 		case 2:
+<<<<<<< HEAD
 			potion.set(1, new Potion("중형 체력 포션", 60, (potion.get(1).pNum) - 1, 30));
+=======
+			potion.set(1, new Potion("	중형 체력 포션", 60, (potion.get(1).pNum) - 1, 30));
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 
 			// 체력 증가 세터
 //			setCurrentHealth(getCurrentHealth() + 60);
@@ -348,7 +390,11 @@ public class Player extends Entity {
 
 			break;
 		case 3:
+<<<<<<< HEAD
 			potion.set(2, new Potion("대형 체력 포션", 150, (potion.get(2).pNum) - 1, 60));
+=======
+			potion.set(2, new Potion("	대형 체력 포션", 150, (potion.get(2).pNum) - 1, 60));
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 
 			// 체력 증가 세터
 
@@ -370,6 +416,13 @@ public class Player extends Entity {
 	}
 
 	public void showPotion() {
+
+		// 처음에만 포션틀을 추가
+		if (potion.size() == 0) {
+			potion.add(sp);
+			potion.add(np);
+			potion.add(bp);
+		}
 		System.out.println("	==========보유 포션==========");
 		System.out.println("	" + potion.toString());
 
@@ -564,12 +617,20 @@ public class Player extends Entity {
 		this.gold = gold;
 	}
 
-	public int getCurrentExp() {
+	public int getCurrentExp() {// levelUpExp
 		return currentExp;
 	}
 
 	public int setCurrentExp(int currentExp) {
 		return this.currentExp = currentExp;
+	}
+
+	public int getLevelUpExp() {// levelUpExp
+		return levelUpExp;
+	}
+
+	public int setLevelUpExp(int levelUpExp) {
+		return this.levelUpExp = levelUpExp;
 	}
 
 	public int getCurrentLevel() {
@@ -632,10 +693,18 @@ public class Player extends Entity {
 
 		int bossCount, stage2Count, stage3Count;
 		try {
-			f = new FileInputStream("data.ser");
+			f = new FileInputStream("savedata.ser");
 			oos = new ObjectInputStream(f);
 //			Player load=(Player)oos.readObject();
 //			load.showStatus();
+			
+			
+//			potion = ((ArrayList<Potion>)oos.readObject());
+//			inven.equip = ((ArrayList<Item>)oos.readObject());
+//			inven.inven = ((ArrayList<Item>)oos.readObject());
+//			skillInven.skill = ((ArrayList<Skill>)oos.readObject());
+			
+			
 			name = ((String) oos.readObject());
 			currentLevel = ((Integer) oos.readObject());
 			currentHealth = ((Integer) oos.readObject());
@@ -697,6 +766,7 @@ public class Player extends Entity {
 			this.setEvasion(evasion);
 
 			this.setCurrentExp(exp);
+			this.setLevelUpExp(levelUpExp);
 			this.setGold(gold);
 
 //			System.out.println("=======================================인벤토리");
@@ -708,7 +778,12 @@ public class Player extends Entity {
 			this.bossCount = bossCount;
 			this.stage2Count = stage2Count;
 			this.stage3Count = stage3Count;
+<<<<<<< HEAD
 
+=======
+			System.out.println("========================소유 장비/장착 장비/배운 스킬/소유 포션");
+			
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 			/*
 			 * invenCurrentStrength = currentStrength + inven.equipPower; invenMaxHealth =
 			 * maxHealth + inven.equipHealth; invenCurrentHealth = currentHealth +
@@ -792,7 +867,12 @@ public class Player extends Entity {
 			oos.writeObject(this.stage3Count);
 //			System.out.println("=====exp:"+this.getCurrentExp());
 //			oos.writeObject(Save);
-
+			// =========================================== 수정 필요, ArrayList 파일에 저장하고 읽어오는 처리
+//			oos.writeObject(skillInven.skill); // 배운 스킬 저장
+//			oos.writeObject(this.inven.equip); // 장비하고 있는 장비 저장
+//			oos.writeObject(this.inven.inven); // 인벤토리에 들어있는 장비 저장
+//			oos.writeObject(this.potion); // 산 포션 저장
+			
 			f.close();
 			oos.close();
 		} catch (Exception e) {

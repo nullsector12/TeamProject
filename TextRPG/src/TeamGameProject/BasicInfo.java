@@ -2,10 +2,14 @@ package TeamGameProject;
 
 public interface BasicInfo {
 
-	int BASIC_HEALTH = 2000;
-	int BASIC_POWER = 500;
+	int BASIC_HEALTH = 200;
+	int BASIC_POWER = 50;
 	int BASIC_GOLD = 100;
+<<<<<<< HEAD
 	int BASIC_EXP = 100;
+=======
+	int BASIC_EXP = 50;
+>>>>>>> branch 'events' of https://github.com/nullsector12/TeamProject.git
 	int BASIC_LEVEL = 1;
 //	int BASIC_STAGE_2 = 0;
 //	int BASIC_STAGE_3 = 0;
