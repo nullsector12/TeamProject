@@ -3,7 +3,7 @@ package TeamGameProject;
 public interface BasicInfo {
 
 	int BASIC_HEALTH = 2000;
-	int BASIC_POWER = 500;
+	int BASIC_POWER = 5000;
 	int BASIC_GOLD = 100;
 	int BASIC_EXP = 200;
 	int BASIC_LEVEL = 5;
